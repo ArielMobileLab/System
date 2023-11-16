@@ -2,6 +2,10 @@
 
 ![image](https://github.com/ArielMobileLab/System/assets/76939624/a380580e-8055-43fc-a9a6-a0f92336b989)
 
+# 1. Experiment Management Unit
+
+1) Experiment Control
+
 # 2. Autonomous Response Unit
 
 This part is responsible for intervening in the simulator
@@ -9,4 +13,6 @@ This part is responsible for intervening in the simulator
 2) **Avatar Agent**: A feature that displays an AVATAR on the screen describing the passenger's feeling in the car.
 
 # 14. API adapter Unit
-Adapter: Responsible for coordination between different types of APIs that give the same data (GPS for example) to use one global pipeline line in the system.
+
+This part is responsible for working with a couple of APIs on the global pipeline.
+**Adapter**: Responsible for coordination between different types of APIs that give the same data (GPS for example) to use one global pipeline line in the system.
