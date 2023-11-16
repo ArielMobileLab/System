@@ -4,7 +4,7 @@
 
 # 1. Experiment Management Unit
 
-This part is responsible for Managing the Experiment from the operator's side
+Managing the Experiment from the operator's side
 1) **Scenario Control Menu:** GUI  which can be used to select the scenario the operator wants to run
 
 
