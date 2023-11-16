@@ -17,4 +17,4 @@ This part is responsible for intervening in the simulator
 # 14. API adapter Unit
 
 This part is responsible for working with a couple of APIs on the global pipeline.
-**Adapter:** Responsible for coordination between different types of APIs that give the same data (GPS for example) to use one global pipeline line in the system.
+1) **Adapter:** Responsible for coordination between different types of APIs that give the same data (GPS for example) to use one global pipeline line in the system.
