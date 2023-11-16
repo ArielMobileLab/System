@@ -1,11 +1,11 @@
 # System Workflow
 
-![image](https://github.com/ArielMobileLab/System/assets/76939624/a380580e-8055-43fc-a9a6-a0f92336b989)
+![image](https://github.com/ArielMobileLab/System/assets/76939624/e66bd43b-7886-40e7-845c-fb116a69ddfe)
 
 # 1. Experiment Management Unit
 
 This part is responsible for Managing the Experiment from the operator's side
-1) **Senario Control:** GUI  which can be used to select the scenario the operator wants to run
+1) **Scenario Control Menu:** GUI  which can be used to select the scenario the operator wants to run
 
 
 # 2. Autonomous Response Unit
