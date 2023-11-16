@@ -6,4 +6,7 @@
 
 This part is responsible for intervening in the simulator
 1) **Map Guide**: A feature that displays arrows and guide signs on the screen at the same time as running a simulator for the purpose of driving assistance.
-2) **Avatar Agent**: A feature that displays an AVATAR on the screen describing the feeling of the passenger in the car.
+2) **Avatar Agent**: A feature that displays an AVATAR on the screen describing the passenger's feeling in the car.
+
+# 14. API adapter Unit
+Adapter: Responsible for coordination between different types of APIs that give the same data (GPS for example) to use one global pipeline line in the system.
