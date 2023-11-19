@@ -1,0 +1,1 @@
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_waypoint_types/lib/python2.7/dist-packages/carla_waypoint_types/msg/_CarlaWaypoint.py

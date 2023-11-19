@@ -1,0 +1,1 @@
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_waypoint_publisher/lib/python2.7/dist-packages/carla_waypoint_publisher/__init__.py

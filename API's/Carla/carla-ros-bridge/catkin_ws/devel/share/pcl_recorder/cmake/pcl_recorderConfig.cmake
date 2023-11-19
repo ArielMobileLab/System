@@ -1,0 +1,1 @@
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/pcl_recorder/share/pcl_recorder/cmake/pcl_recorderConfig.cmake

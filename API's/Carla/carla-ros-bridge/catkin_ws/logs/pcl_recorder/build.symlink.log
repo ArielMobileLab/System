@@ -1,0 +1,4 @@
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/pcl_recorder/pcl_recorder_node
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/pkgconfig/pcl_recorder.pc
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/pcl_recorder/cmake/pcl_recorderConfig.cmake
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/pcl_recorder/cmake/pcl_recorderConfig-version.cmake

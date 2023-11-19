@@ -1,0 +1,4 @@
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/pkgconfig/carla_ad_agent.pc
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/python2.7/dist-packages/carla_ad_agent/__init__.py
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_ad_agent/cmake/carla_ad_agentConfig-version.cmake
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_ad_agent/cmake/carla_ad_agentConfig.cmake

@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_spawn_objects/setup.sh

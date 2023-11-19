@@ -1,0 +1,1 @@
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_manual_control/lib/python2.7/dist-packages/carla_manual_control/__init__.py

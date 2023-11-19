@@ -1,0 +1,4 @@
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/pkgconfig/carla_spawn_objects.pc
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/python2.7/dist-packages/carla_spawn_objects/__init__.py
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_spawn_objects/cmake/carla_spawn_objectsConfig.cmake
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_spawn_objects/cmake/carla_spawn_objectsConfig-version.cmake

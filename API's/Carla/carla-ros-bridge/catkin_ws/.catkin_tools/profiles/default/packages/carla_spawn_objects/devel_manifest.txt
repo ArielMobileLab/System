@@ -1,0 +1,6 @@
+ros-bridge/carla_spawn_objects
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_spawn_objects/cmake.lock /home/omer/carla-ros-bridge/catkin_ws/devel/./cmake.lock
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_spawn_objects/lib/pkgconfig/carla_spawn_objects.pc /home/omer/carla-ros-bridge/catkin_ws/devel/lib/pkgconfig/carla_spawn_objects.pc
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_spawn_objects/lib/python2.7/dist-packages/carla_spawn_objects/__init__.py /home/omer/carla-ros-bridge/catkin_ws/devel/lib/python2.7/dist-packages/carla_spawn_objects/__init__.py
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_spawn_objects/share/carla_spawn_objects/cmake/carla_spawn_objectsConfig.cmake /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_spawn_objects/cmake/carla_spawn_objectsConfig.cmake
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_spawn_objects/share/carla_spawn_objects/cmake/carla_spawn_objectsConfig-version.cmake /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_spawn_objects/cmake/carla_spawn_objectsConfig-version.cmake

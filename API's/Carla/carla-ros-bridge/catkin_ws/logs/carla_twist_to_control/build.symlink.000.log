@@ -1,0 +1,4 @@
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/pkgconfig/carla_twist_to_control.pc
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/python2.7/dist-packages/carla_twist_to_control/__init__.py
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_twist_to_control/cmake/carla_twist_to_controlConfig.cmake
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_twist_to_control/cmake/carla_twist_to_controlConfig-version.cmake

@@ -1,0 +1,8 @@
+prefix=/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_manual_control
+
+Name: carla_manual_control
+Description: Description of carla_manual_control
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: rospy

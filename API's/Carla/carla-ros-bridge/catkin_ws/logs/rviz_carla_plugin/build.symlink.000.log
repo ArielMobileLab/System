@@ -1,0 +1,4 @@
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/librviz_carla_plugin.so
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/pkgconfig/rviz_carla_plugin.pc
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/rviz_carla_plugin/cmake/rviz_carla_pluginConfig.cmake
+Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/rviz_carla_plugin/cmake/rviz_carla_pluginConfig-version.cmake
