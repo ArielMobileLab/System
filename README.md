@@ -1,6 +1,6 @@
 # System Workflow
 
-![image](https://github.com/ArielMobileLab/System/assets/76939624/74a041d5-7140-4409-bb1f-f19d4a54e74b)
+![image](https://github.com/ArielMobileLab/System/assets/76939624/fb2c5a37-4ab3-4d03-8615-db8d598cd2d5)
 
 
 # 1. Experiment Management Unit
