@@ -1,0 +1,1 @@
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_walker_agent/lib/python2.7/dist-packages/carla_walker_agent/__init__.py

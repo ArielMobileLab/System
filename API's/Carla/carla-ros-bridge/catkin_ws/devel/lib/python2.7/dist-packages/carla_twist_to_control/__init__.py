@@ -1,0 +1,1 @@
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_twist_to_control/lib/python2.7/dist-packages/carla_twist_to_control/__init__.py

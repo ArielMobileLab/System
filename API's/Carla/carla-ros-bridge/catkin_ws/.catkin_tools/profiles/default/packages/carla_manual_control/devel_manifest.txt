@@ -1,0 +1,6 @@
+ros-bridge/carla_manual_control
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_manual_control/cmake.lock /home/omer/carla-ros-bridge/catkin_ws/devel/./cmake.lock
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_manual_control/share/carla_manual_control/cmake/carla_manual_controlConfig-version.cmake /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_manual_control/cmake/carla_manual_controlConfig-version.cmake
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_manual_control/share/carla_manual_control/cmake/carla_manual_controlConfig.cmake /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_manual_control/cmake/carla_manual_controlConfig.cmake
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_manual_control/lib/pkgconfig/carla_manual_control.pc /home/omer/carla-ros-bridge/catkin_ws/devel/lib/pkgconfig/carla_manual_control.pc
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_manual_control/lib/python2.7/dist-packages/carla_manual_control/__init__.py /home/omer/carla-ros-bridge/catkin_ws/devel/lib/python2.7/dist-packages/carla_manual_control/__init__.py

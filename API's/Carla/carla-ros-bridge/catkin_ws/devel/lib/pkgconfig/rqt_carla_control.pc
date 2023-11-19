@@ -1,0 +1,1 @@
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/rqt_carla_control/lib/pkgconfig/rqt_carla_control.pc

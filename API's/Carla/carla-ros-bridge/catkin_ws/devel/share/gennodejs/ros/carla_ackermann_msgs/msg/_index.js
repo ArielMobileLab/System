@@ -1,0 +1,1 @@
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_ackermann_msgs/share/gennodejs/ros/carla_ackermann_msgs/msg/_index.js

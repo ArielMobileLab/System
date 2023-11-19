@@ -1,0 +1,1 @@
+/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_common/share/carla_common/cmake/carla_commonConfig-version.cmake
