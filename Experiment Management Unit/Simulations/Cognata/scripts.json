@@ -1,0 +1,28 @@
+{
+"CarControl_100_10" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=100 Valuee:=10",
+"CarControl_100_20" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=100 Valuee:=20",
+"CarControl_100_Matlab" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=100 Valuee:=Matlab",
+"CarControl_200_10" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=200 Valuee:=10",
+"CarControl_200_20" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=200 Valuee:=20",
+"CarControl_200_Matlab" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=200 Valuee:=Matlab",
+
+"CarControl_0_0" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CC.launch Value:=1 Valuee:=1",
+"CarControl_500_0" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=500 Valuee:=1",
+"CarControl_100_0" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=100 Valuee:=1",
+"CarControl_200_0" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=200 Valuee:=1",
+
+"CarControl_50_15" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=50 Valuee:=15",
+"CarControl_50_7" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=50 Valuee:=7",
+"CarControl_50_Matlab" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=50 Valuee:=Matlab",
+"CarControl_150_Matlab" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=150 Valuee:=Matlab",
+"CarControl_150_15" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=150 Valuee:=15",
+
+
+"CarControl_250_15" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=250 Valuee:=15",
+"CarControl_250_Matlab" : "wmctrl -r rear_view -b add,above ; wmctrl -r speed -b add,above ; roslaunch cognata_sdk CarControl.launch Value:=250 Valuee:=Matlab",
+
+
+"spatial": "wmctrl -r speed -b add,above ; roslaunch cognata_sdk train.launch"
+
+}
+

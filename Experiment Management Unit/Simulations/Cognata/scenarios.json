@@ -1,0 +1,20 @@
+{"train": "605c4f99af02fc002f814da8",
+"spatial": "605c5668af02fc002f814de0", 
+"load-1": "606483a8af02fc002f815140",
+"load-2": "6058942daf02fc002f814d16",
+"load-3": "606472eeaf02fc002f815133",
+"load1": "606483a8af02fc002f815140",
+"load2": "6058942daf02fc002f814d16",
+"load3": "606472eeaf02fc002f815133",
+"close": "62fa023a778366002f8bbe1b",
+"far": "62f9ff83778366002f8bbe13",
+"geffen": "62e91a7ae3501f00303782dd",
+"SEGMENT1": "6087799aaf02fc002f8158ad",
+"SEGMENT2": "60877b85af02fc002f8158af",
+"SEGMENT3": "60877b11af02fc002f8158ae",
+"load1_cubex": "63592f0aeba53f002f2ad8fd",
+"load1_cube": "637e1569eba53f002f2ae615",
+"load2_cube": "64944634f555cd0033d4d39d",
+"slalom": "62fa023a778366002f8bbe1b"
+}
+
