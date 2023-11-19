@@ -1,5 +1,0 @@
-ros-bridge/carla_ad_demo
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_ad_demo/cmake.lock /home/omer/carla-ros-bridge/catkin_ws/devel/./cmake.lock
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_ad_demo/lib/pkgconfig/carla_ad_demo.pc /home/omer/carla-ros-bridge/catkin_ws/devel/lib/pkgconfig/carla_ad_demo.pc
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_ad_demo/share/carla_ad_demo/cmake/carla_ad_demoConfig-version.cmake /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_ad_demo/cmake/carla_ad_demoConfig-version.cmake
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_ad_demo/share/carla_ad_demo/cmake/carla_ad_demoConfig.cmake /home/omer/carla-ros-bridge/catkin_ws/devel/share/carla_ad_demo/cmake/carla_ad_demoConfig.cmake

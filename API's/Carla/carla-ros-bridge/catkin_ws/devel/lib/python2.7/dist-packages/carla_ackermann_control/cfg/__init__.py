@@ -1,1 +1,0 @@
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_ackermann_control/lib/python2.7/dist-packages/carla_ackermann_control/cfg/__init__.py

@@ -1,1 +1,0 @@
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_waypoint_types/share/roseus/ros/carla_waypoint_types/srv/GetWaypoint.l

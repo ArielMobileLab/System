@@ -1,1 +1,0 @@
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_waypoint_publisher/share/carla_waypoint_publisher/cmake/carla_waypoint_publisherConfig.cmake

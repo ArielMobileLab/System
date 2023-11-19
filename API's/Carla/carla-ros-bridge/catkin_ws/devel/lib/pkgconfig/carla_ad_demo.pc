@@ -1,1 +1,0 @@
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_ad_demo/lib/pkgconfig/carla_ad_demo.pc

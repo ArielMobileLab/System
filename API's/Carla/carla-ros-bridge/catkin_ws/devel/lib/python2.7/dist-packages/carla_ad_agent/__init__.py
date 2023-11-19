@@ -1,1 +1,0 @@
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_ad_agent/lib/python2.7/dist-packages/carla_ad_agent/__init__.py

@@ -1,1 +1,0 @@
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_ros_scenario_runner/share/carla_ros_scenario_runner/cmake/carla_ros_scenario_runnerConfig.cmake

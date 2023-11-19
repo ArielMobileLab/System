@@ -1,1 +1,0 @@
-/home/omer/carla-ros-bridge/catkin_ws/devel/./cmake.lock 19

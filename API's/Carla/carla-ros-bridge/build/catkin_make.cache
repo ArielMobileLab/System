@@ -1,2 +1,0 @@
-
--DCATKIN_DEVEL_PREFIX=/home/omer/carla-ros-bridge/devel -DCMAKE_INSTALL_PREFIX=/home/omer/carla-ros-bridge/install -G Unix Makefiles

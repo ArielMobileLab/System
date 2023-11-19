@@ -1,4 +1,0 @@
-Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/pkgconfig/ros_compatibility.pc
-Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/lib/python2.7/dist-packages/ros_compatibility/__init__.py
-Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/ros_compatibility/cmake/ros_compatibilityConfig-version.cmake
-Symlinking /home/omer/carla-ros-bridge/catkin_ws/devel/share/ros_compatibility/cmake/ros_compatibilityConfig.cmake

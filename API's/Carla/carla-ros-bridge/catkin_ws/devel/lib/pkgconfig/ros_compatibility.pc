@@ -1,1 +1,0 @@
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/ros_compatibility/lib/pkgconfig/ros_compatibility.pc

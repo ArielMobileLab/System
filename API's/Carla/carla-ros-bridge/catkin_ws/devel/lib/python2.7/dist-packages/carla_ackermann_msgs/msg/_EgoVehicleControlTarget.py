@@ -1,1 +1,0 @@
-/home/omer/carla-ros-bridge/catkin_ws/devel/.private/carla_ackermann_msgs/lib/python2.7/dist-packages/carla_ackermann_msgs/msg/_EgoVehicleControlTarget.py
