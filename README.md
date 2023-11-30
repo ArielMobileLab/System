@@ -24,3 +24,4 @@ This part works with a couple of APIs on the global pipeline
 # 15. Logs Unit
 
 This part is responsible for generate logs
+1) **EgoCar:** Responsible for generate Ego car log
