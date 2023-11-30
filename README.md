@@ -25,3 +25,5 @@ This part works with a couple of APIs on the global pipeline
 
 This part is responsible for generate logs
 1) **Ego Car log:** Responsible for generate Ego car log
+
+Note: You get the Cognet logos through the Cognata station
