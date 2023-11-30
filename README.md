@@ -18,5 +18,9 @@ This part is responsible for intervening in the simulator
 
 # 14. API adapter Unit
 
-This part works with a couple of APIs on the global pipeline.
+This part works with a couple of APIs on the global pipeline
 1) **Adapter:** Responsible for coordination between different types of APIs that give the same data (GPS for example) to use one global pipeline line in the system.
+
+# 15. Logs Unit
+
+This part is responsible for generate logs
