@@ -1,6 +1,6 @@
 # System Workflow
 
-![image](https://github.com/ArielMobileLab/System/assets/76939624/fb2c5a37-4ab3-4d03-8615-db8d598cd2d5)
+![image](https://github.com/ArielMobileLab/System/assets/76939624/7a075cde-05b9-4125-b45b-db9de6d5c26e)
 
 
 # 1. Experiment Management Unit
@@ -23,7 +23,7 @@ This part works with a couple of APIs on the global pipeline
 
 # 15. Logs Unit
 
-This part is responsible for generate logs
-1) **Ego Car log:** Responsible for generate Ego car log
+This part is responsible for generating logs
+1) **Ego Car log:** Responsible for generating Ego car log
 
-Note: the Cognata logos we get through the Cognata station in each senario 
+Note: the Cognata logos we get through the Cognata station in each scenario 
