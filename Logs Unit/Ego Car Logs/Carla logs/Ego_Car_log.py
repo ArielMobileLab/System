@@ -22,6 +22,7 @@ from carla_msgs.msg import CarlaCollisionEvent
 from collections import OrderedDict
 from datetime import datetime
 import time
+from std_msgs.msg import Float32, Int8, Float64, Float32
 
 
 
@@ -112,8 +113,8 @@ def collision_callback(data):
 def speed_callback(data):
   
    global speed
-   velocity = data.velocity
-   speed=round(velocity * 3.6, 1)
+   velocity = data.data
+   speed = velocity*3.6
    
 
     
@@ -144,7 +145,7 @@ def gnss_callback(data):
     Egocar_data["Speed"] = speed
     
 
-    #write_to_csv(gnss_data) # for csv
+    #write_to_csv(Egocar_data) # for csv
 
     write_to_json(Egocar_data) # for json
 
@@ -191,9 +192,10 @@ def main():
     # Subscribe to the GNSS and IMU topics
     rospy.Subscriber("/carla/ego_vehicle/gnss", NavSatFix, gnss_callback)
     rospy.Subscriber("/carla/ego_vehicle/imu", Imu, imu_callback)
-    rospy.Subscriber("/carla/ego_vehicle/vehicle_status", CarlaEgoVehicleStatus, speed_callback, queue_size=10)
+    #rospy.Subscriber("/carla/ego_vehicle/vehicle_status", CarlaEgoVehicleStatus, speed_callback, queue_size=10)
     rospy.Subscriber("/carla/ego_vehicle/collision", CarlaCollisionEvent, collision_callback)
     rospy.Subscriber("/carla/ego_vehicle/odometry", Imu, imu_callback)
+    rospy.Subscriber("/carla/ego_vehicle/speedometer", Float32, speed_callback, queue_size=10)
     #rospy.Subscriber('/carla/ego_vehicle/odometry',Odometry, Odemetry, queue_size=1) 
     #rospy.Subscriber("/HR", Float64, Mental_Work_Load)
     
