@@ -119,7 +119,7 @@ def GetStress(msg):
    global Stress_Model	
 
 
-   Final_value = math.sqrt(msg.linear_acceleration.x**2 + msg.linear_acceleration.y**2*0.8)
+   Final_value = math.sqrt(msg.linear_acceleration.x**2 + msg.linear_acceleration.y**2)
    #Final_value = math.sqrt(msg.linear_acceleration.x**2 + msg.linear_acceleration.y**2*1.3 + msg.linear_acceleration.y**2)
    #Final_value = math.sqrt(msg.linear_acceleration.x**2 + msg.linear_acceleration.y**2 + msg.linear_acceleration.z**2)
    Final_value_Array.append(Final_value)
