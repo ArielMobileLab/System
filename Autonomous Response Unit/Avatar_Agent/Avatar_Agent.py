@@ -129,6 +129,7 @@ def GetStress(msg):
    epsilon = 1e-10  # A small positive value to prevent issues with log(0)
    if Mean > epsilon:
     Stress_Model = math.exp(0.0513 + 0.142 * math.log(Mean))
+    #Stress_Model = 1.052638638*Mean**0.142
    else:
     # Handle the case when Mean is too close to zero
     Stress_Model = 0  # You can choose an appropriate default value
