@@ -25,5 +25,6 @@ This part works with a couple of APIs on the global pipeline
 
 This part is responsible for generating logs
 1) **Ego Car log:** Responsible for generating Ego car log
+2) **Objects log:** Responsible for generating map objects log
 
 Note: the Cognata logos we get through the Cognata station in each scenario 
