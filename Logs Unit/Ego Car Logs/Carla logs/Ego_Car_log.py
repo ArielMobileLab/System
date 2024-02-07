@@ -26,6 +26,25 @@ from std_msgs.msg import Float32, Int8, Float64, Float32
 from sensor_msgs.msg import Joy
 from datetime import datetime
 import carla
+from carla_msgs.msg import CarlaEgoVehicleControl
+import subprocess
+
+
+
+client = carla.Client('localhost', 2000)
+client.set_timeout(10.0)
+world = client.get_world()
+world.wait_for_tick()
+
+actor_id = None
+
+    # Find the actor ID by type
+actors = world.get_actors()
+for actor in actors:
+        if actor.type_id == 'vehicle.nissan.micra':
+            actor_id = actor.id
+            break
+             
 
 
 Agent_type = sys.argv[1]
@@ -46,7 +65,7 @@ angular_velocity_pitch = 0.0
 angular_velocity_yaw = 0.0
 FileExist = False
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-folder_path = "/home/omer/Desktop/Carla_Logs"
+folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 file_name = os.path.join(folder_path, 'EgoCar_{}_{}.json'.format(Agent_type, current_time))
 #sys.path.append('/home/omer/Desktop/CARLA_0.9.13/PythonAPI/carla/dist/carla-0.9.13-py3.7-linux-x86_64.egg')
 FrameID = 0.0
@@ -60,6 +79,11 @@ sterring = 0.0
 write_to_json_flag = True  
 log_closed = False
 flag_my_shutdown_callback = True
+potition_x = 0.0
+potition_y = 0.0
+gear = 0.0
+potition_z = 0.0 
+frame_id_counter = 0
 
 
 	
@@ -95,7 +119,7 @@ def my_shutdown_callback():
         stop_data["Type"] = "Termination"
         stop_data["WorldTime"] = timestamp
         stop_data["SimulationTime"] = simulation_time
-        stop_data["FrameID"] = FrameID  
+        stop_data["FrameID"] = generate_frame_id()  
         stop_data["Reason"] = "Operator Stop"
         if flag_my_shutdown_callback == True:
 		write_to_json(stop_data,add_comma=False)
@@ -118,17 +142,24 @@ def collision_callback(data):
         world = client.get_world()  # Make sure to obtain the actual world instance
         actor = world.get_actor(actor_id)
 
+
         # Check if the actor is valid
         if actor:
-            actor_name = actor.type_id
+            	actor_info =  actor
+		actor_info = str(actor)
+		start_index = actor_info.find("type=") + len("type=")
+		end_index = actor_info.find(")", start_index)
+		actor_name = actor_info[start_index:end_index].strip()
+		
+
         else:
-            actor_name = "Unknown"
+            	actor_name = "Unknown"
 
         stop_data = OrderedDict()
         stop_data["Type"] = "Termination"
         stop_data["WorldTime"] = timestamp
         stop_data["SimulationTime"] = simulation_time
-        stop_data["FrameID"] = FrameID
+        stop_data["FrameID"] = generate_frame_id()
         stop_data["Reason"] = "Crash" + "-" + actor_name
 
         write_to_json(stop_data, add_comma=False)
@@ -161,7 +192,10 @@ def speed_callback(data):
    velocity = data.data
    speed = velocity*3.6
    
-
+def generate_frame_id():
+    global frame_id_counter
+    frame_id_counter += 1
+    return frame_id_counter
     
 
 def gnss_callback(data):
@@ -169,6 +203,10 @@ def gnss_callback(data):
     global simulation_time
     global timestamp
     global FrameID
+    global potition_x
+    global potition_y
+    global potition_z
+
 
     latitude = data.latitude
     longitude = data.longitude
@@ -188,7 +226,8 @@ def gnss_callback(data):
     Egocar_data["Type"] = "GPS"
     Egocar_data["WorldTime"] = timestamp
     Egocar_data["SimulationTime"] = simulation_time
-    Egocar_data["FrameID"] = FrameID 
+    Egocar_data["FrameID"] = generate_frame_id() 
+    Egocar_data["SimulationPosition"] = {"x": potition_x, "y": potition_y, "z": potition_z} 
     Egocar_data["Latitude"] = latitude
     Egocar_data["Longitude"] = longitude
     Egocar_data["Altitude"] = altitude
@@ -197,6 +236,7 @@ def gnss_callback(data):
     Egocar_data["Acceleration"] = {"x": acceleration_x, "y": acceleration_y, "z": acceleration_z}
     Egocar_data["VelocityLocal3D"] = {"x": velocity_x, "y": velocity_y, "z": velocity_z}
     Egocar_data["AngularAccelerationLocal3D"] = {"x": angular_velocity_roll, "y": angular_velocity_pitch, "z": angular_velocity_yaw}
+
 
     #write_to_csv(Egocar_data) # for csv
     write_to_json(Egocar_data,add_comma=True) # for json
@@ -216,7 +256,8 @@ def imu_callback(data):
     acceleration_z = data.linear_acceleration.z
 
 def odometry_callback(data):
-
+    global actor_id
+    global gear
     global orientation_x
     global orientation_y
     global orientation_z
@@ -230,9 +271,17 @@ def odometry_callback(data):
     global collision_flag
     global log_closed  # Add the global variable
     global flag_my_shutdown_callback
+    global potition_x
+    global potition_y
+    global potition_z
+    global Agent_type
 
-    
+    vehicle = client.get_world().get_actor(actor_id)
+    gear = vehicle.get_control().gear
 
+    potition_x = data.pose.pose.position.x
+    potition_y = data.pose.pose.position.y
+    potition_z = data.pose.pose.position.z
     orientation_x = data.pose.pose.orientation.x
     orientation_x = data.pose.pose.orientation.y  
     orientation_x = data.pose.pose.orientation.z 
@@ -248,46 +297,60 @@ def odometry_callback(data):
     Egocar_data["Type"] = "CarTelemetries"
     Egocar_data["WorldTime"] = timestamp
     Egocar_data["SimulationTime"] = simulation_time
-    Egocar_data["FrameID"] = FrameID
+    Egocar_data["FrameID"] = generate_frame_id()
     Egocar_data["Speed"] = speed
     Egocar_data["Acceleration"] = acceleration_x
     Egocar_data["SteeringAngle"] = sterring
     Egocar_data["Brake"] = brake
     Egocar_data["Gas"] = gas
+    Egocar_data["Gear"] = gear
     
     write_to_json(Egocar_data,add_comma=True)
+    if Agent_type == "Face_Train":
+	    if  data.header.seq*0.033333335071821 > 160:
+			print("Log Finished by End of the simulation ")
+			if write_to_json_flag and not log_closed:
+			    stop_data = OrderedDict()
+			    stop_data["Type"] = "Termination"
+			    stop_data["WorldTime"] = timestamp
+			    stop_data["SimulationTime"] = simulation_time
+			    stop_data["FrameID"] = generate_frame_id()
+			    stop_data["Reason"] = "End of the simulation"
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    if  -116.1248<data.pose.pose.position.x<-90.128 and 88.2840<data.pose.pose.position.y<92.3620 : 
-#
-        if write_to_json_flag and not log_closed:
-#	
-            stop_data = OrderedDict()
-            stop_data["Type"] = "Termination"
-            stop_data["WorldTime"] = timestamp
-            stop_data["SimulationTime"] = simulation_time
-            stop_data["FrameID"] = FrameID  
-            stop_data["Reason"] = "Operator Stop"
-	    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-            if flag_my_shutdown_callback == True:
-                write_to_json(stop_data,add_comma=False)
-                close_json_file()
+			    if flag_my_shutdown_callback:
+				write_to_json(stop_data, add_comma=False)
+				#close_json_file()
+				log_closed = True
+				write_to_json_flag = False
+    else:
+	    if -116.1248 < data.pose.pose.position.y < -90.128 and 88.2840 < data.pose.pose.position.x < 92.3620:
+		print("Log Finished by End of the simulation ")
+		if write_to_json_flag and not log_closed:
+		    stop_data = OrderedDict()
+		    stop_data["Type"] = "Termination"
+		    stop_data["WorldTime"] = timestamp
+		    stop_data["SimulationTime"] = simulation_time
+		    stop_data["FrameID"] = generate_frame_id()
+		    stop_data["Reason"] = "End of the simulation"
 
-                log_closed = True
-                write_to_json_flag = False
+		    if flag_my_shutdown_callback:
+		        write_to_json(stop_data, add_comma=False)
+		        #close_json_file()
+		        log_closed = True
+		        write_to_json_flag = False
+
             
 
 
-def Joy_callback(data):
+def control_callback(data):
 
     global gas
     global brake
     global sterring
 
-    sterring = data.axes[0]
-    brake = data.axes[2]
-    gas = data.axes[1]
-
+    sterring = data.steer
+    brake = data.brake
+    gas = data.throttle
 
    
 def write_to_json(data_dict, add_comma=True):
@@ -331,7 +394,7 @@ def main():
     rospy.Subscriber("/carla/ego_vehicle/odometry", Odometry, odometry_callback)
     rospy.Subscriber("/carla/ego_vehicle/speedometer", Float32, speed_callback, queue_size=10)
     #rospy.Subscriber("/HR", Float64, Mental_Work_Load)
-    rospy.Subscriber("joy", Joy, Joy_callback, queue_size=4)
+    rospy.Subscriber("/carla/ego_vehicle/vehicle_control_cmd_manual", CarlaEgoVehicleControl, control_callback)
     
     
 
