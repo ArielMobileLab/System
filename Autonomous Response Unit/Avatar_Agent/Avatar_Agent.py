@@ -134,14 +134,12 @@ def GetStress(msg):
     # Apply rolling median to the Series
    window_size = 5
    median_filtered_array = Final_value_series.rolling(window=window_size).median()
-   median_filtered_array = median_filtered_array[4:]
-
-   #median_filtered_array = median_filtered_array.dropna()
-   Acceleration_Mean = np.average(median_filtered_array)
+	
+   # np.nanmean() function to compute the mean of the array while ignoring any NaN values
+   Acceleration_Mean = np.nanmean(median_filtered_array)
 
 
     
-   #Acceleration_Mean =  np.average(Final_value_Array)
 
    #epsilon = 1e-10  # A small positive value to prevent issues with log(0)
    #if Mean > epsilon:
