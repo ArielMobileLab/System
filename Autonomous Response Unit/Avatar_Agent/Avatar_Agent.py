@@ -18,7 +18,8 @@ import json
 import pygame
 from carla_msgs.msg import CarlaCollisionEvent
 from nav_msgs.msg import Odometry
-
+import numpy as np
+import pandas as pd
 
 
 
@@ -47,7 +48,7 @@ Stress_Model = 1
 Face_State = 1
 Exit = 1
 Stress_Model = 1
-Mean = 1
+Acceleration_Mean = 1
 timestamp = 0
 write_to_json_flag = True  
 
@@ -114,8 +115,9 @@ def my_shutdown_callback():
 
 def GetStress(msg):
 
+
    global Final_value_Array
-   global Mean
+   global Acceleration_Mean
    global Stress_Model	
 
 
@@ -124,15 +126,34 @@ def GetStress(msg):
    #Final_value = math.sqrt(msg.linear_acceleration.x**2 + msg.linear_acceleration.y**2 + msg.linear_acceleration.z**2)
    Final_value_Array.append(Final_value)
    Final_value_Array[:] = Final_value_Array[-20:]  # Keep only the last 20 elements
-   Mean =  np.average(Final_value_Array)
 
-   epsilon = 1e-10  # A small positive value to prevent issues with log(0)
-   if Mean > epsilon:
-    Stress_Model = math.exp(0.0513 + 0.142 * math.log(Mean))
-    #Stress_Model = 1.052638638*Mean**0.142
-   else:
+    # Convert Final_value_Array to a pandas Series
+   Final_value_series = pd.Series(Final_value_Array)
+
+
+    # Apply rolling median to the Series
+   window_size = 5
+   median_filtered_array = Final_value_series.rolling(window=window_size).median()
+   median_filtered_array = median_filtered_array[4:]
+
+   #median_filtered_array = median_filtered_array.dropna()
+   Acceleration_Mean = np.average(median_filtered_array)
+
+
+    
+   #Acceleration_Mean =  np.average(Final_value_Array)
+
+   #epsilon = 1e-10  # A small positive value to prevent issues with log(0)
+   #if Mean > epsilon:
+   #Stress_Model = math.exp(0.0513 + 0.142 * math.log(Mean))
+   #print(Stress_Model)
+   #else:
     # Handle the case when Mean is too close to zero
-    Stress_Model = 0  # You can choose an appropriate default value
+   # Stress_Model = 0  # You can choose an appropriate default value
+   Stress_Model = 1.052638638*Acceleration_Mean**0.142
+   #print(Stress_Model)
+   #print(Stress_Model)
+
 
 
 
@@ -140,8 +161,9 @@ def Imege(photo_path, sec,simulation_time):
 
     global write_to_json_flag
      
+    #timestamp = datetime.now().strftime('%H:%M:%S.%f')
     timestamp = datetime.now().strftime('%H:%M:%S.%f')
-    
+
     Egocar_data = OrderedDict()
     Egocar_data["Type"] = "Face_Status:"
     Egocar_data["Timestamp"] = timestamp
@@ -183,7 +205,12 @@ def Imege(photo_path, sec,simulation_time):
 
 def odometry_callback(data):
 	 global write_to_json_flag
-	 if -116.1248 < data.pose.pose.position.y < -90.128 and 88.2840 < data.pose.pose.position.x < 92.3620:
+	 if Agent_type == "Face_Train":
+	    if  data.header.seq*0.033333335071821 > 160:
+		write_to_json_flag = False
+
+	 else:
+	    if -116.1248 < data.pose.pose.position.y < -90.128 and 88.2840 < data.pose.pose.position.x < 92.3620:
 		write_to_json_flag = False
   
 	
@@ -219,9 +246,13 @@ def AgentPlot(msg):
                 print(" close")
                 sys.exit()
 
+
    if not processing:
 
+ 
         processing = True
+
+
     
         # to start with image number one (2 sec)
         #if Start:
@@ -245,8 +276,8 @@ def AgentPlot(msg):
             # Add more conditions as needed
 
         elif Face_State == 2:
-            #if Stress_Model > 1.23:
-            if Stress_Model > 1.275:
+            if Stress_Model > 1.26:	
+            #if Stress_Model > 1.18:
                 Face_State = 3
                 pygame.mixer.Sound.play(sound_face_3)
                 plt.close('all')
@@ -266,8 +297,8 @@ def AgentPlot(msg):
 
         elif Face_State == 3:
             
-            #if Stress_Model < 1.18:
-            if Stress_Model < 1.175:
+            #if Stress_Model < 1.175:
+            if Stress_Model < 1.10:
                 #pygame.mixer.Sound.play(sound_face_2)
                 Face_State = 2
                 plt.close('all')
@@ -276,8 +307,14 @@ def AgentPlot(msg):
                 photo_path = Image_2
                 Imege(photo_path, sec,simulation_time)
 
+            # Add more conditions as needed
+
+        # Continue with the rest of your code...
+
 
         processing = False
+
+
 
 
 # Initialize ROS node
@@ -288,8 +325,8 @@ matplotlib.use("TkAgg")
 # Subscribe to the topic that publishes the messages from Carla
 rospy.Subscriber("IMU_topic", Imu, GetStress,queue_size=1)
 rospy.Subscriber("GPS_topic",NavSatFix,AgentPlot,queue_size=1)
-rospy.Subscriber("Collision_topic", CarlaCollisionEvent, collision_callback)
-rospy.Subscriber("Odometry_topic", Odometry, odometry_callback)
+rospy.Subscriber("/carla/ego_vehicle/collision", CarlaCollisionEvent, collision_callback)
+rospy.Subscriber("/carla/ego_vehicle/odometry", Odometry, odometry_callback)
 
 rospy.Subscriber("/rosout", Log, callback)  # Subscribe to '/rosout' topic
 # Set the desired loop frequency (1 Hz in this example)
