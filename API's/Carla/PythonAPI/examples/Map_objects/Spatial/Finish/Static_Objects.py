@@ -30,30 +30,29 @@ try:
     # Create a traffic cone
     blueprint_library = world.get_blueprint_library()
     cone_bp = blueprint_library.filter("static.prop.streetbarrier")[0] 
-    cone_location = carla.Location(x=237.699997, y=128.3, z=0.300000)
+    cone_location = carla.Location(x=245.699997, y=128, z=0.1)
     cone_transform = carla.Transform(cone_location, carla.Rotation(pitch=0, yaw=90.0, roll=0))
     cone = world.spawn_actor(cone_bp, cone_transform)
 
-   
     cone_bp1 = blueprint_library.filter("static.prop.streetbarrier")[0] 
-    cone_location1 = carla.Location(x=237.699997, y=130.5, z=0.300000)
+    cone_location1 = carla.Location(x=245.699997, y=130, z=0.1)
     cone_transform1 = carla.Transform(cone_location1, carla.Rotation(pitch=0, yaw=90.0, roll=0))
     cone1 = world.spawn_actor(cone_bp1, cone_transform1)
 
     warning = blueprint_library.filter("static.prop.streetbarrier")[0] 
-    warning_location = carla.Location(x=239, y=129.4, z=0.300000)
+    warning_location = carla.Location(x=245.699997, y=126, z=0.1)
     warning_transform = carla.Transform(warning_location, carla.Rotation(pitch=0, yaw=90.0, roll=0))
     warning = world.spawn_actor(warning, warning_transform)
 
 
-    car_location = carla.Location(x=200.632645, y=2.020034, z=0.300000)
+    car_location = carla.Location(x=198.0, y=2.020034, z=0.300000)
     car_bp = blueprint_library.filter("vehicle.audi.tt")[0]
     car_transform = carla.Transform(car_location, carla.Rotation(pitch=0, yaw=0, roll=0))
     car = world.spawn_actor(car_bp, car_transform)
  
 
-    cone_car_location = carla.Location(x=234, y=129.750061, z=0.300000)
-    cone_car_bp = blueprint_library.filter("vehicle.mercedes.sprinter")[0]
+    cone_car_location = carla.Location(x=242, y=129.750061, z=0.300000)
+    cone_car_bp = blueprint_library.filter("vehicle.dodge.charger_police")[0]
     cone_car_transform = carla.Transform(cone_car_location, carla.Rotation(pitch=0, yaw=180, roll=0))
     cone_car = world.spawn_actor(cone_car_bp, cone_car_transform)
 
@@ -76,4 +75,3 @@ finally:
         warning.destroy()
    
     print("Done!")
-
