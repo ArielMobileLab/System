@@ -120,6 +120,13 @@ def on_world_tick(world_snapshot):
                         "y": str(actor.get_location().y),
                         "z": str(actor.get_location().z)
                     }
+                    carla_location = carla.Location(actor.get_location().x, actor.get_location().y, actor.get_location().z)
+                    world_map = world.get_map()
+                    geolocation = world_map.transform_to_geolocation(carla_location)
+                    actor_info["Longitude"] = str(geolocation.longitude)
+                    actor_info["Latitude"] = str(geolocation.latitude)
+                    actor_info["Altitude"] = str(geolocation.altitude)
+  
                     write_to_json(actor_info)
 
                 elif actor.type_id.startswith('vehicle') and not actor.attributes.get('role_name', '') == 'ego_vehicle':
@@ -137,7 +144,16 @@ def on_world_tick(world_snapshot):
                                 "y": str(actor.get_location().y),
                                 "z": str(actor.get_location().z)
                             }
+
+                            carla_location = carla.Location(actor.get_location().x, actor.get_location().y, actor.get_location().z)
+                            world_map = world.get_map()
+                            geolocation = world_map.transform_to_geolocation(carla_location)
+                            actor_info["Longitude"] = str(geolocation.longitude)
+                            actor_info["Latitude"] = str(geolocation.latitude)
+                            actor_info["Altitude"] = str(geolocation.altitude)
+
                             write_to_json(actor_info)
+
                             written_vehicles.add(actor.type_id)  # Mark as written
                     else:
                         # Write information about other vehicles
@@ -158,9 +174,22 @@ def on_world_tick(world_snapshot):
                             "y": str(actor_transform.rotation.yaw),
                             "z": str(actor_transform.rotation.roll)
                         }
+                        carla_location = carla.Location(actor.get_location().x, actor.get_location().y, actor.get_location().z)
+                        world_map = world.get_map()
+                        geolocation = world_map.transform_to_geolocation(carla_location)
+                        actor_info["Longitude"] = str(geolocation.longitude)
+                        actor_info["Latitude"] = str(geolocation.latitude)
+                        actor_info["Altitude"] = str(geolocation.altitude)
+            
                         actor_info["Speed"] = math.sqrt(actor.get_velocity().x ** 2 + actor.get_velocity().y ** 2)
-                        actor_info["Acceleration"] = str(actor.get_acceleration().x)
+                        #actor_info["Acceleration"] = str(actor.get_acceleration().x)
+			actor_info["Acceleration"] = {
+                            "x": str(actor.get_acceleration().x),
+                            "y": str(actor.get_acceleration().y),
+                            "z": str(actor.get_acceleration().z)
+                        }
                         write_to_json(actor_info)
+
                 elif actor.type_id.startswith('static.prop.streetbarrier'):
                     # Check if the static object has been encountered before
                     actor_tuple = (actor.type_id, actor_id)
@@ -176,7 +205,15 @@ def on_world_tick(world_snapshot):
                             "y": str(actor.get_location().y),
                             "z": str(actor.get_location().z)
                         }
+                        carla_location = carla.Location(actor.get_location().x, actor.get_location().y, actor.get_location().z)
+                        world_map = world.get_map()
+                        geolocation = world_map.transform_to_geolocation(carla_location)
+                        static_info["Longitude"] = str(geolocation.longitude)
+                        static_info["Latitude"] = str(geolocation.latitude)
+                        static_info["Altitude"] = str(geolocation.altitude)
+                        
                         write_to_json(static_info)
+
                         encountered_static_objects.add(actor_tuple)
  
 
