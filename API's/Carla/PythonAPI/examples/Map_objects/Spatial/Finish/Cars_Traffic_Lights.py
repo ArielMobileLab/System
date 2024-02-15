@@ -4,6 +4,7 @@ import time
 from nav_msgs.msg import Odometry
 import rospy
 
+
 # List to store the created actors
 created_actors = []
 
@@ -31,31 +32,58 @@ def Generate_Car1():
 
     # Define the spawn location for the vehicle
     spawn_location = carla.Transform(
-        carla.Location(x=300, y=-2.0, z=0.499982),  # Initial location
+        carla.Location(x=340, y=-1.2, z=0.499982),  # Initial location
         carla.Rotation(pitch=0, yaw=180, roll=0)  # 180-degree rotation
     )
     # Spawn the vehicle
     vehicle = world.spawn_actor(vehicle_bp, spawn_location)
-    vehicle.apply_control(carla.VehicleControl(throttle=0.3, steer=0.0))
+    vehicle.apply_control(carla.VehicleControl(throttle=0.25, steer=0.0))
 
     # Add the created actor to the list
     created_actors.append(vehicle)
 
-def Generate_Cars2():
+
+def Generate_Cars2(world, actors, num_cars=15):
+
+    # Find the Nissan Micra actor
+    for actor in actors:
+        if actor.attributes.get('role_name') == 'ego_vehicle':
+            ego_vehicle = actor
+            break
+
     blueprint_library = world.get_blueprint_library()
     vehicle_bp = random.choice(blueprint_library.filter('vehicle.tesla.model3'))
 
-    # Define the spawn location for the vehicle
     spawn_location = carla.Transform(
-        carla.Location(x=120.0, y=133.5, z=0.499982)
+        carla.Location(x=110.0, y=133.5, z=0.499982)
     )
 
-    # Spawn the vehicle
-    vehicle = world.spawn_actor(vehicle_bp, spawn_location)
-    vehicle.apply_control(carla.VehicleControl(throttle=0.3, steer=0.0))
+    num_cars_with_interval_15_sec = 10
 
-    # Add the created actor to the list
-    created_actors.append(vehicle)
+    created_actors = []
+
+    # Spawn the vehicles
+    for i in range(num_cars):
+        nissan_micra_location = ego_vehicle.get_location()
+
+        #generate only before the apstical
+        if nissan_micra_location.x > 240:
+
+            if i < num_cars_with_interval_15_sec:
+
+                current_interval = 15.0
+                
+            else:
+                current_interval = 18.0
+
+            vehicle = world.spawn_actor(vehicle_bp, spawn_location)
+            vehicle.apply_control(carla.VehicleControl(throttle=0.35, steer=0.0))
+
+            created_actors.append(vehicle)
+
+            time.sleep(current_interval)
+
+    
 
 def cleanup():
     # Destroy all created actors
@@ -69,14 +97,15 @@ def Cars(data):
     global first_car_cross
     global second_car_cross
 
-    if first_car_cross == True and 92.3 < data.pose.pose.position.x < 92.4:
+    #if first_car_cross == True and 87.4309 < data.pose.pose.position.x < 93.3200: original
+    if first_car_cross == True and 87.4309 < data.pose.pose.position.x < 93.3200:
         print("car_1")
         Generate_Car1()
         first_car_cross = False
-
-    if second_car_cross == True and 334.7 < data.pose.pose.position.x < 334.9:
+    #if first_car_cross == True and 334.0 < data.pose.pose.position.x < 339.7652: original
+    if second_car_cross == True and 334.0 < data.pose.pose.position.x < 339.7652:
         print("car_2")
-        Generate_Cars2()
+        Generate_Cars2(world, actors, num_cars=15)
         second_car_cross = False
 
 # Main function
