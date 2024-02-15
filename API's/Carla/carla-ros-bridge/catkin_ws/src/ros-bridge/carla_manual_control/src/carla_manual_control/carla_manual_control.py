@@ -107,7 +107,7 @@ class ManualControl(CompatibleNode):
 
         self.image_subscriber = self.new_subscription(
             Image, "/carla/{}/rgb_view/image".format(self.role_name),
-            self.on_view_image, qos_profile=10)
+            self.on_view_image, qos_profile=1)
 
         self.collision_subscriber = self.new_subscription(
             CarlaCollisionEvent, "/carla/{}/collision".format(self.role_name),
@@ -127,6 +127,8 @@ class ManualControl(CompatibleNode):
                               data.normal_impulse.y**2 + data.normal_impulse.z**2)
         self.hud.notification('Collision with {} (impulse {})'.format(
             data.other_actor_id, intensity))
+	
+	os._exit(0)
 
     def on_lane_invasion(self, data):
         """
@@ -193,7 +195,7 @@ class KeyboardControl(object):
         self._control = CarlaEgoVehicleControl()
         self._steer_cache = 0.0
 
-        fast_qos = QoSProfile(depth=10)
+        fast_qos = QoSProfile(depth=1)
         fast_latched_qos = QoSProfile(depth=10, durability=DurabilityPolicy.TRANSIENT_LOCAL)
 
         self.vehicle_control_manual_override_publisher = self.node.new_publisher(
@@ -224,7 +226,7 @@ class KeyboardControl(object):
             Joy,
             "/joy",  # Replace with the actual joystick topic name
             self.on_joy_input,
-            qos_profile=10)
+            qos_profile=1)
         
         self.set_autopilot(self._autopilot_enabled)
 
@@ -251,15 +253,37 @@ class KeyboardControl(object):
         Callback for processing joystick input
         """
         # Map joystick axes/buttons to control commands as needed
-        throttle = (1+ joy_msg.axes[1])/3 # Adjust the index based on your joystick
-        steer = -1 * joy_msg.axes[0] / 2     # Adjust the index based on your joystick
-        brake = (1 + joy_msg.axes[2]) / 1.2  # Adjust the index based on your joystick
+	throttle = 1+ joy_msg.axes[1]
+        steer = -1 * joy_msg.axes[0]
+        brake = 1 + joy_msg.axes[2]
+
+	# the orignal
+        #throttle = (1+ joy_msg.axes[1])/ 2.5 # Adjust the index based on your joystick
+        #steer = -1 * joy_msg.axes[0]  /2    # Adjust the index based on your joystick
+        #brake = (1 + joy_msg.axes[2]) / 3  # Adjust the index based on your joystick
 	
         # Update the control commands
-        self._control.throttle = max(0.0, throttle) #max()- give me the highest number
-        self._control.steer = steer
+        self._control.throttle = max(0.0, throttle)
+        self._control.steer = 	steer
         self._control.brake = max(0.0, brake)
+        #self._control.throttle = max(0.0, throttle) #max()- give me the highest number
+        #self._control.steer = steer
+        #self._control.brake = max(0.0, brake)
 
+
+        # the orignal
+        #self._control.throttle = max(0.0, min(1.0, throttle)) #max()- give me the highest number
+        #self._control.steer = max(-1.0, min(1.0, steer))
+	#self._control.brake = max(-0.5, min(1.0, brake))
+        #self._control.brake = min(self._control.brake, 0.375) 
+
+        #self._control.brake = max(0.0, min(1.0, brake))
+        #self._control.brake = brake
+	#if joy_msg.buttons[1]:
+	#	self._control.throttle = min(self._control.throttle + 0.01, 1.0)
+	#elif joy_msg.buttons[2]:  # Adjust the button index based on your joystick
+        #	self._control.brake = min(self._control.brake + 0.2, 1.0)
+    	
 # Publish the updated control commands,self._control its data frame with control comands from joy ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         try:
             self.vehicle_control_publisher.publish(self._control)
@@ -463,6 +487,7 @@ class HUD(object):
 	if  -116.1248<self.y<-90.128 and 88.2840<self.x<92.3620 : 
 
 		os._exit(0)
+		
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         self.z = data.pose.pose.position.z
         _, _, yaw = quat2euler(
@@ -758,4 +783,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
