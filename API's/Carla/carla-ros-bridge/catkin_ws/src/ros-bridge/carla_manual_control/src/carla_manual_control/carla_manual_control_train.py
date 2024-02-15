@@ -87,6 +87,7 @@ from sensor_msgs.msg import Joy
 
 # Add a variable to store the speed process ID
 speed_process_id = None
+term_down = 0
 
 
 # ==============================================================================
@@ -94,6 +95,7 @@ speed_process_id = None
 # ==============================================================================
 
 class ManualControl(CompatibleNode):
+    
     """
     Handle the rendering
     """
@@ -128,6 +130,7 @@ class ManualControl(CompatibleNode):
         self.hud.notification('Collision with {} (impulse {})'.format(
             data.other_actor_id, intensity))
 
+	os._exit(0)
     def on_lane_invasion(self, data):
         """
         Callback on lane invasion event
@@ -250,15 +253,24 @@ class KeyboardControl(object):
         """
         Callback for processing joystick input
         """
-        # Map joystick axes/buttons to control commands as needed
-        throttle = (1+ joy_msg.axes[1])/3 # Adjust the index based on your joystick
-        steer = -1 * joy_msg.axes[0] / 2     # Adjust the index based on your joystick
-        brake = (1 + joy_msg.axes[2]) / 1.2  # Adjust the index based on your joystick
+        throttle = (1+ joy_msg.axes[1])/ 2.5 # Adjust the index based on your joystick
+        steer = -1 * joy_msg.axes[0]  /2    # Adjust the index based on your joystick
+        brake = (1 + joy_msg.axes[2]) / 3  # Adjust the index based on your joystick
 	
         # Update the control commands
-        self._control.throttle = max(0.0, throttle) #max()- give me the highest number
-        self._control.steer = steer
-        self._control.brake = max(0.0, brake)
+        #self._control.throttle = max(0.0, throttle) #max()- give me the highest number
+        #self._control.steer = steer
+        #self._control.brake = max(0.0, brake)
+        self._control.throttle = max(0.0, min(1.0, throttle)) #max()- give me the highest number
+        self._control.steer = max(-1.0, min(1.0, steer))
+	self._control.brake = max(-0.5, min(1.0, brake))
+        self._control.brake = min(self._control.brake, 0.375) 
+        #self._control.brake = max(0.0, min(1.0, brake))
+        #self._control.brake = brake
+	#if joy_msg.buttons[1]:
+	#	self._control.throttle = min(self._control.throttle + 0.01, 1.0)
+	#elif joy_msg.buttons[2]:  # Adjust the button index based on your joystick
+        #	self._control.brake = min(self._control.brake + 0.2, 1.0)
 
 # Publish the updated control commands,self._control its data frame with control comands from joy ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         try:
@@ -454,16 +466,18 @@ class HUD(object):
         self.update_info_text()
 
     def odometry_updated(self, data):
+        
         self.x = data.pose.pose.position.x
 
         self.y = data.pose.pose.position.y
+	
 
 	
 	#close the senario:
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	if 150 < data.header.seq*0.033333335071821<151:
-		
-		os._exit(0)
+	if  data.header.seq*0.033333335071821 > 160:
+	
+	    os._exit(0)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         self.z = data.pose.pose.position.z
         _, _, yaw = quat2euler(
@@ -759,4 +773,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
