@@ -9,11 +9,11 @@
   <arg name='role_name' default='ego_vehicle'/>
   <arg name="vehicle_filter" default='vehicle.*'/>
   <!-- Point for train-->
-  <arg name="spawn_point" default="-205.130340576, 4.08491802216, 0.499982 , 0.000000, 0.000000, 180"/> use comma separatedd format "x,y,z,roll,pitch,yaw" 
+  <!-- <arg name="spawn_point" default="-205.130340576, 4.08491802216, 0.499982 , 0.000000, 0.000000, 180"/> use comma separatedd format "x,y,z,roll,pitch,yaw" -->
   <!-- Point for spatial-->
   <!--<arg name="spawn_point" default="267.27456665, -55.8394165039, 0.499982 , 0.000000, 0.000000, 180.0"/> use comma separatedd format "x,y,z,roll,pitch,yaw" -->
 
-  
+  <arg name="spawn_point" default="-3.04867935181, -291.170318604, 0.499982 ,0.0, 0.0 ,90.0"/> use comma separatedd format "x,y,z,roll,pitch,yaw" 
 
   <arg name="town" default='Town01'/>
 
@@ -42,6 +42,7 @@
     <arg name="spawn_sensors_only" value="false"/>
   </include>
 
+  
   <include file="$(find carla_manual_control)/launch/carla_manual_control_train.launch">
     <arg name='role_name' value='$(arg role_name)'/>
   </include>
