@@ -29,6 +29,7 @@ import webbrowser
 import os
 
 def play_video(video_path):
+    
     # video_x = 1920 * 2  # Adjust this value to match the screen width of your setup
     # video_y = 0        # Adjust this value to match the screen height and positioning of your setup
     subprocess.Popen(['vlc',video_path,'--fullscreen','--play-and-exit']) 
@@ -61,7 +62,7 @@ for file in files:
 # Create a function to launch the selected scenario
 def launch_scenario(scenarioslist,Town,Face,Objects, Arrow_Guilde):
     if wheelName != 'null':
-        os.system('ffset /dev/input/by-id/' + wheelName + ' -a 30')
+        os.system('ffset /dev/input/by-id/' + wheelName + ' -a 50')
     for scenario in scenarioslist:
         root.withdraw()  # added this line to hide the root window
         repeat = 1
@@ -86,33 +87,49 @@ def launch_scenario(scenarioslist,Town,Face,Objects, Arrow_Guilde):
 
 scenarios = [
     {
-        "name": "Training",
-        "description": "Get used to driving with our steering wheel and brakes in an urban scenario",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Training.mp4", 
-        "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/startScenarioTrain.sh","Town05","No_Face","Train","Guide_Train"]
-    },
-    {
         "name": "Face",
-        "description": "Drive around the city whole following the instruction signs with Face Agent ",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Face.mp4",
-        "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/startScenarioSpatial.sh","Town01","Face","Spatial","Guide_Spatial"]
+        "description": "",
+        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Face.mov",
+        "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
+	"NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/newspatial.sh","Town01","Face","Obstacle_A","Guide_Spatial"],
+        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/newspatial.sh","Town01","Face","Obstacle_B","Guide_Spatial"],
+
     },
     {
         "name": "Color",
-        "description": "Drive around the city whole following the instruction signs with Color Agent",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Color.mp4",
-        "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/startScenarioSpatial.sh","Town01","Color","Spatial","Guide_Spatial"]
+        "description": "",
+        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Color.mov",
+        "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
+	"NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/newspatial.sh","Town01","Color","Obstacle_A","Guide_Spatial"],
+        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/newspatial.sh","Town01","Color","Obstacle_B","Guide_Spatial"],
     },
     {
         "name": "No_Face",
-        "description": "Drive around the city whole following the instruction signs",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/None.mp4",
+        "description": "",
+        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/None.mov",
+        "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
+	"NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/newspatial.sh","Town01","No_Face","Obstacle_A","Guide_Spatial"],
+        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/newspatial.sh","Town01","No_Face","Obstacle_B","Guide_Spatial"],
+    },
+    {
+        "name": "Face_Familiar",
+        "description": "",
+        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Face_Familiar.mov",
+        "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
+	"NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/newspatial.sh","Town01","Face_Familiar","Obstacle_A","Guide_Spatial"],
+	"code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/newspatial.sh","Town01","Face_Familiar","Obstacle_B","Guide_Spatial"],
+    },
+    {
+        "name": "Training",
+        "description": "",
+        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Training.mov", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/startScenarioSpatial.sh","Town01","No_Face","Spatial","Guide_Spatial"]
-    }
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Senarios/newtrain.sh","Town02","Face_Train","Nah","Guide_Train"]
+    },
 ]
 
 
@@ -127,6 +144,7 @@ def show_scenario_menu():
     small_title_label = tk.Label(root, text="Please choose a scenario", font=("Tahoma", 31))
     small_title_label.pack()
 
+   
     # Create buttons for each scenario
     for scenario in scenarios:
 	    
@@ -135,15 +153,26 @@ def show_scenario_menu():
         scenario_frame = tk.Frame(root, bg="black", padx=10, pady=10)
         scenario_frame.pack(pady=15, anchor="w", fill="x")
 
-        
+        if scenario["name"] == "Training":
+            # Create a scenario button
+            scenario_button = ttk.Button(scenario_frame, text="Scenario", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
+            #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
+            scenario_button.configure(style="Custom.TButton")
+            scenario_button.pack(side=tk.RIGHT)
+        else:   
+            # Create a scenario button
+            scenario_button = ttk.Button(scenario_frame, text="Scenario A", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
+            #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
+            scenario_button.configure(style="Custom.TButton")
+            scenario_button.pack(side=tk.RIGHT)
 
-        # Create a scenario button
-        scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
-        #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
-        scenario_button.configure(style="Custom.TButton")
-        scenario_button.pack(side=tk.RIGHT)
+            # Create a scenario button
+            scenario_button = ttk.Button(scenario_frame, text="Scenario B", command=lambda s=scenario: launch_scenario(s["code1"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
+            #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
+            scenario_button.configure(style="Custom.TButton")
+            scenario_button.pack(side=tk.RIGHT)
 
-  
+    
 
         # Create a frame for the description label
         description_frame = tk.Frame(scenario_frame, bg="black")
@@ -151,10 +180,7 @@ def show_scenario_menu():
 
         s.configure("Danger.TButton", foreground="Black", background="green", padding=(20, 15), font=("Tahoma", 14, "bold"))     
 
-        if scenario["name"] != "Training":
-            shelon_button = ttk.Button(scenario_frame, text="NASA - TLX", command=lambda url=scenario["NASA"]: open_url(url))   
-            shelon_button.configure(style="Danger.TButton") 
-            shelon_button.pack(side=tk.LEFT, padx=4)  
+       
 
         # Create a label with the scenario description
         title_label = tk.Label(description_frame, text=scenario["name"], font=("Tahoma", 16, "bold"), wraplength=300,width=28, fg="white", bg="black",anchor="w")
@@ -169,11 +195,16 @@ def show_scenario_menu():
         description_frame.columnconfigure(1, weight=1)
 
         # Create a play video button
-        play_video_button = ttk.Button(scenario_frame, text="Play Video", command=lambda url=scenario["video_path"]: play_video(url))
+        play_video_button = ttk.Button(scenario_frame, text="Video", command=lambda url=scenario["video_path"]: play_video(url))
         play_video_button.configure(style="Custom.TButton")
         play_video_button.pack(side=tk.RIGHT, padx=5)
 
-       
+
+    frame = tk.Frame(root, bg="black", padx=10, pady=10)
+    frame.pack(pady=15, anchor="w", fill="x")
+
+
+
 
 # Show the initial scenario menu
 show_scenario_menu()
