@@ -154,7 +154,6 @@ if __name__ == '__main__':
           
      
         rospy.init_node('message_listenerr')
-        
         # Subscribe to the topic that publishes the messages
         rospy.Subscriber('/carla/ego_vehicle/odometry',Odometry, Cross_Walker, queue_size=1)  
 
