@@ -17,7 +17,7 @@ first_car_cross = True
 second_car_cross = True
 actors = world.get_actors()
 
-# Iterate through all actors and find traffic lights
+# Iterate through all actors, find traffic lights to make them green 
 for actor in actors:
     if actor.type_id.startswith("traffic.traffic_light"):
         traffic_light = actor
