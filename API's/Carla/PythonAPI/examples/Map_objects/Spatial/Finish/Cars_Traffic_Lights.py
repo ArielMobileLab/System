@@ -66,7 +66,7 @@ def Generate_Cars2(world, actors, num_cars=15):
     for i in range(num_cars):
         nissan_micra_location = ego_vehicle.get_location()
 
-        #generate only before the apstical
+        #generate only before the optical
         if nissan_micra_location.x > 240:
 
             if i < num_cars_with_interval_15_sec:
@@ -78,12 +78,8 @@ def Generate_Cars2(world, actors, num_cars=15):
 
             vehicle = world.spawn_actor(vehicle_bp, spawn_location)
             vehicle.apply_control(carla.VehicleControl(throttle=0.35, steer=0.0))
-
             created_actors.append(vehicle)
-
             time.sleep(current_interval)
-
-    
 
 def cleanup():
     # Destroy all created actors
@@ -97,12 +93,11 @@ def Cars(data):
     global first_car_cross
     global second_car_cross
 
-    #if first_car_cross == True and 87.4309 < data.pose.pose.position.x < 93.3200: original
     if first_car_cross == True and 87.4309 < data.pose.pose.position.x < 93.3200:
         print("car_1")
         Generate_Car1()
         first_car_cross = False
-    #if first_car_cross == True and 334.0 < data.pose.pose.position.x < 339.7652: original
+        
     if second_car_cross == True and 334.0 < data.pose.pose.position.x < 339.7652:
         print("car_2")
         Generate_Cars2(world, actors, num_cars=15)
@@ -113,7 +108,7 @@ if __name__ == '__main__':
     rospy.init_node('message_listener4')
 
     # Subscribe to the topic that publishes the messages
-    rospy.Subscriber('/carla/ego_vehicle/odometry', Odometry, Cars, queue_size=1)
+    rospy.Subscriber('Odomerty_topic', Odometry, Cars, queue_size=1)
 
     # Set the desired loop frequency (1 Hz)
     rate = rospy.Rate(1)
