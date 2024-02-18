@@ -45,7 +45,7 @@ def Generate_Car1():
 
 def Generate_Cars2(world, actors, num_cars=15):
 
-    # Find the Nissan Micra actor
+    # Find the Ego car actor
     for actor in actors:
         if actor.attributes.get('role_name') == 'ego_vehicle':
             ego_vehicle = actor
