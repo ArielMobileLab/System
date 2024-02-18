@@ -1,3 +1,7 @@
+#The code is responsible for
+#    1) Changing the color of traffic lights
+#    2) Launch of dynamic cars on the map
+
 import carla
 import random
 import time
@@ -5,16 +9,18 @@ from nav_msgs.msg import Odometry
 import rospy
 
 
-# List to store the created actors
+# List to store the created actors for cleaning
 created_actors = []
 
+#connecot to the server
 client = carla.Client('localhost', 2000)
 client.set_timeout(2.0)
 
-# Load the CARLA world
-world = client.get_world()
 first_car_cross = True
 second_car_cross = True
+
+# Load the CARLA world
+world = client.get_world()
 actors = world.get_actors()
 
 # Iterate through all actors, find traffic lights to make them green 
@@ -25,7 +31,8 @@ for actor in actors:
         traffic_light.set_state(carla.TrafficLightState.Green)
         traffic_light.set_green_time(10000)  # Optional: Set the green time duration
 
-def Generate_Car1():
+
+def Generate_cars_first_vehicle_obstacle():
     # Create a blueprint for the vehicle
     blueprint_library = world.get_blueprint_library()
     vehicle_bp = random.choice(blueprint_library.filter('vehicle.tesla.model3'))
@@ -43,7 +50,7 @@ def Generate_Car1():
     created_actors.append(vehicle)
 
 
-def Generate_Cars2(world, actors, num_cars=15):
+def Generate_cars_secound_vehicle_obstacle(world, actors, num_cars=15):
 
     # Find the Ego car actor
     for actor in actors:
@@ -58,28 +65,32 @@ def Generate_Cars2(world, actors, num_cars=15):
         carla.Location(x=110.0, y=133.5, z=0.499982)
     )
 
-    num_cars_with_interval_15_sec = 10
+    amount_of_cars_driving_with_difficult_gap = 10
 
     created_actors = []
 
     # Spawn the vehicles
     for i in range(num_cars):
-        nissan_micra_location = ego_vehicle.get_location()
 
-        #generate only before the optical
-        if nissan_micra_location.x > 240:
+        #ego car location
+        ego_car_location = ego_vehicle.get_location()
+        ego_car_x-axis_location=ego_car.x
 
-            if i < num_cars_with_interval_15_sec:
+        #generate only before the optical, the x location of the ego car is parallel to the x location of the police car
+        if ego_car_x-axis_location > 240:
 
-                current_interval = 15.0
+            if i < amount_of_cars_driving_with_difficult_gap:
+                #dificalt gap in sec
+                gap_sec = 15.0
                 
             else:
-                current_interval = 18.0
+                #easy gap in sec
+                gap_sec = 18.0
 
             vehicle = world.spawn_actor(vehicle_bp, spawn_location)
             vehicle.apply_control(carla.VehicleControl(throttle=0.35, steer=0.0))
             created_actors.append(vehicle)
-            time.sleep(current_interval)
+            time.sleep(gap_sec)
 
 def cleanup():
     # Destroy all created actors
@@ -87,7 +98,7 @@ def cleanup():
         actor.destroy()
 
 # Callback function for the subscriber
-def Cars(data):
+def dynamic_car_generation(data):
     world.tick()
 
     global first_car_cross
@@ -95,12 +106,13 @@ def Cars(data):
 
     if first_car_cross == True and 87.4309 < data.pose.pose.position.x < 93.3200:
         print("car_1")
-        Generate_Car1()
+        Generate_cars_first_vehicle_obstacle()
         first_car_cross = False
         
     if second_car_cross == True and 334.0 < data.pose.pose.position.x < 339.7652:
         print("car_2")
-        Generate_Cars2(world, actors, num_cars=15)
+        #obstacle with gap acceptence
+        Generate_cars_secound_vehicle_obstacle(world, actors, num_cars=15)
         second_car_cross = False
 
 # Main function
@@ -108,7 +120,7 @@ if __name__ == '__main__':
     rospy.init_node('message_listener4')
 
     # Subscribe to the topic that publishes the messages
-    rospy.Subscriber('Odomerty_topic', Odometry, Cars, queue_size=1)
+    rospy.Subscriber('Odomerty_topic', Odometry, dynamic_car_generation, queue_size=1)
 
     # Set the desired loop frequency (1 Hz)
     rate = rospy.Rate(1)
