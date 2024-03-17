@@ -1,4 +1,4 @@
-# Simulation Data Documentation (output from Ego_Car_log.py and Objects_log.py codes)
+Simulation Data Documentation (output from Ego_Car_log.py and Objects_log.py codes)
 
 This document provides documentation for the JSON data obtained from a simulation.
 
