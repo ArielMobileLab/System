@@ -1,4 +1,4 @@
-#Code that use the main camera and show in the screen parent side not make another camera
+#Side of an accompanying parent who uses the main camera
 
 import carla
 import numpy as np
