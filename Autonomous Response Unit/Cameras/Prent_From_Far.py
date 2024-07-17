@@ -1,4 +1,4 @@
-#Side of an accompanying parent who uses the main camera
+#Side of an accompanying parent who uses the main camera of the Ego car
 
 import carla
 import numpy as np
