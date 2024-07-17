@@ -13,8 +13,9 @@ Managing the Experiment from the operator's side
 
 This part is responsible for intervening in the simulator
 1) **Map Guide:** A feature that displays arrows and guide signs on the screen at the same time as running a simulator for the purpose of driving assistance.
-2) **Avatar Agent:** A feature that displays an AVATAR on the screen describing the passenger's feeling in the car.
-3) **Speedometer:** A feature that displays The Speed ​​measurement of the Ego Car.
+2) **Avatar Videos:** A feature that displays a video record of Accompanying AVATAR on the screen.
+3) **Avatar Agent:** A feature that displays an AVATAR on the screen describing the passenger's feeling in the car.
+4) **Speedometer:** A feature that displays The Speed ​​measurement of the Ego Car.
 
 # 14. API adapter Unit
 
@@ -28,3 +29,10 @@ This part is responsible for generating logs
 2) **Objects log:** Responsible for generating map objects log
 
 Note: the Cognata logos we get through the Cognata station in each scenario 
+
+
+# 16. Map Customization Unit
+
+This part is responsible for Customization maps scenarios 
+
+
