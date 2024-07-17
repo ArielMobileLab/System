@@ -1,3 +1,5 @@
+#Code that generates front camera in the ego car
+
 import carla
 import numpy as np
 import pygame
