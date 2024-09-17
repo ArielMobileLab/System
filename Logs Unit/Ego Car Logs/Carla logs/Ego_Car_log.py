@@ -41,10 +41,11 @@ actor_id = None
     # Find the actor ID by type
 actors = world.get_actors()
 for actor in actors:
-        if actor.type_id == 'vehicle.nissan.micra':
+        if actor.attributes.get('role_name') == 'ego_vehicle':
+            ego_vehicle = actor
             actor_id = actor.id
             break
-             
+
 
 
 Agent_type = sys.argv[1]
