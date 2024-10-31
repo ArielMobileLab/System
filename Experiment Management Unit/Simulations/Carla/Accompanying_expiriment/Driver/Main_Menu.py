@@ -30,10 +30,9 @@ import os
 
 def play_video(video_path):
     
-    # video_x = 1920 * 2  # Adjust this value to match the screen width of your setup
-    # video_y = 0        # Adjust this value to match the screen height and positioning of your setup
-    subprocess.Popen(['vlc',video_path,'--fullscreen','--play-and-exit']) 
+      subprocess.Popen(['vlc',video_path,'--fullscreen','--play-and-exit']) 
 
+      
 def open_url(url):
     webbrowser.open(url)
 
@@ -103,18 +102,10 @@ scenarios = [
     {
         "name": "Close",
         "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Parent/X.mp4", 
+        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Parent/Driver_Side_Close.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
         "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Obstacle_C","Guide_Parent"],
 	    "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Obstacle_D","Guide_Parent"],
-    },
-    {
-        "name": "Far_Close_with_extra_camera",
-        "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Parent/X.mp4", 
-        "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_A_extra_camera.sh","Town01","Parent_with_out_videos_A","Obstacle_C","Guide_Parent"],
-	    "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_B_extra_camera.sh","Town01","Parent_with_out_videos_B","Obstacle_D","Guide_Parent"],
     },
     {
         "name": "Avatar",
@@ -125,20 +116,12 @@ scenarios = [
 	    "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_videos_B.sh","Town01","Parent_with_videos_B","Obstacle_B","Guide_Parent"],
     },
     {
-        "name": "Star_Video",
+        "name": "Start Video",
         "description": "",
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Parent/Start_Prent_Video.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
         "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Obstacle_C","Guide_Parent"],
 	    "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Obstacle_D","Guide_Parent"],
-    },
-    {
-        "name": "test",
-        "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Parent/Start_Prent_Video.mp4", 
-        "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/test.sh","Town02","Parent_with_out_videos_A","Obstacle_C","Guide_Parent"],
-	    "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/test.sh","Town02","Parent_with_out_videos_B","Obstacle_D","Guide_Parent"],
     }
 ]
 
@@ -168,6 +151,7 @@ def show_scenario_menu():
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
+
         else:   
             # Create a scenario button
             scenario_button = ttk.Button(scenario_frame, text="Scenario A", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
@@ -176,7 +160,7 @@ def show_scenario_menu():
             scenario_button.pack(side=tk.RIGHT)
 
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text="Scenario B", command=lambda s=scenario: launch_scenario(s["code1"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
+            scenario_button = ttk.Button(scenario_frame, text="Scenario B", command=lambda s=scenario: launch_scenario(s["code1"] ,s["code1"][1],s["code1"][2],s["code1"][3],s["code1"][4]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
@@ -221,6 +205,4 @@ show_scenario_menu()
 # Run the main loop
 root.mainloop()
 
-
-# OnLy GoD cAn judGe mE
 
