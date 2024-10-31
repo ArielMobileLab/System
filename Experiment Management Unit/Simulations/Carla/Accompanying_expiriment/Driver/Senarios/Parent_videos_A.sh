@@ -44,14 +44,13 @@ function free_port() {
     fi
 }
 
-export ROS_IP=10.20.0.164
 export  ROS_MASTER_URI=http://10.20.0.164:11311 
+export ROS_IP=10.20.0.164
 
 
 free_port 2000
 
 trap cleanup INT
-
 
 
 "$HOME/Desktop/CARLA_0.9.13/CarlaUE4.sh" -windowed -ResX=640 -ResY=480 -benchmark -fps=20 &
@@ -61,8 +60,7 @@ sleep 11s
 source /home/omer/carla-ros-bridge/catkin_ws/devel/setup.bash &&
 
 
-roslaunch carla_ros_bridge Prent.launch town:=$1&
-
+roslaunch carla_ros_bridge Prent.launch town:=$1 spawn_point:="-3.04867935181, -291.170318604, 0.499982, 0.0, 0.0, 180.0"
 sleep 3s
 
 
@@ -70,19 +68,15 @@ run_python=python3
 
 "$run_python" "$HOME/Desktop/API Addapter/Addapter.py" &
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/speed/speed.py" &
+run_python=python
+
 "$run_python" "$HOME/Desktop/API Addapter/RosToUDP.py" &
 sleep 1s &&
 
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Voice/Voice_To_Json_PyAudio.py" &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Voice/Voice_To_Json_PyAudio.py" &
 
 sleep 6s &&
 
- #this script run with python and not python 3 like the face script
-  # $2 give the argumnet that responsible for the Face Agent 
- 
-#if [ "$2" == "Face" ] || [ "$2" = "Color" ] || [ "$2" = "Face_Familiar" ] || [ "$2" = "Face_Train" ]; then
-#"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Avatar_Guide/Face_Last_Version.py" $2&
-#fi
 
 run_python=python
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Walkers.py" &
@@ -93,21 +87,25 @@ run_python=python
 
 
 
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Arrows_guide.py" $4 &
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API.py" $4 &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide_Parent.py" $4 &
 
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API_Parent_V2.py.py" $4 &
 
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Spatial/Finish/Static_Objects.py" &
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Train/Traffic_Lights.py" &
 sleep 1s &&
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Traffic_Light_Event.py" &
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Traffic_Light_Event_A.py" &
 sleep 1s &&
 
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Cars_Other_Side_Event.py" &
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Static_Objects.py" &
 
 sleep 1s &&
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Train/Traffic_Lights.py" &
+
+run_python=python3
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Avatar_Parent/photo.py" &
+run_python=python
+
+
+sleep 1s &&
 "$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $2 &
 "$run_python" "$HOME/Desktop/Carla_Logs/Objects_log.py" $2 &
 
