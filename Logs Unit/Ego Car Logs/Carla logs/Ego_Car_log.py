@@ -1,410 +1,181 @@
-#!/usr/bin/env python
 
-import rospy
-import csv
-import cv2
-import os
-import matplotlib.pyplot as plt
-from sensor_msgs.msg import NavSatFix
-from sensor_msgs.msg import Imu
-from nav_msgs.msg import Odometry
+# Code that generate log of the Ego car.
+#   - Refernce to snap function in caral, link: https://carla.readthedocs.io/en/latest/python_api/#carla.WorldSnapshot
+
+
+
+import carla
+import json
+from datetime import datetime
+from collections import OrderedDict
 import math
 import time
-import numpy as np
+import rospy
+from sensor_msgs.msg import NavSatFix
+import os
 import sys
-from rosgraph_msgs.msg import Log
-import matplotlib
-import json
-from carla_msgs.msg import CarlaStatus
-from carla_msgs.msg import CarlaWorldInfo
-from carla_msgs.msg import CarlaEgoVehicleStatus
-from carla_msgs.msg import CarlaCollisionEvent
-from collections import OrderedDict
-from datetime import datetime
-import time
-from std_msgs.msg import Float32, Int8, Float64, Float32
-from sensor_msgs.msg import Joy
-from datetime import datetime
-import carla
-from carla_msgs.msg import CarlaEgoVehicleControl
-import subprocess
 
-
-
-client = carla.Client('localhost', 2000)
-client.set_timeout(10.0)
-world = client.get_world()
-world.wait_for_tick()
-
-actor_id = None
-
-    # Find the actor ID by type
-actors = world.get_actors()
-for actor in actors:
-        if actor.attributes.get('role_name') == 'ego_vehicle':
-            ego_vehicle = actor
-            actor_id = actor.id
-            break
-
-
-
+# Set the file name for JSON output
 Agent_type = sys.argv[1]
-#Agent_type = 'test'
-
-simulation_time = 0.0
-carla_world_time = 0.0
-timestamp = 0.0
-speed = 0.0
-acceleration_x = 0.0
-acceleration_y = 0.0
-acceleration_z = 0.0
-velocity_x = 0.0
-velocity_y = 0.0
-velocity_z = 0.0
-angular_velocity_roll = 0.0
-angular_velocity_pitch = 0.0
-angular_velocity_yaw = 0.0
-FileExist = False
-current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+#Agent_type = "Test"
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
+current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 file_name = os.path.join(folder_path, 'EgoCar_{}_{}.json'.format(Agent_type, current_time))
-#sys.path.append('/home/omer/Desktop/CARLA_0.9.13/PythonAPI/carla/dist/carla-0.9.13-py3.7-linux-x86_64.egg')
-FrameID = 0.0
-orientation_x = 0.0
-orientation_y = 0.0 
-orientation_z = 0.0 
-orientation_w = 0.0
-gas = 0.0
-brake = 0.0
-sterring = 0.0 
-write_to_json_flag = True  
-log_closed = False
-flag_my_shutdown_callback = True
-potition_x = 0.0
-potition_y = 0.0
-gear = 0.0
-potition_z = 0.0 
+simulation_time = 0.0
+
+
+termination_data_added = False
+
+# Initialize an empty set to keep track of written vehicles
+written_vehicles = set()
+write_to_json_flag = True
 frame_id_counter = 0
 
-
-	
-#def Mental_Work_Load(data):
-#    if data.data < 0.5:
-        
-#	    stop_data = OrderedDict()
-#	    stop_data["Type"] = "Termination:"
-#	    stop_data["Reson"] = "Aoutnumos stop"
-#	    stop_data["Timestamp"] = timestamp
-#	    stop_data["Simulation_time"] = simulation_time
-    	    
-#       write_to_json(stop_data)
-#       rospy.signal_shutdown()
-
-#     else :
-#	pass
-
-
-def my_shutdown_callback():
-  
-        global write_to_json_flag
-        global FrameID
-	global flag_my_shutdown_callback
-        
-
-        # This function will be called when the ROS node is shutting down.
-        rospy.loginfo("ROS node is shutting down. Performing cleanup...")
-        
-        
-    
-        stop_data = OrderedDict()
-        stop_data["Type"] = "Termination"
-        stop_data["WorldTime"] = timestamp
-        stop_data["SimulationTime"] = simulation_time
-        stop_data["FrameID"] = generate_frame_id()  
-        stop_data["Reason"] = "Operator Stop"
-        if flag_my_shutdown_callback == True:
-		write_to_json(stop_data,add_comma=False)
-		close_json_file()
-		#close_json_file()
-        
-    
-        write_to_json_flag = False
-
-def collision_callback(data):
-    global write_to_json_flag
-    global collision_flag
-    global log_closed  # Add the global variable
-    global flag_my_shutdown_callback
-
-    if write_to_json_flag and not log_closed:
-        actor_id = data.other_actor_id
-
-        client = carla.Client('127.0.0.1', 2000)
-        world = client.get_world()  # Make sure to obtain the actual world instance
-        actor = world.get_actor(actor_id)
-
-
-        # Check if the actor is valid
-        if actor:
-            	actor_info =  actor
-		actor_info = str(actor)
-		start_index = actor_info.find("type=") + len("type=")
-		end_index = actor_info.find(")", start_index)
-		actor_name = actor_info[start_index:end_index].strip()
-		
-
-        else:
-            	actor_name = "Unknown"
-
-        stop_data = OrderedDict()
-        stop_data["Type"] = "Termination"
-        stop_data["WorldTime"] = timestamp
-        stop_data["SimulationTime"] = simulation_time
-        stop_data["FrameID"] = generate_frame_id()
-        stop_data["Reason"] = "Crash" + "-" + actor_name
-
-        write_to_json(stop_data, add_comma=False)
-        log_closed = True  # Set the flag to True to indicate that the log is closed
-        close_json_file()  # Call the close function here
-        write_to_json_flag = False  # Set the flag to False after writing the last entry
-	flag_my_shutdown_callback = False
-
-   
-#def Odemetry(data):
-    
-
-#    if 190.776831<data.pose.pose.position.x<191.722782898:
-#        stop_data = OrderedDict()
-#        stop_data["Type"] = "Termination"
-#        stop_data["Reson"] = "Finished"
-#        stop_data["Timestamp"] = timestamp
-#        stop_data["Simulation_time"] = simulation_time
-        
-#        write_to_json(stop_data) 
-
-#        rospy.signal_shutdown('Finished')
-#    else:
-#        pass
-
-
-def speed_callback(data):
-  
-   global speed
-   velocity = data.data
-   speed = velocity*3.6
-   
 def generate_frame_id():
     global frame_id_counter
     frame_id_counter += 1
     return frame_id_counter
-    
+
 
 def gnss_callback(data):
-
     global simulation_time
-    global timestamp
-    global FrameID
-    global potition_x
-    global potition_y
-    global potition_z
+    # Process the GNSS data here
+    # Example: Print the latitude and longitude
+    simulation_time = data.header.seq * 0.033333335071821
 
 
-    latitude = data.latitude
-    longitude = data.longitude
-    altitude = data.altitude
+def my_shutdown_callback():
+    print("ROS node is shutting down. Performing cleanup...")
+                        # Add the termination data only once
     timestamp = datetime.now().strftime('%H:%M:%S.%f')
-    #timestamp = time.time() * 1000 / 1000
-    #dt_object = datetime.utcfromtimestamp(timestamp)
-    #formatted_time = dt_object.strftime('%H:%M:%S.%f')[:-3]
-    FrameID += 1
-    
+    world = client.get_world()
 
-    simulation_time = data.header.seq*0.033333335071821 #matlab 
-    
- 
-    # Create a dictionary for the current GNSS data
-    Egocar_data = OrderedDict()
-    Egocar_data["Type"] = "GPS"
-    Egocar_data["WorldTime"] = timestamp
-    Egocar_data["SimulationTime"] = simulation_time
-    Egocar_data["FrameID"] = generate_frame_id() 
-    Egocar_data["SimulationPosition"] = {"x": potition_x, "y": potition_y, "z": potition_z} 
-    Egocar_data["Latitude"] = latitude
-    Egocar_data["Longitude"] = longitude
-    Egocar_data["Altitude"] = altitude
-    Egocar_data["Orientation"] = {"x": orientation_x, "y": orientation_y, "z": orientation_z}
-    Egocar_data["Speed"] = speed
-    Egocar_data["Acceleration"] = {"x": acceleration_x, "y": acceleration_y, "z": acceleration_z}
-    Egocar_data["VelocityLocal3D"] = {"x": velocity_x, "y": velocity_y, "z": velocity_z}
-    Egocar_data["AngularAccelerationLocal3D"] = {"x": angular_velocity_roll, "y": angular_velocity_pitch, "z": angular_velocity_yaw}
+# Get the current world snapshot
+    world_snapshot = world.wait_for_tick()
 
+# Retrieve simulation time
+    global simulation_time
+    simulation_time = world_snapshot.timestamp.elapsed_seconds
+    frame_id = world_snapshot.timestamp.frame
 
-    #write_to_csv(Egocar_data) # for csv
-    write_to_json(Egocar_data,add_comma=True) # for json
+    stop_data = OrderedDict()
+    stop_data["Type"] = "Termination"
+    stop_data["WorldTime"] = timestamp
+    stop_data["SimulationTime"] = simulation_time
+    stop_data["FrameID"] = frame_id
+    stop_data["Reason"] = ""
+    write_to_json(stop_data)
+    close_json_file()  
 
-    
-
-
-def imu_callback(data):
-
-    global acceleration_x
-    global acceleration_y
-    global acceleration_z
-
-
-    acceleration_x = data.linear_acceleration.x
-    acceleration_y = data.linear_acceleration.y
-    acceleration_z = data.linear_acceleration.z
-
-def odometry_callback(data):
-    global actor_id
-    global gear
-    global orientation_x
-    global orientation_y
-    global orientation_z
-    global velocity_x
-    global velocity_y
-    global velocity_z
-    global angular_velocity_roll
-    global angular_velocity_pitch
-    global angular_velocity_yaw
-    global write_to_json_flag
-    global collision_flag
-    global log_closed  # Add the global variable
-    global flag_my_shutdown_callback
-    global potition_x
-    global potition_y
-    global potition_z
-    global Agent_type
-
-    vehicle = client.get_world().get_actor(actor_id)
-    gear = vehicle.get_control().gear
-
-    potition_x = data.pose.pose.position.x
-    potition_y = data.pose.pose.position.y
-    potition_z = data.pose.pose.position.z
-    orientation_x = data.pose.pose.orientation.x
-    orientation_x = data.pose.pose.orientation.y  
-    orientation_x = data.pose.pose.orientation.z 
-    velocity_x = data.twist.twist.linear.x
-    velocity_y = data.twist.twist.linear.y
-    velocity_z = data.twist.twist.linear.z
-    angular_velocity_roll = data.twist.twist.angular.x
-    angular_velocity_pitch = data.twist.twist.angular.y
-    angular_velocity_yaw = data.twist.twist.angular.z
-
-
-    Egocar_data = OrderedDict()
-    Egocar_data["Type"] = "CarTelemetries"
-    Egocar_data["WorldTime"] = timestamp
-    Egocar_data["SimulationTime"] = simulation_time
-    Egocar_data["FrameID"] = generate_frame_id()
-    Egocar_data["Speed"] = speed
-    Egocar_data["Acceleration"] = acceleration_x
-    Egocar_data["SteeringAngle"] = sterring
-    Egocar_data["Brake"] = brake
-    Egocar_data["Gas"] = gas
-    Egocar_data["Gear"] = gear
-    
-    write_to_json(Egocar_data,add_comma=True)
-    if Agent_type == "Face_Train":
-	    if  data.header.seq*0.033333335071821 > 160:
-			print("Log Finished by End of the simulation ")
-			if write_to_json_flag and not log_closed:
-			    stop_data = OrderedDict()
-			    stop_data["Type"] = "Termination"
-			    stop_data["WorldTime"] = timestamp
-			    stop_data["SimulationTime"] = simulation_time
-			    stop_data["FrameID"] = generate_frame_id()
-			    stop_data["Reason"] = "End of the simulation"
-
-			    if flag_my_shutdown_callback:
-				write_to_json(stop_data, add_comma=False)
-				#close_json_file()
-				log_closed = True
-				write_to_json_flag = False
-    else:
-	    if -116.1248 < data.pose.pose.position.y < -90.128 and 88.2840 < data.pose.pose.position.x < 92.3620:
-		print("Log Finished by End of the simulation ")
-		if write_to_json_flag and not log_closed:
-		    stop_data = OrderedDict()
-		    stop_data["Type"] = "Termination"
-		    stop_data["WorldTime"] = timestamp
-		    stop_data["SimulationTime"] = simulation_time
-		    stop_data["FrameID"] = generate_frame_id()
-		    stop_data["Reason"] = "End of the simulation"
-
-		    if flag_my_shutdown_callback:
-		        write_to_json(stop_data, add_comma=False)
-		        #close_json_file()
-		        log_closed = True
-		        write_to_json_flag = False
-
-            
-
-
-def control_callback(data):
-
-    global gas
-    global brake
-    global sterring
-
-    sterring = data.steer
-    brake = data.brake
-    gas = data.throttle
-
-   
 def write_to_json(data_dict, add_comma=True):
-    global write_to_json_flag
     if write_to_json_flag:
         with open(file_name, 'a') as json_file:
-            json.dump(data_dict, json_file, indent=2)  # Add indentation for better readability
+            json.dump(data_dict, json_file, indent=2)  # Add indentation for readability
             if add_comma:
-                json_file.write(',\n')  # Add a comma and newline for proper JSON formatting
+                json_file.write(',\n')
             else:
-                json_file.write('\n')  # Add newline without a comma
+                json_file.write('\n')
 
 
 def close_json_file():
-    with open(file_name, 'a') as json_file:
-        json_file.write('\n]}\n')            
-
-#write to csv file
-#def write_to_csv(data):
-#    csv_file = 'Object_data.csv'
-#    # Open the CSV file in append mode and write the data
-#    with open(csv_file, 'a', newline='') as csv_file:
-#        csv_writer = csv.writer(csv_file)
-
-#        # Write the data as a row in the CSV file
-#        csv_writer.writerow(data.values())
-    
-
-def main():
-
-    rospy.init_node('sensor_data_receiver')
-
+    with open(file_name, 'r') as json_file:
+        content = json_file.read()
+    content = content.rstrip(', \t\n')  # Remove trailing commas
     with open(file_name, 'w') as json_file:
-        json_file.write('{"Logs": [\n')
+        json_file.write(content)
+        json_file.write('\n]}')  # Close the JSON array
 
-    # Subscribe to the GNSS and IMU topics
-    rospy.Subscriber("/carla/ego_vehicle/gnss", NavSatFix, gnss_callback)
-    rospy.Subscriber("/carla/ego_vehicle/imu", Imu, imu_callback)
-    #rospy.Subscriber("/carla/ego_vehicle/vehicle_status", CarlaEgoVehicleStatus, speed_callback, queue_size=10)
-    rospy.Subscriber("/carla/ego_vehicle/collision", CarlaCollisionEvent, collision_callback)
-    rospy.Subscriber("/carla/ego_vehicle/odometry", Odometry, odometry_callback)
-    rospy.Subscriber("/carla/ego_vehicle/speedometer", Float32, speed_callback, queue_size=10)
-    #rospy.Subscriber("/HR", Float64, Mental_Work_Load)
-    rospy.Subscriber("/carla/ego_vehicle/vehicle_control_cmd_manual", CarlaEgoVehicleControl, control_callback)
-    
-    
+# Connect to the CARLA server
+client = carla.Client('localhost', 2000)
+client.set_timeout(10.0)
 
-    
-    rospy.on_shutdown(my_shutdown_callback)
-    
-    rospy.spin()  # Keep the script running
+# Get the world
+world = client.get_world()
 
-    
+# Start the JSON file
+with open(file_name, 'w') as json_file:
+    json_file.write('{"Logs": [\n')
 
+def on_world_tick(world_snapshot):
+    global frame_id_counter
+    global simulation_time
+    for actor_snapshot in world_snapshot:
+        actor_id = actor_snapshot.id
+        actor = world.get_actor(actor_id)
+
+        # Check if the actor is the ego vehicle
+        if actor.attributes.get('role_name', '') == 'ego_vehicle':
+            timestamp = datetime.now().strftime('%H:%M:%S.%f')
+            SimulationTime = world_snapshot.timestamp.elapsed_seconds
+            FrameID = world_snapshot.timestamp.frame
+            actor_info = OrderedDict()
+            actor_info["Type"] = "GPS"
+            actor_info["WorldTime"] = timestamp
+            actor_info["SimulationTime_Ros"] = simulation_time
+            actor_info["FrameID_Ros"] = generate_frame_id()
+            actor_info["SimulationTime"] = SimulationTime
+            actor_info["FrameID"] = FrameID
+            actor_info["SimulationPosition"] = {
+                "x": actor.get_location().x,
+                "y": actor.get_location().y,
+                "z": actor.get_location().z
+            }
+            world_map = world.get_map()
+            carla_location = carla.Location(actor.get_location().x, actor.get_location().y, actor.get_location().z)
+            geolocation = world_map.transform_to_geolocation(carla_location)
+            actor_info["Latitude"] = geolocation.latitude
+            actor_info["Longitude"] = geolocation.longitude
+            actor_info["Altitude"] = geolocation.altitude
+            actor_transform = actor.get_transform()
+            actor_info["Orientation"] = {
+                "x": actor_transform.rotation.pitch,
+                "y": actor_transform.rotation.yaw,
+                "z": actor_transform.rotation.roll
+            }
+            actor_info["Speed"] =  math.sqrt(actor.get_velocity().x ** 2 + actor.get_velocity().y ** 2)*3.6
+            actor_info["Acceleration"] = {
+                "x": actor.get_acceleration().x,
+                "y": actor.get_acceleration().y,
+                "z": actor.get_acceleration().z
+            }
+            actor_info["VelocityLocal3D"] = {"x": actor.get_velocity().x, "y": actor.get_velocity().x, "z": actor.get_velocity().x}
+            angular_velocity = actor.get_angular_velocity()
+            actor_info["AngularAccelerationLocal3D"] = {"x": angular_velocity.x, "y": angular_velocity.y, "z": angular_velocity.z}
+            
+            write_to_json(actor_info)
+
+            actor_info = OrderedDict()
+            actor_info["Type"] = "Car_Telemetries"
+            actor_info["WorldTime"] = timestamp
+            actor_info["SimulationTime_Ros"] = simulation_time
+            actor_info["SimulationTime"] = SimulationTime
+            actor_info["FrameID"] = FrameID
+            actor_info["Speed"] =  math.sqrt(actor.get_velocity().x ** 2 + actor.get_velocity().y ** 2)*3.6
+            actor_info["Acceleration"] = actor.get_acceleration().x
+            control = actor.get_control()  
+            actor_info["SteeringAngle"] = control.steer
+            actor_info["Brake"] = control.brake
+            actor_info["Gas"] = control.throttle
+            vehicle = client.get_world().get_actor(actor_id)
+            gear = vehicle.get_control().gear
+            actor_info["Gear"] = gear
+
+
+            write_to_json(actor_info)
+
+
+# Initialize ROS node
 if __name__ == '__main__':
-    main()
+
+    rospy.init_node('carla_data_logger', anonymous=True)
+    rospy.Subscriber("/carla/ego_vehicle/gnss", NavSatFix, gnss_callback)
+
+    world.on_tick(lambda snapshot: on_world_tick(snapshot))
+    rospy.on_shutdown(my_shutdown_callback)
+    try:
+        
+        while not rospy.is_shutdown():
+            time.sleep(1)
+    except KeyboardInterrupt:
+        with open(file_name, 'a') as json_file:
+            json_file.write('\n]}')  # Close the JSON array when interrupted

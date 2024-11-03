@@ -54,12 +54,17 @@ def my_shutdown_callback():
                         # Add the termination data only once
     global simulation_time
     timestamp = datetime.now().strftime('%H:%M:%S.%f')
+    world_snapshot = world.wait_for_tick()
+
+# Retrieve simulation time
+    simulationTime = world_snapshot.timestamp.elapsed_seconds
+    frame_id = world_snapshot.timestamp.frame
 
     stop_data = OrderedDict()
     stop_data["Type"] = "Termination"
     stop_data["WorldTime"] = timestamp
-    stop_data["SimulationTime"] = simulation_time
-    stop_data["FrameID"] = generate_frame_id()
+    stop_data["SimulationTime"] = simulationTime
+    stop_data["FrameID"] = frame_id
     stop_data["Reason"] = ""
     write_to_json(stop_data)
     close_json_file()  
@@ -107,13 +112,17 @@ def on_world_tick(world_snapshot):
             if actor:
                 actor_name = str(actor.type_id) + " " + str(actor_id)
                 timestamp = datetime.now().strftime('%H:%M:%S.%f')
+                SimulationTime = world_snapshot.timestamp.elapsed_seconds
+                FrameID = world_snapshot.timestamp.frame
 
                 if actor.type_id.startswith('walker'):
                     actor_info = OrderedDict()
                     actor_info["Type"] = "GPS"
                     actor_info["Name"] = actor_name
                     actor_info["WorldTime"] = timestamp
-                    actor_info["SimulationTime"] = simulation_time
+                    actor_info["SimulationTime_ROS"] = SimulationTime
+                    actor_info["FrameID_ROS"] = FrameID
+            	    actor_info["SimulationTime"] = simulation_time
                     actor_info["FrameID"] = generate_frame_id()
                     actor_info["SimulationPosition"] = {
                         "x": str(actor.get_location().x),
@@ -137,8 +146,10 @@ def on_world_tick(world_snapshot):
                             actor_info["Type"] = "GPS"
                             actor_info["Name"] = actor_name
                             actor_info["WorldTime"] = timestamp
-                            actor_info["SimulationTime"] = simulation_time
-                            actor_info["FrameID"] = generate_frame_id()
+		            actor_info["SimulationTime_ROS"] = SimulationTime
+		            actor_info["FrameID_ROS"] = FrameID
+		    	    actor_info["SimulationTime"] = simulation_time
+		            actor_info["FrameID"] = generate_frame_id()
                             actor_info["SimulationPosition"] = {
                                 "x": str(actor.get_location().x),
                                 "y": str(actor.get_location().y),
@@ -161,7 +172,9 @@ def on_world_tick(world_snapshot):
                         actor_info["Type"] = "GPS"
                         actor_info["Name"] = actor_name
                         actor_info["WorldTime"] = timestamp
-                        actor_info["SimulationTime"] = simulation_time
+                        actor_info["SimulationTime_ROS"] = SimulationTime
+                        actor_info["FrameID_ROS"] = FrameID
+            	        actor_info["SimulationTime"] = simulation_time
                         actor_info["FrameID"] = generate_frame_id()
                         actor_info["SimulationPosition"] = {
                             "x": str(actor.get_location().x),
@@ -181,7 +194,7 @@ def on_world_tick(world_snapshot):
                         actor_info["Latitude"] = str(geolocation.latitude)
                         actor_info["Altitude"] = str(geolocation.altitude)
             
-                        actor_info["Speed"] = math.sqrt(actor.get_velocity().x ** 2 + actor.get_velocity().y ** 2)
+                        actor_info["Speed"] = math.sqrt(actor.get_velocity().x ** 2 + actor.get_velocity().y ** 2)*3.6
                         #actor_info["Acceleration"] = str(actor.get_acceleration().x)
 			actor_info["Acceleration"] = {
                             "x": str(actor.get_acceleration().x),
@@ -199,7 +212,10 @@ def on_world_tick(world_snapshot):
                         static_info["Type"] = "StaticObject"
                         static_info["Name"] = actor_name
                         static_info["WorldTime"] = timestamp
-                        static_info["SimulationTime"] = simulation_time
+                        actor_info["SimulationTime_ROS"] = SimulationTime
+                        actor_info["FrameID_ROS"] = FrameID
+            	        actor_info["SimulationTime"] = simulation_time
+                        actor_info["FrameID"] = generate_frame_id()
                         static_info["Position"] = {
                             "x": str(actor.get_location().x),
                             "y": str(actor.get_location().y),
