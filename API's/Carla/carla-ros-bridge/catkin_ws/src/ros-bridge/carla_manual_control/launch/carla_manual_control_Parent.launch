@@ -1,0 +1,18 @@
+<!-- -->
+<launch>
+  <arg name="role_name" default="ego_vehicle"/>
+
+  <node pkg="carla_manual_control" type="carla_manual_control_Parent.py" name="carla_manual_control_$(arg role_name)" output="screen">
+    <param name="role_name" value="$(arg role_name)"/>
+  </node>
+
+
+  
+  <node pkg="joy" type="joy_node" name="joy_node">
+    <param name="dev" value="/dev/input/js0" />
+    <param name="deadzone" value="0.010000" />
+    <param name="steering_sensitivity" value="10" />
+  </node>
+  
+</launch>
+
