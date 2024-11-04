@@ -3,15 +3,35 @@ from nav_msgs.msg import Odometry
 import vlc
 import time
 import tkinter as tk
+import json
+from datetime import datetime
+import os
+from collections import OrderedDict
 
 # Global flags to track if the videos have been played
 video_flags = {
     'video1': False,
     'video2': False,
-    'video3': False,
+    # 'video3': False,
     'video4': False,
-    'video5': False
+    'video5': False,
+    'video6': False
 }
+
+Agent_type = "_Avatar"
+folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
+current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+file_name = os.path.join(folder_path, 'Video_Status{}_{}.json'.format(Agent_type, current_time))
+
+
+def write_to_json(data_dict):
+   
+    # Open the JSON file in append mode and write the data
+    with open(file_name, 'a') as json_file:
+        json.dump(data_dict, json_file)
+        json_file.write('\n')  # Add a newline for readability
+
+
 
 def play_video(video_path, window_x, window_y, window_width, window_height):
     # Create a Tkinter window
@@ -45,6 +65,8 @@ def play_video(video_path, window_x, window_y, window_width, window_height):
     root.after(100, check_video)
     root.mainloop()
 
+
+
 def odometry_callback(data):
     global video_flags
 
@@ -56,8 +78,8 @@ def odometry_callback(data):
     screen_height = 1080  # Height of the screens
 
     # Desired video window size
-    window_width = 300
-    window_height = 300
+    window_width = 250
+    window_height = 250
 
     # Calculate position to center the window at the bottom of the middle screen
     middle_screen_x_start = single_screen_width  # Start of the middle screen
@@ -66,33 +88,136 @@ def odometry_callback(data):
 
     # Video 1 condition
     if 200 < x < 230 and -65 < y < -50 and not video_flags['video1']:
-        video_path1 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar video/person_cross.MOV'
+
+        timestamp = datetime.now().strftime('%H:%M:%S.%f')
+        simulation_time = data.header.seq*0.033333335071821
+
+	header = data.header
+	secs = header.stamp.secs
+	nsecs = header.stamp.nsecs
+
+	# Combine secs and nsecs into a float
+	simulation_Time = secs + nsecs * 1e-9
+
+        Egocar_data = OrderedDict()
+        Egocar_data["Type"] = "Video_Status:"
+        Egocar_data["Timestamp"] = timestamp
+        Egocar_data["Simulation_time_ROS"] = simulation_time
+        Egocar_data["Simulation_time"] = simulation_Time
+        Egocar_data["Video"] = "person_cross"
+        write_to_json(Egocar_data) # for json
+
+        video_path1 = '/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Avatar video/person_cross.mp4'
         play_video(video_path1, window_x, window_y, window_width, window_height)
         video_flags['video1'] = True
 
     # Video 2 condition
     elif 165 < x < 195 and -8 < y < 8 and not video_flags['video2']:
-        video_path2 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar video/car_stop.MOV'
+
+        timestamp = datetime.now().strftime('%H:%M:%S.%f')
+        simulation_time = data.header.seq*0.033333335071821
+
+	header = data.header
+	secs = header.stamp.secs
+	nsecs = header.stamp.nsecs
+
+	# Combine secs and nsecs into a float
+	simulation_Time = secs + nsecs * 1e-9
+
+        Egocar_data = OrderedDict()
+        Egocar_data["Type"] = "Video_Status:"
+        Egocar_data["Timestamp"] = timestamp
+        Egocar_data["Simulation_time_ROS"] = simulation_time
+        Egocar_data["Simulation_time"] = simulation_Time
+        Egocar_data["Video"] = "car_stop"
+        write_to_json(Egocar_data) # for json
+
+        video_path2 = '/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Avatar video/car_stop.mp4'
         play_video(video_path2, window_x, window_y, window_width, window_height)
         video_flags['video2'] = True
 
-    # Video 3 condition
-    elif 330.00 < x < 345.00 and -33 < y < -13 and not video_flags['video3']:
-        video_path3 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar video/person_cross.MOV'
-        play_video(video_path3, window_x, window_y, window_width, window_height)
-        video_flags['video3'] = True
+    # # Video 3 condition
+    # elif 330.00 < x < 345.00 and -33 < y < -13 and not video_flags['video3']:
+    #     video_path3 = '/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Avatar video/person_cross.mp4'
+    #     play_video(video_path3, window_x, window_y, window_width, window_height)
+    #     video_flags['video3'] = True
 
     # Video 4 condition
-    elif 330.00 < x < 340.00 and -115.00 < y < -95.00 and not video_flags['video4']:
-        video_path4 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar video/red_light.MOV'
+    elif 332 < x < 340 and  -177 < y < -148 and not video_flags['video4']:
+
+        timestamp = datetime.now().strftime('%H:%M:%S.%f')
+        simulation_time = data.header.seq*0.033333335071821
+
+	header = data.header
+	secs = header.stamp.secs
+	nsecs = header.stamp.nsecs
+
+	# Combine secs and nsecs into a float
+	simulation_Time = secs + nsecs * 1e-9
+
+        Egocar_data = OrderedDict()
+        Egocar_data["Type"] = "Video_Status:"
+        Egocar_data["Timestamp"] = timestamp
+        Egocar_data["Simulation_time_ROS"] = simulation_time
+        Egocar_data["Simulation_time"] = simulation_Time
+        Egocar_data["Video"] = "red_light"
+        write_to_json(Egocar_data) # for json
+
+
+        video_path4 = '/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Avatar video/red_light.mp4'
         play_video(video_path4, window_x, window_y, window_width, window_height)
         video_flags['video4'] = True
 
     # Video 5 condition
-    elif 260.00 < x < 290.00 and -137.00 < y < -123.00 and not video_flags['video5']:
-        video_path5 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar video/passing_barrier.MOV'
+    elif 260.00 < x < 290.00 and -332.00 < y < -323.00 and not video_flags['video5']:
+
+        timestamp = datetime.now().strftime('%H:%M:%S.%f')
+        simulation_time = data.header.seq*0.033333335071821
+
+	header = data.header
+	secs = header.stamp.secs
+	nsecs = header.stamp.nsecs
+
+	# Combine secs and nsecs into a float
+	simulation_Time = secs + nsecs * 1e-9
+
+        Egocar_data = OrderedDict()
+        Egocar_data["Type"] = "Video_Status:"
+        Egocar_data["Timestamp"] = timestamp
+        Egocar_data["Simulation_time_ROS"] = simulation_time
+        Egocar_data["Simulation_time"] = simulation_Time
+        Egocar_data["Video"] = "barrier"
+        write_to_json(Egocar_data) # for json
+
+        video_path5 = '/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Avatar video/barrier.mp4'
         play_video(video_path5, window_x, window_y, window_width, window_height)
         video_flags['video5'] = True
+    
+    # Video 6 condition
+    elif 86 < x < 95 and  -260.0 < y < -250.0 and not video_flags['video6']:
+
+        timestamp = datetime.now().strftime('%H:%M:%S.%f')
+        simulation_time = data.header.seq*0.033333335071821
+
+	header = data.header
+	secs = header.stamp.secs
+	nsecs = header.stamp.nsecs
+
+	# Combine secs and nsecs into a float
+	simulation_Time = secs + nsecs * 1e-9
+
+        Egocar_data = OrderedDict()
+        Egocar_data["Type"] = "Video_Status:"
+        Egocar_data["Timestamp"] = timestamp
+        Egocar_data["Simulation_time_ROS"] = simulation_time
+        Egocar_data["Simulation_time"] = simulation_Time
+        Egocar_data["Video"] = "red_light"
+        write_to_json(Egocar_data) # for json
+
+        video_path6 = '/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Avatar video/red_light.mp4'
+        play_video(video_path6, window_x, window_y, window_width, window_height)
+        video_flags['video6'] = True    
+
 
 # Initialize ROS node
 rospy.init_node('Video_Agent')
