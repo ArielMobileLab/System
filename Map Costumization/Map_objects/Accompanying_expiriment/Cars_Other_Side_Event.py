@@ -47,7 +47,8 @@ def Generate_Cars2(world, actors, num_cars=15):
     vehicle_bp = random.choice(blueprint_library.filter('vehicle.tesla.model3'))
 
     spawn_location = carla.Transform(
-        carla.Location(x=110.0, y=133.5, z=0.499982)
+        carla.Location(x=110.0, y=330.5, z=0.499982)
+	
     )
 
     num_cars_with_interval_15_sec = 10
@@ -94,8 +95,9 @@ def Cars(data):
         print("car_1")
         Generate_Car1()
         first_car_cross = False
-    #if first_car_cross == True and 334.0 < data.pose.pose.position.x < 339.7652: original
-    if second_car_cross == True and 334.0 < data.pose.pose.position.x < 339.7652:
+    
+    #if second_car_cross == True and 334.0 < data.pose.pose.position.x < 339.7652:
+    if second_car_cross == True  and  330.00 < data.pose.pose.position.x < 340.00 and -115.00 < data.pose.pose.position.y < -90.00:
         print("car_2")
         Generate_Cars2(world, actors, num_cars=15)
         second_car_cross = False

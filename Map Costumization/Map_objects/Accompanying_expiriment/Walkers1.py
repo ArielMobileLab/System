@@ -27,10 +27,6 @@ client = carla.Client('localhost', 2000)
 #Retrieve the CARLA world
 world = client.get_world() 
 # Set up the simulator in synchronous mode
-settings = world.get_settings()
-settings.synchronous_mode = True
-settings.fixed_delta_seconds = 0.05
-world.apply_settings(settings)
 
 # Lists to store vehicles, walkers, and actor IDs
 walkers = []
@@ -108,11 +104,6 @@ def secound_walker_cross():
 # Function to clean up and end the simulation
 def cleanup(world, vehicles, client):
     all_actors = world.get_actors(all_id)
-    settings = world.get_settings()
-    settings.synchronous_mode = False
-    settings.no_rendering_mode = False
-    settings.fixed_delta_seconds = None
-    world.apply_settings(settings)
 
     # Stop walker controllers (list is [controller, actor, controller, actor ...])
     for i in range(0, len(all_id), 2):
@@ -122,7 +113,6 @@ def cleanup(world, vehicles, client):
 
 
 def Cross_Walker(data):
-    world.tick()
     global first_walker_cross_cond
     global secound_walker_cross_cond
 
@@ -132,10 +122,10 @@ def Cross_Walker(data):
        first_walker_cross()
        first_walker_cross_cond = False
 
-    if secound_walker_cross_cond == True  and 325<data.pose.pose.position.x<340 and -27<data.pose.pose.position.y<-3 :
-        print("walker_2")
-        secound_walker_cross()
-        secound_walker_cross_cond = False
+    # if secound_walker_cross_cond == True  and 325<data.pose.pose.position.x<340 and -27<data.pose.pose.position.y<-3 :
+    #     print("walker_2")
+    #     secound_walker_cross()
+    #     secound_walker_cross_cond = False
     
     
 def cleanup(world, walkers, client):
@@ -148,12 +138,6 @@ def cleanup(world, walkers, client):
 
     # Destroy all actors
     client.apply_batch([carla.command.DestroyActor(x.id) for x in all_actors])
-
-    # Reset the world settings
-    settings = world.get_settings()
-    settings.synchronous_mode = False
-    settings.fixed_delta_seconds = None
-    world.apply_settings(settings) 
 
 
 

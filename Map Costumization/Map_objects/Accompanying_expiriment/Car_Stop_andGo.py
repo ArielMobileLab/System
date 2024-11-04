@@ -50,7 +50,7 @@ def Generate_Car1():
     vehicle.apply_control(carla.VehicleControl(throttle=0.0, steer=0.0, brake=1.0))
 
     # Wait for 2 seconds
-    time.sleep(2)
+    time.sleep(4)
 
     # Resume driving slowly
     vehicle.apply_control(carla.VehicleControl(throttle=0.2, steer=0.0))
