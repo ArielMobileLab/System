@@ -6,15 +6,6 @@ import time
 from nav_msgs.msg import Odometry
 import rospy
 import threading
-import rospy
-from nav_msgs.msg import Odometry
-import vlc
-import time
-import tkinter as tk
-import json
-from datetime import datetime
-import os
-from collections import OrderedDict
 
 
 # # # # find location of the traficlitts and then go ot the side that give me locatsion of map file~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -122,23 +113,6 @@ import rospy
 from nav_msgs.msg import Odometry
 import threading
 
-
-
-Agent_type = "_Traffic_Light"
-folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
-current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-file_name = os.path.join(folder_path, 'Traffic_Light_Event{}_{}.json'.format(Agent_type, current_time))
-
-
-def write_to_json(data_dict):
-   
-    # Open the JSON file in append mode and write the data
-    with open(file_name, 'a') as json_file:
-        json.dump(data_dict, json_file)
-        json_file.write('\n')  # Add a newline for readability
-
-
-
 # Connect to the CARLA server
 client = carla.Client('localhost', 2000)
 client.set_timeout(10.0)
@@ -150,7 +124,7 @@ world = client.get_world()
 actors = world.get_actors()
 
 # Find the traffic light with ID 48
-traffic_light_id = 60
+traffic_light_id = 63
 traffic_light = None
 ramzor_flag = True
 
@@ -160,16 +134,18 @@ for actor in actors:
         break
 
 if traffic_light is None:
-    rospy.logerr("Traffic light with ID 48 not found")
+    rospy.logerr("Traffic light with ID {} not found".format(traffic_light_id))
 else:
-    rospy.loginfo("Traffic light with ID 48 found")
+    rospy.loginfo("Traffic light with ID {} found".format(traffic_light_id))
+
 
 # Function to set the traffic light state
 def set_traffic_light_state(state, duration=None):
     if traffic_light is not None:
         traffic_light.set_state(state)
-        if duration:
-            traffic_light.set_green_time(duration)
+        if duration and state == carla.TrafficLightState.Red:
+            threading.Timer(duration, lambda: traffic_light.set_state(carla.TrafficLightState.Green)).start()
+            rospy.loginfo("Traffic light will be set to green after {} seconds".format(duration))
 
 # Callback function for the odometry subscriber
 def ramzor(data):
@@ -177,36 +153,16 @@ def ramzor(data):
     x = data.pose.pose.position.x
     y = data.pose.pose.position.y
 
-    #if  ramzor_flag == True and 86 < x < 95 and  -267.0 < y < -250.0 :
-    if  ramzor_flag == True :
+    if  ramzor_flag == True and 86 < x < 95 and  -267.0 < y < -250.0 :
         rospy.loginfo("Car is within the specified range")
-        # Set traffic light to red
-        traffic_light.set_state(carla.TrafficLightState.Red)
-        rospy.loginfo("Traffic light set to red")
 
-        # Set traffic light back to green after 4 seconds
-        threading.Timer(10, lambda: traffic_light.set_state(carla.TrafficLightState.Green)).start()
-        ramzor_flag = False   
-        
+        # Set traffic light to yellow
+        traffic_light.set_state(carla.TrafficLightState.Yellow)
+        rospy.loginfo("Traffic light set to yellow")
 
-        timestamp = datetime.now().strftime('%H:%M:%S.%f')
-        simulation_time = data.header.seq*0.033333335071821
-
-        header = data.header
-        secs = header.stamp.secs
-        nsecs = header.stamp.nsecs
-
-        # Combine secs and nsecs into a float
-        simulation_Time = secs + nsecs * 1e-9
-        Egocar_data = OrderedDict()
-        Egocar_data["Type"] = "Video_Status:"
-        Egocar_data["Timestamp"] = timestamp
-        Egocar_data["Simulation_time_ROS"] = simulation_time
-        Egocar_data["Simulation_time"] = simulation_Time
-        Egocar_data["Traffc_Light_Number"] = "60"
-        write_to_json(Egocar_data) # for json
- 
-
+        # Set traffic light to red after 3 seconds
+        threading.Timer(3, lambda: set_traffic_light_state(carla.TrafficLightState.Red, duration=10)).start()
+        ramzor_flag = False
  
 if __name__ == '__main__':
     rospy.init_node('traffic_light_control')
@@ -215,6 +171,7 @@ if __name__ == '__main__':
     # Subscribe to the topic that publishes the messages
     rospy.Subscriber('/carla/ego_vehicle/odometry', Odometry, ramzor, queue_size=1)  
 
+    rospy.loginfo("Subscribed to /carla/ego_vehicle/odometry")
 
     # Spin to keep the script running
     rospy.spin()
