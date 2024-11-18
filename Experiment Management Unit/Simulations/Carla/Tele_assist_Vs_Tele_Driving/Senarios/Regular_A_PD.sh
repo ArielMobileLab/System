@@ -90,7 +90,7 @@ run_python=python
 
 
 sleep 1s &&
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Traffic_Light_Event_A.py" &
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Traffic_Light_Event_A_Stop.py" $2 &
 sleep 1s &&
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Cars_Other_Side_Event.py" &
 
@@ -100,8 +100,17 @@ sleep 1s &&
 "$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $2 &
 
 "$run_python" "$HOME/Desktop/Carla_Logs/Objects_log.py" $2 &
-sleep 4s &&
-"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
+sleep 1s &&
+
+"$run_python" "$HOME/Desktop/API Addapter/Joy_addapter.py" &
+
+sleep 6s &&
+
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
+
+sleep 1s &&
+
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Green_Traffice_Light.py" &
 
 wait
 
