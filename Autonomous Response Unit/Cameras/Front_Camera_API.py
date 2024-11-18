@@ -53,7 +53,7 @@ camera_bp.set_attribute('iso', '600.0')                  # Set ISO to 600.0
 camera_bp.set_attribute('shutter_speed', '500.0')
 
 # Initialise the camera floating behind the vehicle
-camera_init_trans = carla.Transform(carla.Location(x=0.12, y=0.0, z=1.47), carla.Rotation(pitch=0.0))
+camera_init_trans = carla.Transform(carla.Location(x=0.12, y=0.0, z=1.60), carla.Rotation(pitch=0.0))
 camera = world.spawn_actor(camera_bp, camera_init_trans, attach_to=ego_vehicle)
 
 # Start camera with PyGame callback
