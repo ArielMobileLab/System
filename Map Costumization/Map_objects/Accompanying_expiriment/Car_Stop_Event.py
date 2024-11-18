@@ -16,15 +16,6 @@ world = client.get_world()
 first_car_cross = True
 second_car_cross = True
 actors = world.get_actors()
-print("car2~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
-# Iterate through all actors and find traffic lights
-for actor in actors:
-    if actor.type_id.startswith("traffic.traffic_light"):
-        traffic_light = actor
-        # Change the traffic light state to green (Assuming the state is "Green")
-        traffic_light.set_state(carla.TrafficLightState.Green)
-        traffic_light.set_green_time(10000)  # Optional: Set the green time duration
 
 def Generate_Car1():
     # Create a blueprint for the vehicle
@@ -33,25 +24,26 @@ def Generate_Car1():
 
     # Define the spawn location for the vehicle
     spawn_location = carla.Transform(
-        carla.Location(x=117, y=2.43, z=0.5),  # Initial location
-        carla.Rotation(pitch=0, yaw=0, roll=0)  # 180-degree rotation
+        #carla.Location(x=117, y=2.43, z=0.5),  # Initial location
+        #carla.Rotation(pitch=0, yaw=0, roll=0)  # 180-degree rotation
+        carla.Location(x=335, y=35.6, z=0.5),  # Initial location
+        carla.Rotation(pitch=0, yaw=90.0, roll=0)  # 180-degree rotation
     )
     # Spawn the vehicle
     vehicle = world.spawn_actor(vehicle_bp, spawn_location)
-    vehicle.apply_control(carla.VehicleControl(throttle=0.5 , steer=0.0))
+    time.sleep(8)
+    vehicle.apply_control(carla.VehicleControl(throttle=0.45 , steer=0.0))
 
     # Add the created actor to the list
     created_actors.append(vehicle)
 
-    time.sleep(10)
+    time.sleep(15)
 
     brake_light_state = carla.VehicleLightState(carla.VehicleLightState.Brake)
 
 # Apply the brake light state to the vehicle
     vehicle.set_light_state(carla.VehicleLightState(brake_light_state)) 
     vehicle.apply_control(carla.VehicleControl(throttle=0.0, steer=0.0,brake= 1.0))
-
-
 
 
     
@@ -68,7 +60,8 @@ def Cars(data):
     global first_car_cross
     global second_car_cross
 
-    if first_car_cross == True and 90 < data.pose.pose.position.x < 100 and -18.5 < data.pose.pose.position.y<-2:
+    #if first_car_cross == True and 90 < data.pose.pose.position.x < 100 and -18.5 < data.pose.pose.position.y<-2:
+    if first_car_cross == True and 320 < data.pose.pose.position.x < 328 and -4.1 < data.pose.pose.position.y<3.84 :
  
         print("car_1")
         Generate_Car1()
@@ -94,4 +87,3 @@ if __name__ == '__main__':
     finally:
         # Cleanup and destroy actors when the script is interrupted
         cleanup()
-
