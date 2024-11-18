@@ -37,7 +37,7 @@ class RenderObject(object):
 def pygame_callback(data, obj):
     img = np.reshape(np.copy(data.raw_data), (data.height, data.width, 4))
     img = img[:, :, :3]
-    img = img[:, :, ::-1]
+    img = img[:, :, ::-1]  # Convert from RGB to BGR
     obj.surface = pygame.surfarray.make_surface(img.swapaxes(0, 1))
 
 # Setup camera
@@ -61,6 +61,10 @@ pygame.init()
 gameDisplay = pygame.display.set_mode((renderObject.surface.get_width(), renderObject.surface.get_height()), pygame.HWSURFACE | pygame.DOUBLEBUF)
 pygame.display.set_caption('CARLA Viewer')
 
+# Frame settings
+frame_color = (169, 169, 169)  # Grey color (Dark Grey)
+frame_thickness = 20  # Thickness of the frame
+
 # This function will be called after the window is created to set it always on top
 def set_always_on_top():
     pygame.display.flip()  # Ensure the window is created
@@ -73,8 +77,13 @@ set_always_on_top()  # Set window always on top
 # Game loop
 crashed = False
 while not crashed:
-    #world.tick()
-    gameDisplay.blit(renderObject.surface, (0, 0))
+    # world.tick()  # Uncomment if you want to update the world
+    gameDisplay.fill((0, 0, 0))  # Clear the display with a black background
+    gameDisplay.blit(renderObject.surface, (0, 0))  # Draw the camera image
+    
+    # Draw the frame
+    pygame.draw.rect(gameDisplay, frame_color, (0, 0, renderObject.surface.get_width(), renderObject.surface.get_height()), frame_thickness)
+
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -82,4 +91,3 @@ while not crashed:
 
 camera.stop()
 pygame.quit()
-
