@@ -46,6 +46,7 @@ roslaunch carla_ros_bridge First_Responders.launch town:=$1&
 
 sleep 3s
 
+
 run_python=python3
 
 
@@ -64,7 +65,7 @@ run_python=python
 
 "$run_python" "/home/omer/Desktop/Autonomous Resope Unit/Predivtive display/predictive_display.py" $5 $8 &
 
-"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
+
 
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API_Parent_V2.py.py" $4 &
 
@@ -76,18 +77,17 @@ sleep 7s &&
 
 sleep 2s &&
 
-
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/train/Car_In_lane_train.py" &
 
 sleep 2s &&
 
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/train/Car_in_lane_train_ego_car.py" $7 & 
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
 
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/train/Car_in_lane_train_ego_car.py" $7 & 
 
 sleep 20s
 
-
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/train/Car_In_lane_train_3.py" $7 & 
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/train/Car_In_lane_train_3.py" & 
 
 
 "$run_python" "$HOME/Desktop/API Addapter/Joy_addapter.py" &
@@ -95,6 +95,12 @@ sleep 20s
 "$run_python" "$HOME/Desktop/Comunication Unit/Latency.py" $5 &
 
 
+#"$run_python" "/home/omer/Desktop/Carla_Logs/Objects_log_first_responders.py" $2 &
+
+#"$run_python" "/home/omer/Desktop/Carla_Logs/Ego_Car_log.py" $2 &
+
+
+#"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
 
 
 
@@ -103,7 +109,6 @@ wait
 free_port
 
 cleanup
-
 
 
 
