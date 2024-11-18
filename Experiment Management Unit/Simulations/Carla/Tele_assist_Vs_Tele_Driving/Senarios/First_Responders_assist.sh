@@ -62,13 +62,12 @@ run_python=python
 
 
 sleep 6s &&
-"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
+
 
 run_python=python
-#"$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Barriers.py" &
 "$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Police.py" &
 
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 &
+#"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 &
 
 #"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API_Parent_V2.py.py" $4 &
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Version_Ros_API_Work_For_Web.py" $4 &
@@ -90,15 +89,14 @@ sleep 4s &&
 "$run_python" "/home/omer/Desktop/Carla_Logs/Ego_Car_log.py" $2 &
 
 
-#"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 &
 
 sleep 14.5s &&
 
-#"$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $2 &
-#"$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Car_In_lane.py" &
 "$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Car_In_lane_New.py" &
 
 sleep 10.5s &&
+
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
 
 "$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Ego_Test.py"  $7 &
 
@@ -106,21 +104,10 @@ sleep 10.5s &&
 "$run_python" "$HOME/Desktop/Comunication Unit/Latency.py" $5 &
 
 
-
 sleep 23s &&
 
 "$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Car_NPC.py" &
 
-
-#sleep 40s &&
-
-
-
-
-#"$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/KEy_board.py" &
-
-
-#"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
 
 
 
@@ -129,7 +116,6 @@ wait
 free_port
 
 cleanup
-
 
 
 
