@@ -70,6 +70,7 @@ def launch_scenario(scenarioslist,Town,Face,Objects, Arrow_Guilde, Delay, Gap, A
             try:
 
                 # Use subprocess to execute the command,  # Agent is tele assite or tele driving
+                # Agent - its for control the ego car autonomus part
                 subprocess.run(["bash", scenario, Town, Face, Objects, Arrow_Guilde, Delay, Gap, Agent, Predictive_Display], check=True)
                 repeat = 0
             except subprocess.CalledProcessError:
@@ -98,8 +99,8 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Driving_Train_PD.MOV", 
         "video_path1": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Assist_Train.MOV",
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2.sh","Town04","Teledriving_Train_2","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_ON"],
-        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2_assit.sh","Town04","Teledriving_Train_2","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2.sh","Town04","Teledriving_Driving_Train","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_ON"],
+        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2_assit.sh","Town04","Teledriving_Assit_Train","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_OFF"],
     },
     {
         "name": "Tele_assist",
@@ -107,10 +108,10 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Assist.MOV",
         "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
 	    "NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_50_Easy","Nah","First_Response","50", "0", "tele_assiste", "Predictive_OFF"],
-        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_150_Hard","Nah","First_Response","150", "1", "tele_assiste", "Predictive_OFF"],
-        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_50_Hard","Nah","First_Response", "50", "1", "tele_assiste", "Predictive_OFF"],
-        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_150_Easy","Nah","First_Response", "150", "0", "tele_assiste", "Predictive_OFF"],
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_50_Easy","Nah","First_Response","50", "1", "tele_driving", "Predictive_OFF"],
+        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_150_Hard","Nah","First_Response","150", "0", "tele_driving", "Predictive_OFF"],
+        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_50_Hard","Nah","First_Response", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_150_Easy","Nah","First_Response", "150", "1", "tele_driving", "Predictive_OFF"],
     },
     {
         "name": "Tele_driving ",
@@ -118,10 +119,10 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Driving.MOV",
         "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
 	    "NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Easy","Nah","First_Response","50", "0", "tele_driving", "Predictive_OFF"],
-        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Hard","Nah","First_Response","150", "1", "tele_driving", "Predictive_OFF"],
-        "code2": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Hard","Nah","First_Response", "50", "1", "tele_driving", "Predictive_OFF"],
-        "code3": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Easy","Nah","First_Response", "150", "0", "tele_driving", "Predictive_OFF"]
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Easy","Nah","First_Response","50", "1", "tele_driving", "Predictive_OFF"],
+        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Hard","Nah","First_Response","150", "0", "tele_driving", "Predictive_OFF"],
+        "code2": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Hard","Nah","First_Response", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code3": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Easy","Nah","First_Response", "150", "1", "tele_driving", "Predictive_OFF"]
     },
     {
         "name": "Tele_driving + P.D",
@@ -129,21 +130,32 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Driving_PD.MOV",
         "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
 	    "NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Easy","Nah","First_Response","50", "0", "tele_driving", "Predictive_ON"],
-        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Hard","Nah","First_Response","150", "1", "tele_driving", "Predictive_ON"],
-        "code2": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Hard","Nah","First_Response", "50", "1", "tele_driving", "Predictive_ON"],
-        "code3": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Easy","Nah","First_Response", "150", "0", "tele_driving", "Predictive_ON"]
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Easy_PD","Nah","First_Response","50", "1", "tele_driving", "Predictive_ON"],
+        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Hard_PD","Nah","First_Response","150", "0", "tele_driving", "Predictive_ON"],
+        "code2": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Hard_PD","Nah","First_Response", "50", "0", "tele_driving", "Predictive_ON"],
+        "code3": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Easy_PD","Nah","First_Response", "150", "1", "tele_driving", "Predictive_ON"]
     },
     {
-        "name": "Regual_City",
+        "name": "Regual_City_A",
         "description": "",
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latency.MOV",
 	"video_path1": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latancy_PD.MOV",
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Regular_50","Obstacle_A","Guide_Parent", "50", "0", "tele_driving", "Predictive_ON"],
-        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Regular_150","Obstacle_A","Guide_Parent", "150", "0", "tele_assist", "Predictive_ON"],   
-        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Regular_50 + PD","Obstacle_A","Guide_Parent", "50", "0", "tele_assist", "Predictive_OFF"],
-        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Regular_150 + PD","Obstacle_A","Guide_Parent", "150", "0", "tele_assist", "Predictive_OFF"]
+        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Regular_50","Obstacle_A","Guide_Parent", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Regular_150","Obstacle_A","Guide_Parent", "150", "0", "tele_driving", "Predictive_OFF"],   
+        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Regular_50_PD","Obstacle_A","Guide_Parent", "50", "0", "tele_driving", "Predictive_ON"],
+        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Regular_150_PD","Obstacle_A","Guide_Parent", "150", "0", "tele_driving", "Predictive_ON"]
+    },
+    {
+        "name": "Regual_City_B",
+        "description": "",
+        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latency.MOV",
+	"video_path1": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latancy_PD.MOV",
+        "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
+        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B.sh","Town01","Regular_50","Obstacle_B","Guide_Parent", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B.sh","Town01","Regular_150","Obstacle_B","Guide_Parent", "150", "0", "tele_driving", "Predictive_OFF"],   
+        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B_PD.sh","Town01","Regular_50_PD","Obstacle_B","Guide_Parent", "50", "0", "tele_driving", "Predictive_ON"],
+        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B_PD.sh","Town01","Regular_150_PD","Obstacle_B","Guide_Parent", "150", "0", "tele_driving", "Predictive_ON"]
     }
 ]
 
@@ -169,7 +181,7 @@ def show_scenario_menu():
         scenario_frame = tk.Frame(root, bg="black", padx=10, pady=10)
         scenario_frame.pack(pady=15, anchor="w", fill="x")
 
-        if scenario["name"] == "Regual_City":
+        if scenario["name"] == "Regual_City_A":
 
             # Create a scenario button
             scenario_button = ttk.Button(scenario_frame, text=" 50ms", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5],s["code"][6],s["code"][7],s["code"][8]))
@@ -184,7 +196,7 @@ def show_scenario_menu():
             scenario_button.pack(side=tk.RIGHT)
 
 
-        # Create a play video button
+        # Create a play video buttonassit
             play_video_button = ttk.Button(scenario_frame, text="Video P.D", command=lambda url=scenario["video_path1"]: play_video(url))
             play_video_button.configure()
             play_video_button.pack(side=tk.RIGHT, padx=5)
@@ -204,7 +216,43 @@ def show_scenario_menu():
             play_video_button = ttk.Button(scenario_frame, text="Video", command=lambda url=scenario["video_path"]: play_video(url))
             play_video_button.configure()
             play_video_button.pack(side=tk.RIGHT, padx=5)
-            
+        elif scenario["name"] == "Regual_City_B":
+
+	   
+                # Create a scenario button
+                scenario_button = ttk.Button(scenario_frame, text=" 50ms", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5],s["code"][6],s["code"][7],s["code"][8]))
+                #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
+                scenario_button.configure()
+                scenario_button.pack(side=tk.RIGHT)
+
+                # Create a scenario button
+                scenario_button = ttk.Button(scenario_frame, text=" 150ms", command=lambda s=scenario: launch_scenario(s["code1"] ,s["code1"][1],s["code1"][2],s["code1"][3],s["code1"][4],s["code1"][5],s["code1"][6],s["code1"][7],s["code1"][8]))
+                #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
+                scenario_button.configure()
+                scenario_button.pack(side=tk.RIGHT)
+
+
+            # Create a play video buttonassit
+                play_video_button = ttk.Button(scenario_frame, text="Video P.D", command=lambda url=scenario["video_path1"]: play_video(url))
+                play_video_button.configure()
+                play_video_button.pack(side=tk.RIGHT, padx=5)
+
+                # Create a scenario button
+                scenario_button = ttk.Button(scenario_frame, text=" 50ms + P.D ", command=lambda s=scenario: launch_scenario(s["code2"] ,s["code2"][1],s["code2"][2],s["code2"][3],s["code2"][4],s["code2"][5],s["code2"][6],s["code2"][7],s["code2"][8]))
+                #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
+                scenario_button.configure()
+                scenario_button.pack(side=tk.RIGHT)
+
+                # Create a scenario button
+                scenario_button = ttk.Button(scenario_frame, text=" 150ms + P.D", command=lambda s=scenario: launch_scenario(s["code3"] ,s["code3"][1],s["code3"][2],s["code3"][3],s["code3"][4],s["code3"][5],s["code3"][6],s["code3"][7],s["code3"][8]))
+                #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
+                scenario_button.configure()
+                scenario_button.pack(side=tk.RIGHT)
+            # Create a play video button
+                play_video_button = ttk.Button(scenario_frame, text="Video", command=lambda url=scenario["video_path"]: play_video(url))
+                play_video_button.configure()
+                play_video_button.pack(side=tk.RIGHT, padx=5)
+                
         elif scenario["name"] == "Tele_driving + P.D":
             # Create a scenario button
             scenario_button = ttk.Button(scenario_frame, text=" Hard 50ms ", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5],s["code"][6],s["code"][7],s["code"][8]))
@@ -219,13 +267,13 @@ def show_scenario_menu():
             scenario_button.pack(side=tk.RIGHT)
 
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text=" Easy 50ms", command=lambda s=scenario: launch_scenario(s["code2"] ,s["code2"][1],s["code2"][2],s["code2"][3],s["code2"][4],s["code2"][5],s["code2"][6],s["code2"][7],s["code1"][8]))
+            scenario_button = ttk.Button(scenario_frame, text=" Easy 50ms", command=lambda s=scenario: launch_scenario(s["code2"] ,s["code2"][1],s["code2"][2],s["code2"][3],s["code2"][4],s["code2"][5],s["code2"][6],s["code2"][7],s["code2"][8]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
 
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text=" Hard 150ms", command=lambda s=scenario: launch_scenario(s["code3"] ,s["code3"][1],s["code3"][2],s["code3"][3],s["code3"][4],s["code3"][5],s["code3"][6],s["code3"][7],s["code1"][8]))
+            scenario_button = ttk.Button(scenario_frame, text=" Hard 150ms", command=lambda s=scenario: launch_scenario(s["code3"] ,s["code3"][1],s["code3"][2],s["code3"][3],s["code3"][4],s["code3"][5],s["code3"][6],s["code3"][7],s["code3"][8]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
@@ -257,50 +305,47 @@ def show_scenario_menu():
             scenario_button.pack(side=tk.RIGHT)
 
        # Create a play video button
-            play_video_button = ttk.Button(scenario_frame, text="Video assit", command=lambda url=scenario["video_path"]: play_video(url))
+            play_video_button = ttk.Button(scenario_frame, text="Video assit", command=lambda url=scenario["video_path1"]: play_video(url))
             play_video_button.configure(style="Custom.TButton")
             play_video_button.pack(side=tk.RIGHT, padx=5)
 
 
 
-
-
-        elif scenario["name"] ==  scenario["name"] == "Training-Joystic (For Tele-Driving)" or scenario["name"] == "Training-tele-asist" :
+        elif scenario["name"] ==  scenario["name"] == "Training-Joystic (For Tele-Driving)":
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text="Scenario 50ms", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5],s["code"][6],s["code"][7],s["code1"][8]))
+            scenario_button = ttk.Button(scenario_frame, text="Scenario", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5],s["code"][6],s["code"][7],s["code"][8]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
 
+       # Create a play video button
+            play_video_button = ttk.Button(scenario_frame, text="Video", command=lambda url=scenario["video_path"]: play_video(url))
+            play_video_button.configure(style="Custom.TButton")
+            play_video_button.pack(side=tk.RIGHT, padx=5)
 
-            # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text="Scenario 150ms", command=lambda s=scenario: launch_scenario(s["code1"] ,s["code1"][1],s["code1"][2],s["code1"][3],s["code1"][4],s["code1"][5],s["code1"][6],s["code1"][7],s["code1"][8]))
-            #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
-            scenario_button.configure(style="Custom.TButton")
-            scenario_button.pack(side=tk.RIGHT)
 
 
         else:   
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text=" Hard 50ms ", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5],s["code"][6],s["code"][7],s["code"][8]))
+            scenario_button = ttk.Button(scenario_frame, text=" Easy 50ms ", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5],s["code"][6],s["code"][7],s["code"][8]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
 
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text=" Easy 150ms", command=lambda s=scenario: launch_scenario(s["code1"] ,s["code1"][1],s["code1"][2],s["code1"][3],s["code1"][4],s["code1"][5],s["code1"][6],s["code1"][7],s["code1"][8]))
+            scenario_button = ttk.Button(scenario_frame, text=" Hard 150ms", command=lambda s=scenario: launch_scenario(s["code1"] ,s["code1"][1],s["code1"][2],s["code1"][3],s["code1"][4],s["code1"][5],s["code1"][6],s["code1"][7],s["code1"][8]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
 
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text=" Easy 50ms", command=lambda s=scenario: launch_scenario(s["code2"] ,s["code2"][1],s["code2"][2],s["code2"][3],s["code2"][4],s["code2"][5],s["code2"][6],s["code2"][7],s["code1"][8]))
+            scenario_button = ttk.Button(scenario_frame, text=" Hard 50ms", command=lambda s=scenario: launch_scenario(s["code2"] ,s["code2"][1],s["code2"][2],s["code2"][3],s["code2"][4],s["code2"][5],s["code2"][6],s["code2"][7],s["code2"][8]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
 
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text=" Hard 150ms", command=lambda s=scenario: launch_scenario(s["code3"] ,s["code3"][1],s["code3"][2],s["code3"][3],s["code3"][4],s["code3"][5],s["code3"][6],s["code3"][7],s["code1"][8]))
+            scenario_button = ttk.Button(scenario_frame, text=" Easy 150ms", command=lambda s=scenario: launch_scenario(s["code3"] ,s["code3"][1],s["code3"][2],s["code3"][3],s["code3"][4],s["code3"][5],s["code3"][6],s["code3"][7],s["code3"][8]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
