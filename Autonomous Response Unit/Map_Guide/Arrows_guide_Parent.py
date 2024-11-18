@@ -48,6 +48,7 @@ fourth_arrow = True
 fifth_arrow = True
 Brake_arrow = True
 arrow_term = 0.0
+Brake_blackWindow = True
 
 plt.rcParams['toolbar'] = 'None'
 
@@ -166,7 +167,45 @@ def BrakeGas(photo_path, sec):
 
 
 
+def blackWindow(photo_path, sec):
 
+    # create a figure and subplot
+    fig, ax = plt.subplots(figsize=(58, 50))
+    # remove margins
+    fig.subplots_adjust(0, 0, 1, 1)
+    # turn axes off
+    ax.axis("off")
+
+    # Try reading the image
+    image = cv2.imread(photo_path)
+
+    if image is not None:
+        # Check the number of channels
+        num_channels = image.shape[-1]
+
+        if num_channels == 3 or num_channels == 4:
+            manager = plt.get_current_fig_manager()
+            manager.window.wm_geometry("+0+0")
+
+            # Calculate position to center the image at the top
+            image_height, image_width, _ = image.shape
+            display_width = 1  # Set to 1 to cover the entire width
+            display_height = display_width * (image_height / image_width)
+
+            # Calculate position to center the image at the top
+            top_margin = 1 - display_height
+
+            ax.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), extent=[0, display_width, top_margin, 1], aspect='auto')
+            # remove frame
+            fig.canvas.manager.window.overrideredirect(1)
+            # Show the plot
+            plt.show(block=False)  # block=False allows the script to continue without waiting for the window to be closed
+            plt.pause(sec)
+            plt.close(fig)
+        else:
+            print("Image has an unsupported number of channels.")
+    else:
+        print("Failed to read the image.")
 
 def Arrows(data):
     global first_arrow
@@ -176,6 +215,8 @@ def Arrows(data):
     global fifth_arrow
     global Brake_arrow
     global arrow_term
+    global Brake_blackWindow
+
 
 
 
