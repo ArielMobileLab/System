@@ -70,7 +70,7 @@ def Generate_Cars2(world, actors, num_cars=15):
                 current_interval = 18.0
 
             vehicle = world.spawn_actor(vehicle_bp, spawn_location)
-            vehicle.apply_control(carla.VehicleControl(throttle=0.35, steer=0.0))
+            vehicle.apply_control(carla.VehicleControl(throttle=0.42, steer=0.0)) # throttle=0.35 original
 
             created_actors.append(vehicle)
 
@@ -92,13 +92,12 @@ def Cars(data):
 
     #if first_car_cross == True and 87.4309 < data.pose.pose.position.x < 93.3200: original
     if first_car_cross == True and 87.4309 < data.pose.pose.position.x < 93.3200:
-        print("car_1")
+        #print("first_Car")
         Generate_Car1()
         first_car_cross = False
     
-    #if second_car_cross == True and 334.0 < data.pose.pose.position.x < 339.7652:
     if second_car_cross == True  and  330.00 < data.pose.pose.position.x < 340.00 and -115.00 < data.pose.pose.position.y < -90.00:
-        print("car_2")
+        #print("car_2")
         Generate_Cars2(world, actors, num_cars=15)
         second_car_cross = False
 
