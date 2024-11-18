@@ -74,59 +74,34 @@ run_python=python
 
 sleep 6s &&
 
-run_python=python #this script run with python and not python 3 like the face script
-  # $2 give the argumnet that responsible for the Face Agent 
- 
-#if [ "$2" == "Face" ] || [ "$2" = "Color" ] || [ "$2" = "Face_Familiar" ] || [ "$2" = "Face_Train" ]; then
-#"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Avatar_Guide/Face_Last_Version.py" $2&
-#fi
+run_python=python
 
 
-#"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Rearview_Mirror.py" &
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 &
 
-#"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Prent_Camera_v2.py" $4 &
 
 sleep 1s &&
 "$run_python" "$HOME/Desktop/API Addapter/Joy_addapter.py" &
 "$run_python" "$HOME/Desktop/Comunication Unit/Latency.py" $5 &
 
 
-#"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Version_Ros_API_Work_For_Web.py" $4 &
+
 
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API_Parent_V2.py.py" $4 &
 
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/For_Train_first.py" $4 &
 
-
-
 sleep 3s &&
 
-"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
-
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Train_Objects.py" &
-
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Spatial/Finish/Static_Objects.py" &
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Train/Traffic_Lights.py" &
-#sleep 1s &&
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Coraction/Static_Objects.py" &
-#sleep 1s &&
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Train/Traffic_Lights.py" &
-#"$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $2 &
-#"$run_python" "$HOME/Desktop/Carla_Logs/Objects_log.py" $2 &
 
 
-#auto with out B
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Train_Objects.py" &
 
-#auto with  B
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/with_auto_B.py" &
-
-
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/ego_auto.py" &
-
-
 sleep 6s &&
+
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
+
+
 
 wait
 
