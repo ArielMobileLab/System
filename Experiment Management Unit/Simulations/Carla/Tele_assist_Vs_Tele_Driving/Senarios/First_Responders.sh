@@ -58,7 +58,7 @@ run_python=python
 
 
 sleep 6s &&
-"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
+
 
 run_python=python
 
@@ -95,7 +95,7 @@ sleep 14.5s &&
 "$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Car_In_lane_New.py" &
 
 sleep 10.5s &&
-
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
 "$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Ego_Test.py"  $7 &
 
 "$run_python" "$HOME/Desktop/API Addapter/Joy_addapter.py" &
@@ -115,8 +115,4 @@ wait
 free_port
 
 cleanup
-
-
-
-
 
