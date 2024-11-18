@@ -64,11 +64,10 @@ def main():
 	    # Apply Vehicle Physics Control for the vehicle
 	    vehicle.apply_physics_control(physics_control)
 
-	    print(physics_control)
+	    print("physics_Changed")
 
     else:
         print("No actor of type 'vehicle.nissan.micra' found in the world.")
 
 if __name__ == '__main__':
     main()
-
