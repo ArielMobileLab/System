@@ -48,6 +48,7 @@ rosrun web_video_server web_video_server &
 
 sleep 3s
 
+
 run_python=python3
 
 
@@ -65,7 +66,7 @@ run_python=python
 
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 &
 
-"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
+
 
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Version_Ros_API_Work_For_Web.py" $4 &
 
@@ -83,28 +84,21 @@ sleep 2s &&
 
 sleep 2s &&
 
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
+
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/train/Car_in_lane_train_ego_car.py" $7 & 
 
 
 
 sleep 20s
 
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/train/Car_In_lane_train_2.py" $7 & 
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/train/Car_In_lane_train_3.py" $7 & 
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/train/Car_In_lane_train_3.py"  & 
 
-#"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
 
-#"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/train/Train_Objects.py" &
 
 "$run_python" "$HOME/Desktop/API Addapter/Joy_addapter.py" &
+
 "$run_python" "$HOME/Desktop/Comunication Unit/Latency.py" $5 &
-
-
-
-#"$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/KEy_board.py" &
-
-
-#"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
 
 
 
@@ -113,7 +107,6 @@ wait
 free_port
 
 cleanup
-
 
 
 
