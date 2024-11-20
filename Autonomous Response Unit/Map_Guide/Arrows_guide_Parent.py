@@ -36,7 +36,7 @@ black_window='/home/omer/Desktop/Autonomous Resope Unit/Arrow_Guide/A_black_imag
 
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-file_name = os.path.join(folder_path, 'Photo_Interapt_Status{}_{}.json'.format(Map_type,current_time))
+file_name = os.path.join(folder_path, 'Photo_Interapt_{}_{}.json'.format('Status_',current_time))
 
 
 sec = 1
