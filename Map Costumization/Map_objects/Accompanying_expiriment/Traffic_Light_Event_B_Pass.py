@@ -35,8 +35,7 @@ Map_type = sys.argv[1]
 
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-file_name = os.path.join(folder_path, 'Traffic_Light_Status_{}_{}.json'.format(Map_type,current_time))
-
+file_name = os.path.join(folder_path, 'Traffic_Light_{}_{}.json'.format('Status_',current_time))
 
 def write_to_json(data_dict):
    
