@@ -28,9 +28,10 @@ yellow_time = 3
 
 
 #Map_type = sys.argv[1]
-Map_type = "Guide_parent"
+#Map_type = "Guide_parent"
 #Map_type = "First_Response_train_2"
 #Map_type = "First_Response"
+Agent_type = "_Traffic_Light"
 
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
