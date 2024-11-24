@@ -23,6 +23,7 @@ from nav_msgs.msg import Odometry
 
 
 Map_type = sys.argv[1]
+Map_type_for_log = sys.argv[2]
 #Map_type = "Guide_Train"
 #Map_type = "Guide_Spatial"
 
@@ -36,7 +37,7 @@ black_window='/home/omer/Desktop/Autonomous Resope Unit/Arrow_Guide/A_black_imag
 
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-file_name = os.path.join(folder_path, 'Photo_Interapt_{}_{}.json'.format('Status_',current_time))
+file_name = os.path.join(folder_path, 'Photo_Interapt_{}_{}.json'.format(Map_type_for_log,current_time))
 
 
 sec = 1
