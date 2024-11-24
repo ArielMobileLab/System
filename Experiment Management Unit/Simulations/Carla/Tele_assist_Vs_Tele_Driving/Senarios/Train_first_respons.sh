@@ -76,8 +76,11 @@ sleep 6s &&
 
 run_python=python
 
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
 
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 $2 &
+
+"$run_python" "/home/omer/Desktop/Autonomous Resope Unit/Predivtive display/predictive_display.py" $5 $8 &
 
 
 sleep 1s &&
@@ -89,17 +92,12 @@ sleep 1s &&
 
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API_Parent_V2.py.py" $4 &
 
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/For_Train_first.py" $4 &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/low_fps_try.py" $4 &
 
 sleep 3s &&
 
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/train_traffic.py" &
 
-
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Train_Objects.py" &
-
-sleep 6s &&
-
-"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
 
 
 
