@@ -23,6 +23,7 @@ from nav_msgs.msg import Odometry
 
 
 Map_type = sys.argv[1]
+Map_type_for_log = sys.argv[2]
 #Map_type = "Guide_Train"
 #Map_type = "Guide_parent"
 #Map_type = "First_Response_train_2"
@@ -30,7 +31,7 @@ Map_type = sys.argv[1]
 
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-file_name = os.path.join(folder_path, 'Photo_Interapt_{}_{}.json'.format('Status_',current_time))
+file_name = os.path.join(folder_path, 'Photo_Interapt_{}_{}.json'.format(Map_type_for_log,current_time))
 
 RIGHT='/home/omer/Desktop/Autonomous Resope Unit/Arrow_Guide/RIGHT.jpeg'
 LEFT='/home/omer/Desktop/Autonomous Resope Unit/Arrow_Guide/LEFT.jpeg'
@@ -344,14 +345,14 @@ def image_display(data):
         if data.header.seq  == 4000: 
             blackWindow(black_window,20)
     
-        if Map_type == 'Regual':
+    if Map_type == 'Regual':
 
             if Brake_blackWindow == True:
                 blackWindow(black_window,20)
                 Brake_blackWindow = False
 
-        if data.header.seq  == 2200: 
-            blackWindow(black_window,20)
+            if data.header.seq  == 2300: 
+                blackWindow(black_window,20)
 
 
     if Map_type == 'First_Response':
@@ -388,47 +389,40 @@ def image_display(data):
             #TakeControl(ACCIDENT,6)
             #Brake_arrow = False
             #Brake_blackWindow = False
-        if data.header.seq  ==1665: 
-            Egocar_data = OrderedDict()
-            Egocar_data["Type"] = "Video_Status:"
-            Egocar_data["World_Time"] = timestamp
-            Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
-            Egocar_data["Simulation_time"] = simulation_Time
-            Egocar_data["Video"] = "Right_100M"
-            write_to_json(Egocar_data) # for json
+        if data.header.seq  ==1630: 
+            #Egocar_data = OrderedDict()
+            #Egocar_data["Type"] = "Video_Status:"
+            #Egocar_data["World_Time"] = timestamp
+            #Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
+            #Egocar_data["Simulation_time"] = simulation_Time
+            #Egocar_data["Video"] = "Right_100M"
+            #write_to_json(Egocar_data) # for json
 
 
             TakeControl(Right_100M,5)
-            time.sleep(15)
-            Egocar_data = OrderedDict()
-            Egocar_data["Type"] = "Video_Status:"
-            Egocar_data["World_Time"] = timestamp
-            Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
-            Egocar_data["Simulation_time"] = simulation_Time
-            Egocar_data["Video"] = "Right_50M"
-            write_to_json(Egocar_data) # for json
+            #time.sleep(12)
+            #Egocar_data = OrderedDict()
+            #Egocar_data["Type"] = "Video_Status:"
+            #Egocar_data["World_Time"] = timestamp
+            #Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
+            #Egocar_data["Simulation_time"] = simulation_Time
+            #Egocar_data["Video"] = "Right_50M"
+            #write_to_json(Egocar_data) # for json
 
             TakeControl(Right_50M,5)
-		    
+            time.sleep(12)
+
+            #Egocar_data = OrderedDict()
+            #Egocar_data["Type"] = "Video_Status:"
+            #Egocar_data["World_Time"] = timestamp
+            #Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
+            #Egocar_data["Simulation_time"] = simulation_Time
+            #Egocar_data["Video"] = "Right_Now"
+            #write_to_json(Egocar_data) # for json
 
 
-   	        
-        if first_arrow == True and 320<data.pose.pose.position.x<347.8  and 330<data.pose.pose.position.y<351.7:
-            Egocar_data = OrderedDict()
-            Egocar_data["Type"] = "Video_Status:"
-            Egocar_data["World_Time"] = timestamp
-            Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
-            Egocar_data["Simulation_time"] = simulation_Time
-            Egocar_data["Video"] = "Right_Now"
-            write_to_json(Egocar_data) # for json
-
-
-            for _ in range(20):  # Loop 20 times
+            for _ in range(25):  # Loop 25 times
                 TakeControl(Right_Now, 0.3)
-
-            first_arrow = False
-
-   	      
 
 
 	    
@@ -568,4 +562,3 @@ while not rospy.is_shutdown():
 
 
    rate.sleep()
-
