@@ -25,7 +25,7 @@ traffic_light_id = 83
 traffic_light = None
 traffic_light_green_flag = 0
 yellow_time = 3
-acceleraion = 2
+
 
 
 Map_type = sys.argv[1]
@@ -35,7 +35,8 @@ Map_type = sys.argv[1]
 
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-file_name = os.path.join(folder_path, 'Traffic_Light_{}_{}.json'.format('Status_',current_time))
+file_name = os.path.join(folder_path, 'Traffic_Light_Status_{}_{}.json'.format(Map_type,current_time))
+
 
 def write_to_json(data_dict):
    
@@ -75,14 +76,14 @@ def set_traffic_light_state(state, duration=None):
 def maximal_distance_for_must_cross_function(v,yellow_time):
     # Calculate the distance based on speed and defined parameters
     # the Junction_Width is deffrennt based on the junction and map
-    Junction_Width = 7.86
+    Junction_Width = 7.5
     Vehicle_Length = 3.633375
     distance = v * yellow_time - Junction_Width - Vehicle_Length
     return distance
 
 
 def maximal_distance_for_must_stop_function(speed,yellow_time):
-    acceleraion = 2
+    acceleraion = 1.5
     distance = (speed*yellow_time-0.5*acceleraion*yellow_time**2)
     return distance
 
