@@ -27,7 +27,7 @@ yellow_time = 3
 
 
 
-#Map_type = sys.argv[1]
+Map_type = sys.argv[1]
 #Map_type = "Guide_parent"
 #Map_type = "First_Response_train_2"
 #Map_type = "First_Response"
