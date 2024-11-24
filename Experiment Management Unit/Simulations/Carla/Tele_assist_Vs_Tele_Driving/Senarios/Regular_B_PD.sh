@@ -81,7 +81,7 @@ run_python=python
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Walkers1.py" &
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Car_Stop_andGo.py" &
 
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide_Parent.py" $4 &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide_Parent.py" $4 $2 &
 
 "$run_python" "/home/omer/Desktop/Autonomous Resope Unit/Predivtive display/predictive_display.py" $5 $8 &
 
@@ -113,7 +113,10 @@ sleep 6s &&
 "$run_python" "$HOME/Desktop/API Addapter/phy.py" &
 
 sleep 1s &&
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
 
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Green_Traffice_Light.py" &
+sleep 1s &&
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Green_Traffice_Light.py" &
 
 
