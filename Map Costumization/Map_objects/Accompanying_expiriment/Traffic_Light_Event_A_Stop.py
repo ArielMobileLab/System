@@ -24,17 +24,18 @@ traffic_light_id = 63
 traffic_light = None
 traffic_light_green_flag = 0
 yellow_time = 3
-acceleraion = 2
 
 
-Map_type = sys.argv[1]
-#Map_type = "Guide_parent"
+
+#Map_type = sys.argv[1]
+Map_type = "Guide_parent"
 #Map_type = "First_Response_train_2"
 #Map_type = "First_Response"
 
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-file_name = os.path.join(folder_path, 'Traffic_Light_{}_{}.json'.format('Status_',current_time))
+file_name = os.path.join(folder_path, 'Traffic_Light_{}_{}.json'.format(Map_type,current_time))
+
 
 def write_to_json(data_dict):
    
@@ -74,14 +75,14 @@ def set_traffic_light_state(state, duration=None):
 def maximal_distance_for_must_cross_function(v,yellow_time):
     # Calculate the distance based on speed and defined parameters
     # the Junction_Width is deffrennt based on the junction and map
-    Junction_Width = 7.86
+    Junction_Width = 7.5
     Vehicle_Length = 3.633375
     distance = v * yellow_time - Junction_Width - Vehicle_Length
     return distance
 
 
 def maximal_distance_for_must_stop_function(speed,yellow_time):
-    acceleraion = 2
+    acceleraion = 1.5
     distance = (speed*yellow_time-0.5*acceleraion*yellow_time**2)
     return distance
 
@@ -90,7 +91,6 @@ def maximal_distance_for_must_stop_function(speed,yellow_time):
 # Callback function for the odometry subscriber
 def traffic_light_event(data):
 
-
     global traffic_light_green_flag
     ego_x = data.pose.pose.position.x
     ego_y = data.pose.pose.position.y
@@ -98,8 +98,6 @@ def traffic_light_event(data):
     if traffic_light_green_flag == 0 and 130<data.pose.pose.position.x<160 and -333<data.pose.pose.position.y<-323 :
         traffic_light_green_flag = 1 
           
-    #traffic_light_green_flag  :
-
 
     if traffic_light_green_flag == 1:
           speed = math.sqrt(data.twist.twist.linear.x**2 + data.twist.twist.linear.y**2)
@@ -115,7 +113,7 @@ def traffic_light_event(data):
           maximal_distance_for_must_stop = maximal_distance_for_must_stop_function(speed,yellow_time)
           #print("maximal_distance_for_must_stop")
           #print(maximal_distance_for_must_stop)
-          
+          print(maximal_distance_for_must_stop)
           
           if maximal_distance_for_must_stop >= distance_to_traffic_light: 
                 timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
@@ -133,8 +131,6 @@ def traffic_light_event(data):
                 Egocar_data["Simulation_time"] = simulation_Time
                 Egocar_data["Traffic_Light_Event"] = "Traffic_Light_Stop_A"
                 write_to_json(Egocar_data) # for json
-
-
            
                 # Set traffic light to yellow
                 traffic_light.set_state(carla.TrafficLightState.Yellow)
