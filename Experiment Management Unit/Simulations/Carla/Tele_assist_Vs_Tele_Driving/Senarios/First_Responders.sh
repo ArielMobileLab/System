@@ -64,7 +64,7 @@ run_python=python
 
 "$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Police.py" &
 
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 $2 &
 
 "$run_python" "/home/omer/Desktop/Autonomous Resope Unit/Predivtive display/predictive_display.py" $5 $8 &
 
