@@ -270,7 +270,7 @@ class KeyboardControl(object):
 	else:
 		throttle = (1+ msg.axes[1]) # Adjust the index based on your joystick
 		steer = -1 * msg.axes[0]  / 2.1622   # Adjust the index based on your joystick
-		brake = (1 + msg.axes[2])   # Adjust the index based on your joystick
+		brake = (1 + msg.axes[2]) / 0.2   # Adjust the index based on your joystick
 	
         # Update the control commands
         #self._control.throttle = max(0.0, throttle) #max()- give me the highest number
