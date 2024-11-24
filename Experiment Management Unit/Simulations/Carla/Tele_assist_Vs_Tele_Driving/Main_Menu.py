@@ -90,8 +90,8 @@ scenarios = [
         "description": "",
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Joy_Train.MOV", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons.sh","Town02","Teledriving_Train_1","Nah","Guide_Train", "0", "0", "tele_driving", "Predictive_OFF"],
-        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons.sh","Town02","Teledriving_Train_1","Nah","Guide_Train", "0", "0", "tele_driving", "Predictive_OFF"],
+        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons.sh","Town02","Train_Latency_50ms_PD_ON","Nah","Guide_Train", "50", "0", "tele_driving", "Predictive_ON"],
+        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons.sh","Town02","Train_Latency_50ms_PD_ON","Nah","Guide_Train", "50", "0", "tele_driving", "Predictive_ON"],
     },
      {
         "name": "Training",
@@ -99,8 +99,8 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Driving_Train_PD.MOV", 
         "video_path1": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Assist_Train.MOV",
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2.sh","Town04","Teledriving_Driving_Train","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_ON"],
-        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2_assit.sh","Town04","Teledriving_Assit_Train","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2.sh","Town04","Teledriving_Takeover_Latency_50ms_","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2_assit.sh","Town04","Teleassiste_Takeover_Latency_50ms_","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_OFF"],
     },
     {
         "name": "Tele_assist",
@@ -108,10 +108,10 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Assist.MOV",
         "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
 	    "NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_50_Easy","Nah","First_Response","50", "1", "tele_driving", "Predictive_OFF"],
-        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_150_Hard","Nah","First_Response","150", "0", "tele_driving", "Predictive_OFF"],
-        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_50_Hard","Nah","First_Response", "50", "0", "tele_driving", "Predictive_OFF"],
-        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_150_Easy","Nah","First_Response", "150", "1", "tele_driving", "Predictive_OFF"],
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_Latency_50ms_Gap_44m_","Nah","First_Response","50", "1", "tele_driving", "Predictive_OFF"],
+        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_Latency_150ms_Gap_27m_","Nah","First_Response","150", "0", "tele_driving", "Predictive_OFF"],
+        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_Latency_50ms_Gap_27m_","Nah","First_Response", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_Latency_150ms_Gap_44m_","Nah","First_Response", "150", "1", "tele_driving", "Predictive_OFF"],
     },
     {
         "name": "Tele_driving ",
@@ -119,21 +119,10 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Driving.MOV",
         "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
 	    "NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Easy","Nah","First_Response","50", "1", "tele_driving", "Predictive_OFF"],
-        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Hard","Nah","First_Response","150", "0", "tele_driving", "Predictive_OFF"],
-        "code2": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Hard","Nah","First_Response", "50", "0", "tele_driving", "Predictive_OFF"],
-        "code3": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Easy","Nah","First_Response", "150", "1", "tele_driving", "Predictive_OFF"]
-    },
-    {
-        "name": "Tele_driving + P.D",
-        "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Driving_PD.MOV",
-        "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
-	    "NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Easy_PD","Nah","First_Response","50", "1", "tele_driving", "Predictive_ON"],
-        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Hard_PD","Nah","First_Response","150", "0", "tele_driving", "Predictive_ON"],
-        "code2": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_50_Hard_PD","Nah","First_Response", "50", "0", "tele_driving", "Predictive_ON"],
-        "code3": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_150_Easy_PD","Nah","First_Response", "150", "1", "tele_driving", "Predictive_ON"]
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_50ms_Gap_44m_","Nah","First_Response","50", "1", "tele_driving", "Predictive_OFF"],
+        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_150ms_Gap_27m_","Nah","First_Response","150", "0", "tele_driving", "Predictive_OFF"],
+        "code2": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_50ms_Gap_27m_","Nah","First_Response", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code3": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_150ms_Gap_44m_","Nah","First_Response", "150", "1", "tele_driving", "Predictive_OFF"]
     },
     {
         "name": "Regual_City_A",
@@ -141,10 +130,10 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latency.MOV",
 	"video_path1": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latancy_PD.MOV",
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Regular_50","Obstacle_A","Guide_Parent", "50", "0", "tele_driving", "Predictive_OFF"],
-        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Regular_150","Obstacle_A","Guide_Parent", "150", "0", "tele_driving", "Predictive_OFF"],   
-        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Regular_50_PD","Obstacle_A","Guide_Parent", "50", "0", "tele_driving", "Predictive_ON"],
-        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Regular_150_PD","Obstacle_A","Guide_Parent", "150", "0", "tele_driving", "Predictive_ON"]
+        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Latency_50ms_","Obstacle_A","Guide_Parent", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Latency_150ms_","Obstacle_A","Guide_Parent", "150", "0", "tele_driving", "Predictive_OFF"],   
+        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Latency_50ms_PD_ON_","Obstacle_A","Guide_Parent", "50", "0", "tele_driving", "Predictive_ON"],
+        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Latency_150ms_PD_ON_","Obstacle_A","Guide_Parent", "150", "0", "tele_driving", "Predictive_ON"]
     },
     {
         "name": "Regual_City_B",
@@ -152,10 +141,10 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latency.MOV",
 	"video_path1": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latancy_PD.MOV",
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B.sh","Town01","Regular_50","Obstacle_B","Guide_Parent", "50", "0", "tele_driving", "Predictive_OFF"],
-        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B.sh","Town01","Regular_150","Obstacle_B","Guide_Parent", "150", "0", "tele_driving", "Predictive_OFF"],   
-        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B_PD.sh","Town01","Regular_50_PD","Obstacle_B","Guide_Parent", "50", "0", "tele_driving", "Predictive_ON"],
-        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B_PD.sh","Town01","Regular_150_PD","Obstacle_B","Guide_Parent", "150", "0", "tele_driving", "Predictive_ON"]
+        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B.sh","Town01","Latency_50ms_","Obstacle_B","Guide_Parent", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B.sh","Town01","Latency_150ms_","Obstacle_B","Guide_Parent", "150", "0", "tele_driving", "Predictive_OFF"],   
+        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B_PD.sh","Town01","Latency_50ms_PD_ON_","Obstacle_B","Guide_Parent", "50", "0", "tele_driving", "Predictive_ON"],
+        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B_PD.sh","Town01","Latency_150ms_PD_ON_","Obstacle_B","Guide_Parent", "150", "0", "tele_driving", "Predictive_ON"]
     }
 ]
 
@@ -356,11 +345,6 @@ def show_scenario_menu():
             play_video_button.pack(side=tk.RIGHT, padx=5)
 
             
-
-
-
-
-
     
 
         # Create a frame for the description label
