@@ -67,7 +67,7 @@ sleep 6s &&
 run_python=python
 "$run_python" "/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/First Responders/First responders/Police.py" &
 
-#"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 $2 &
 
 #"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API_Parent_V2.py.py" $4 &
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Version_Ros_API_Work_For_Web.py" $4 &
