@@ -74,12 +74,15 @@ run_python=python
 sleep 6s &&
 
 
+
 run_python=python
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Walkers.py" &
 
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Car_Stop_Event.py" &
 
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide_Parent.py" $4 $2 &
+
+"$run_python" "/home/omer/Desktop/Autonomous Resope Unit/Predivtive display/predictive_display.py" $5 $8 &
 
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API_Parent_V2.py.py" $4 &
 
@@ -97,7 +100,6 @@ sleep 1s &&
 "$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $2 &
 
 "$run_python" "$HOME/Desktop/Carla_Logs/Objects_log.py" $2 &
-
 sleep 1s &&
 
 "$run_python" "$HOME/Desktop/API Addapter/Joy_addapter.py" &
