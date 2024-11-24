@@ -265,7 +265,7 @@ class KeyboardControl(object):
         # Update the control commands
         self._control.throttle = max(0.0, throttle)
         self._control.steer = 	steer
-        self._control.brake = max(0.0, brake)
+        self._control.brake = max(0.0, brake)/0.2
         #self._control.throttle = max(0.0, throttle) #max()- give me the highest number
         #self._control.steer = steer
         #self._control.brake = max(0.0, brake)
