@@ -64,7 +64,7 @@ sleep 3s &&
 
 run_python=python
 
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 $2 &
 
 
 
