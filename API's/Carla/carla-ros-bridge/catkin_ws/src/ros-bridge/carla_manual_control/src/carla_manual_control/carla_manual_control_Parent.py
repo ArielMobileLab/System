@@ -278,7 +278,7 @@ class KeyboardControl(object):
         #self._control.brake = max(0.0, brake)
    	self._control.throttle = max(0.0, throttle) #max()- give me the highest number
         #self._control.steer = steer
-        self._control.brake = max(0.0, brake)
+        self._control.brake = max(0.0, brake) / 0.2
         #self._control.throttle = max(0.0, min(1.0, throttle)) #max()- give me the highest number
         #self._control.steer = max(-1.0, min(1.0, steer))
         #self._control.brake = max(0.0, min(1.0, brake))
