@@ -84,7 +84,7 @@ def maximal_distance_for_must_cross_function(v,yellow_time):
 
 
 def maximal_distance_for_must_stop_function(speed,yellow_time):
-    acceleraion = 1.5
+    acceleraion = 2
     distance = (speed*yellow_time-0.5*acceleraion*yellow_time**2)
     return distance
 
