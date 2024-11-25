@@ -44,77 +44,98 @@ function free_port() {
     fi
 }
 
-export  ROS_MASTER_URI=http://10.20.0.164:11311 
-export ROS_IP=10.20.0.164
 
+export ROS_MASTER_URI=http://10.20.0.180:11311 &&
+export ROS_HOSTNAME=10.20.0.180 &&
+export ROS_IP=10.20.0.180 &&
 
 free_port 2000
 
 trap cleanup INT
 
 
-"$HOME/Desktop/CARLA_0.9.13/CarlaUE4.sh" -windowed -ResX=640 -ResY=480 -benchmark -fps=20 &
+
+"$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/CarlaUE4.sh" &
 
 sleep 11s
-
 source /home/omer/carla-ros-bridge/catkin_ws/devel/setup.bash &&
 
+roslaunch carla_ros_bridge Prent.launch town:=$1&
 
-roslaunch carla_ros_bridge Prent.launch town:=$1 spawn_point:="-3.04867935181, -291.170318604, 0.499982, 0.0, 0.0, 180.0"
 sleep 3s
 
+run_python=python3
+"$run_python" "$HOME/Desktop/API Addapter/Addapter.py" &
+
+export ROS_MASTER_URI=http://10.20.0.180:11311 &&
+export ROS_HOSTNAME=10.20.0.180 &&
+export ROS_IP=10.20.0.180 &&
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/speed/speed_secound_pc.py" &
+
+run_python=python
+"$run_python" "$HOME/Desktop/API Addapter/RosToUDP.py" &
+sleep 6s &&
 
 run_python=python3
-
-"$run_python" "$HOME/Desktop/API Addapter/Addapter.py" &
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/speed/speed.py" &
-run_python=python
-
-"$run_python" "$HOME/Desktop/API Addapter/RosToUDP.py" &
-sleep 1s &&
 
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/Voice/Voice_To_Json_PyAudio.py" &
 
-sleep 6s &&
-
-
 run_python=python
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Walkers.py" &
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Car_Stop_Event.py" &
+
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Green_Traffice_Light.py" &
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Walkers.py" &
+
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Car_Stop_Event.py" &
+
 run_python=python3
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Video_Avatar_scenerio1.py" &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Avatar_Parent/Video_Avatar_scenerio1.py" $2 &
 run_python=python
 
-
-
+export ROS_MASTER_URI=http://10.20.0.180:11311 &&
+export ROS_HOSTNAME=10.20.0.180 &&
+export ROS_IP=10.20.0.180 &&
+run_python=python3
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide_Parent.py" $4 &
-
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API_Parent_V2.py.py" $4 &
-
-sleep 1s &&
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Traffic_Light_Event_A.py" &
-sleep 1s &&
-
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Cars_Other_Side_Event.py" &
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Static_Objects.py" &
-
-sleep 1s &&
-
-run_python=python3
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Avatar_Parent/photo.py" &
 run_python=python
 
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API.py" $4 &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Rear_camera_API.py" $4 &
 
+sleep 1s &&
+run_python=python3
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Traffic_Light_Event_Stop.py" $2 &
+run_python=python
+
+sleep 1s &&
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Cars_Other_Side_Event.py" &
+
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Static_Objects.py" &
+
+run_python=python3
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Avatar_Parent/Static_Photo.py" &
+
+run_python=python
 sleep 1s &&
 "$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $2 &
+
 "$run_python" "$HOME/Desktop/Carla_Logs/Objects_log.py" $2 &
+sleep 6s &&
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
 
-sleep 5s &&
 
-"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
+sleep 1s &&
+
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Green_Traffice_Light.py" &
+sleep 1s &&
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
+sleep 10s &&
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Green_Traffice_Light.py" &
+
+
 
 wait
 
 free_port 2000
 
 cleanup
+
