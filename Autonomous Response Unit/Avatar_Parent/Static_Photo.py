@@ -10,6 +10,9 @@ def display_photo(photo_path, window_x, window_y, window_width, window_height):
     # Create a Tkinter window
     root = tk.Tk()
     root.geometry("{0}x{1}+{2}+{3}".format(window_width, window_height, window_x, window_y))
+    
+    # Set the window to be always on top
+    root.attributes('-topmost', True)
 
     # Load the image
     image = Image.open(photo_path)
@@ -49,7 +52,7 @@ def odometry_callback(data):
     # Display photo condition
     if not photo_displayed:
         # Define the path to the photo
-        photo_path = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar video/photo.jpeg'
+        photo_path = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar_video/photo.jpeg'
         display_photo(photo_path, window_x, window_y, window_width, window_height)
         photo_displayed = True
 
@@ -65,4 +68,3 @@ rate = rospy.Rate(1)
 # Continue running the code
 while not rospy.is_shutdown():
     rate.sleep()
-
