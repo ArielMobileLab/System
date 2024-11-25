@@ -38,12 +38,15 @@ def play_video(video_path, window_x, window_y, window_width, window_height):
     root = tk.Tk()
     root.geometry("{0}x{1}+{2}+{3}".format(window_width, window_height, window_x, window_y))
     root.title("Video Player")
+    root.attributes('-topmost', True)
 
     # Initialize VLC player
     instance = vlc.Instance()
     player = instance.media_player_new()
     media = instance.media_new(video_path)
     player.set_media(media)
+
+
 
     # Embed VLC player in Tkinter window
     root.update()
@@ -92,12 +95,12 @@ def odometry_callback(data):
         timestamp = datetime.now().strftime('%H:%M:%S.%f')
         simulation_time = data.header.seq*0.033333335071821
 
-	header = data.header
-	secs = header.stamp.secs
-	nsecs = header.stamp.nsecs
+        header = data.header
+        secs = header.stamp.secs
+        nsecs = header.stamp.nsecs
 
-	# Combine secs and nsecs into a float
-	simulation_Time = secs + nsecs * 1e-9
+        # Combine secs and nsecs into a float
+        simulation_Time = secs + nsecs * 1e-9
 
         Egocar_data = OrderedDict()
         Egocar_data["Type"] = "Video_Status:"
@@ -107,7 +110,7 @@ def odometry_callback(data):
         Egocar_data["Video"] = "person_cross"
         write_to_json(Egocar_data) # for json
 
-        video_path1 = '/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Avatar video/person_cross.mp4'
+        video_path1 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar_video/person_cross.mp4'
         play_video(video_path1, window_x, window_y, window_width, window_height)
         video_flags['video1'] = True
 
@@ -117,12 +120,12 @@ def odometry_callback(data):
         timestamp = datetime.now().strftime('%H:%M:%S.%f')
         simulation_time = data.header.seq*0.033333335071821
 
-	header = data.header
-	secs = header.stamp.secs
-	nsecs = header.stamp.nsecs
+        header = data.header
+        secs = header.stamp.secs
+        nsecs = header.stamp.nsecs
 
-	# Combine secs and nsecs into a float
-	simulation_Time = secs + nsecs * 1e-9
+        # Combine secs and nsecs into a float
+        simulation_Time = secs + nsecs * 1e-9
 
         Egocar_data = OrderedDict()
         Egocar_data["Type"] = "Video_Status:"
@@ -132,7 +135,7 @@ def odometry_callback(data):
         Egocar_data["Video"] = "car_stop"
         write_to_json(Egocar_data) # for json
 
-        video_path2 = '/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Avatar video/car_stop.mp4'
+        video_path2 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar_video/car_stop.mp4'
         play_video(video_path2, window_x, window_y, window_width, window_height)
         video_flags['video2'] = True
 
@@ -148,12 +151,12 @@ def odometry_callback(data):
         timestamp = datetime.now().strftime('%H:%M:%S.%f')
         simulation_time = data.header.seq*0.033333335071821
 
-	header = data.header
-	secs = header.stamp.secs
-	nsecs = header.stamp.nsecs
+        header = data.header
+        secs = header.stamp.secs
+        nsecs = header.stamp.nsecs
 
-	# Combine secs and nsecs into a float
-	simulation_Time = secs + nsecs * 1e-9
+        # Combine secs and nsecs into a float
+        simulation_Time = secs + nsecs * 1e-9
 
         Egocar_data = OrderedDict()
         Egocar_data["Type"] = "Video_Status:"
@@ -164,7 +167,7 @@ def odometry_callback(data):
         write_to_json(Egocar_data) # for json
 
 
-        video_path4 = '/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Avatar video/red_light.mp4'
+        video_path4 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar_video/red_light.mp4'
         play_video(video_path4, window_x, window_y, window_width, window_height)
         video_flags['video4'] = True
 
@@ -174,12 +177,12 @@ def odometry_callback(data):
         timestamp = datetime.now().strftime('%H:%M:%S.%f')
         simulation_time = data.header.seq*0.033333335071821
 
-	header = data.header
-	secs = header.stamp.secs
-	nsecs = header.stamp.nsecs
+        header = data.header
+        secs = header.stamp.secs
+        nsecs = header.stamp.nsecs
 
-	# Combine secs and nsecs into a float
-	simulation_Time = secs + nsecs * 1e-9
+        # Combine secs and nsecs into a float
+        simulation_Time = secs + nsecs * 1e-9
 
         Egocar_data = OrderedDict()
         Egocar_data["Type"] = "Video_Status:"
@@ -189,7 +192,7 @@ def odometry_callback(data):
         Egocar_data["Video"] = "barrier"
         write_to_json(Egocar_data) # for json
 
-        video_path5 = '/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Avatar video/barrier.mp4'
+        video_path5 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar_video/barrier.mp4'
         play_video(video_path5, window_x, window_y, window_width, window_height)
         video_flags['video5'] = True
     
@@ -199,12 +202,12 @@ def odometry_callback(data):
         timestamp = datetime.now().strftime('%H:%M:%S.%f')
         simulation_time = data.header.seq*0.033333335071821
 
-	header = data.header
-	secs = header.stamp.secs
-	nsecs = header.stamp.nsecs
+        header = data.header
+        secs = header.stamp.secs
+        nsecs = header.stamp.nsecs
 
-	# Combine secs and nsecs into a float
-	simulation_Time = secs + nsecs * 1e-9
+        # Combine secs and nsecs into a float
+        simulation_Time = secs + nsecs * 1e-9
 
         Egocar_data = OrderedDict()
         Egocar_data["Type"] = "Video_Status:"
@@ -214,7 +217,7 @@ def odometry_callback(data):
         Egocar_data["Video"] = "red_light"
         write_to_json(Egocar_data) # for json
 
-        video_path6 = '/home/omer/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Avatar video/red_light.mp4'
+        video_path6 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar_video/red_light.mp4'
         play_video(video_path6, window_x, window_y, window_width, window_height)
         video_flags['video6'] = True    
 
