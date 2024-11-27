@@ -256,17 +256,17 @@ class KeyboardControl(object):
 	to make the ego car max wheel angel to be 32.374* we need to ([joy sterring index] / 2.1622) 
         """
         if msg.axes[1] == 0.0 and msg.axes[2] == 0.0:
-		steer = -1 * msg.axes[0]
-		throttle = (1 + (-1.0)) / 2.1622  # range correction
-		brake = (1 + (-1.0))   # range correction
+		steer = -1 * msg.axes[0] / 2.1622
+		throttle = (1 + (-1.0))   # range correction
+		brake = (1 + (-1.0)) / 0.2   # range correction
 	elif msg.axes[2] == 0.0:
-		steer = -1 * msg.axes[0]  # reverse wheel input
-        	throttle = (1 + msg.axes[1]) / 2.1622  # range correction
-        	brake = (1 + (-1.0))   # range correction
+		steer = -1 * msg.axes[0] / 2.1622  # reverse wheel input
+        	throttle = (1 + msg.axes[1])   # range correction
+        	brake = (1 + (-1.0)) / 0.2  # range correction
 	elif msg.axes[1] == 0.0:
-		steer = -1 * msg.axes[0]  # reverse wheel input
-        	throttle = (1 + 1 + (-1.0)) / 2.1622  # range correction
-        	brake = (1 + msg.axes[2])  # range correction
+		steer = -1 * msg.axes[0] / 2.1622 # reverse wheel input
+        	throttle = (1 + (-1.0))   # range correction
+        	brake = (1 + msg.axes[2]) / 0.2 # range correction
 	else:
 		throttle = (1+ msg.axes[1]) # Adjust the index based on your joystick
 		steer = -1 * msg.axes[0]  / 2.1622   # Adjust the index based on your joystick
