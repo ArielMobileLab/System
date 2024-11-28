@@ -21,7 +21,7 @@ world = client.get_world()
 actors = world.get_actors()
 
 # Find the traffic light with the specified ID
-traffic_light_id = 80
+traffic_light_id = 83
 traffic_light = None
 traffic_light_green_flag = 0
 yellow_time = 3
@@ -112,20 +112,20 @@ def traffic_light_event(data):
           
           # Calculate the distance from the ego vehicle to the traffic light
           distance_to_traffic_light = math.sqrt((traffic_light_x - ego_x)**2 + (traffic_light_y + ego_y)**2)
-          print("distance_to_traffic_light")
-          print(distance_to_traffic_light)
+          #print("distance_to_traffic_light")
+          #print(distance_to_traffic_light)
 
 
           maximal_distance_for_must_cross = maximal_distance_for_must_cross_function(speed,yellow_time)
-          print("maximal_distance_for_must_cross")
-          print(maximal_distance_for_must_cross)
+          #print("maximal_distance_for_must_cross")
+          #print(maximal_distance_for_must_cross)
 
 
         #     # Condition to check if the vehicle is at a specific distance
           if (maximal_distance_for_must_cross + 27.0) >= distance_to_traffic_light: 
                 
                    
-                timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+                timestamp = datetime.now().strftime('%H:%M:%S.%f')
                 # Simulation Time
                 header = data.header
                 secs = header.stamp.secs
@@ -138,7 +138,7 @@ def traffic_light_event(data):
                 Egocar_data["World_Time"] = timestamp
                 Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
                 Egocar_data["Simulation_time"] = simulation_Time
-                Egocar_data["Traffic_Light_Event"] = "Traffic_Light_Pass_B"
+                Egocar_data["Traffic_Light_Event"] = "Traffic_Light_Easy"
                 write_to_json(Egocar_data) # for json
 
            
