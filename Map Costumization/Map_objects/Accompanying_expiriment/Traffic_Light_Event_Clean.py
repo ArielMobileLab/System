@@ -9,6 +9,7 @@ import json
 import os
 import sys
 
+
 # Connect to the CARLA server
 client = carla.Client('localhost', 2000)
 client.set_timeout(10.0)
@@ -20,11 +21,10 @@ world = client.get_world()
 actors = world.get_actors()
 
 # Find the traffic light with the specified ID
-traffic_light_id = 60
+traffic_light_id = 63
 traffic_light = None
 traffic_light_green_flag = 0
 yellow_time = 3
-acceleraion = 2
 
 
 
@@ -32,12 +32,11 @@ Map_type = sys.argv[1]
 #Map_type = "Guide_parent"
 #Map_type = "First_Response_train_2"
 #Map_type = "First_Response"
-
 Agent_type = "_Event"
+
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-file_name = os.path.join(folder_path, 'Traffic_Light{}_{}.json'.format(Agent_type, current_time))
-
+file_name = os.path.join(folder_path, 'Traffic_Light{}_{}.json'.format(Map_type,current_time))
 
 
 def write_to_json(data_dict):
@@ -81,14 +80,15 @@ def maximal_distance_for_must_cross_function(v,yellow_time):
     Junction_Width = 7.5
     Vehicle_Length = 3.633375
     delay = 0.04
-    distance = (v * (yellow_time+delay) - Junction_Width - Vehicle_Length)  
+    #distance = v * (yellow_time + delay)- Junction_Width - Vehicle_Length
+    distance = v * (yellow_time + delay)
     return distance
 
 
 def maximal_distance_for_must_stop_function(speed,yellow_time):
     acceleraion = 2
     delay = 0.04
-    distance = (speed*(yellow_time+delay) - 0.5*acceleraion*yellow_time**2)  
+    distance = (speed* (yellow_time + delay)-0.5*acceleraion*yellow_time**2)
     return distance
 
 
@@ -101,7 +101,7 @@ def traffic_light_event(data):
     ego_x = data.pose.pose.position.x
     ego_y = data.pose.pose.position.y
 
-    if traffic_light_green_flag == 0 and 130<data.pose.pose.position.x<160 and -333<data.pose.pose.position.y<-323 :
+    if traffic_light_green_flag == 0 and 250.5562<data.pose.pose.position.x<282.5260 and -3.0682<data.pose.pose.position.y<2.4960 :
         traffic_light_green_flag = 1 
           
     #traffic_light_green_flag  :
@@ -109,22 +109,23 @@ def traffic_light_event(data):
 
     if traffic_light_green_flag == 1:
           speed = math.sqrt(data.twist.twist.linear.x**2 + data.twist.twist.linear.y**2)
-          #print(speed)
-          # Get the ego vehicle's position
           
-
           # Calculate the distance from the ego vehicle to the traffic light
           distance_to_traffic_light = math.sqrt((traffic_light_x - ego_x)**2 + (traffic_light_y + ego_y)**2)
           #print("distance_to_traffic_light")
           #print(distance_to_traffic_light)
 
-          maximal_distance_for_must_stop = maximal_distance_for_must_stop_function(speed,yellow_time)
-          #print("maximal_distance_for_must_stop")
-          #print(maximal_distance_for_must_stop)
-          
-          
-          if maximal_distance_for_must_stop >= distance_to_traffic_light: 
-                timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+
+          maximal_distance_for_must_cross = maximal_distance_for_must_cross_function(speed,yellow_time)
+          #print("maximal_distance_for_must_cross")
+          #print(maximal_distance_for_must_cross)
+
+
+        #     # Condition to check if the vehicle is at a specific distance
+          if maximal_distance_for_must_cross >= distance_to_traffic_light: 
+                
+                   
+                timestamp = datetime.now().strftime('%H:%M:%S.%f')
                 # Simulation Time
                 header = data.header
                 secs = header.stamp.secs
@@ -137,9 +138,8 @@ def traffic_light_event(data):
                 Egocar_data["World_Time"] = timestamp
                 Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
                 Egocar_data["Simulation_time"] = simulation_Time
-                Egocar_data["Traffic_Light_Event"] = "Traffic_Light_Stop_A"
+                Egocar_data["Traffic_Light_Event"] = "Traffic_Light_Pass_B"
                 write_to_json(Egocar_data) # for json
-
 
            
                 # Set traffic light to yellow
@@ -148,7 +148,7 @@ def traffic_light_event(data):
 
                 # Set traffic light to red after 3 seconds
                 threading.Timer(yellow_time, lambda: set_traffic_light_state(carla.TrafficLightState.Red, duration=10)).start()
-                traffic_light_green_flag = 0  # Disable further changes until reset
+                traffic_light_green_flag = False  # Disable further changes until reset
 
             
 
