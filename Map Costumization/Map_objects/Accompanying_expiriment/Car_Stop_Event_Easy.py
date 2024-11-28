@@ -9,6 +9,7 @@ import json
 import os
 import sys
 
+
 # Connect to the CARLA server
 client = carla.Client('localhost', 2000)
 client.set_timeout(10.0)
@@ -20,7 +21,7 @@ world = client.get_world()
 actors = world.get_actors()
 
 # Find the traffic light with the specified ID
-traffic_light_id = 63
+traffic_light_id = 83
 traffic_light = None
 traffic_light_green_flag = 0
 yellow_time = 3
@@ -92,32 +93,36 @@ def maximal_distance_for_must_stop_function(speed,yellow_time):
 # Callback function for the odometry subscriber
 def traffic_light_event(data):
 
+
     global traffic_light_green_flag
     ego_x = data.pose.pose.position.x
     ego_y = data.pose.pose.position.y
 
-    if traffic_light_green_flag == 0 and 130<data.pose.pose.position.x<160 and -333<data.pose.pose.position.y<-323 :
+    if traffic_light_green_flag == 0 and 250.5562<data.pose.pose.position.x<282.5260 and -3.0682<data.pose.pose.position.y<2.4960 :
         traffic_light_green_flag = 1 
           
+    #traffic_light_green_flag  :
+
 
     if traffic_light_green_flag == 1:
           speed = math.sqrt(data.twist.twist.linear.x**2 + data.twist.twist.linear.y**2)
-          #print(speed)
-          # Get the ego vehicle's position
           
-
           # Calculate the distance from the ego vehicle to the traffic light
           distance_to_traffic_light = math.sqrt((traffic_light_x - ego_x)**2 + (traffic_light_y + ego_y)**2)
           #print("distance_to_traffic_light")
           #print(distance_to_traffic_light)
 
-          maximal_distance_for_must_stop = maximal_distance_for_must_stop_function(speed,yellow_time)
-          #print("maximal_distance_for_must_stop")
-          #print(maximal_distance_for_must_stop)
-          print(maximal_distance_for_must_stop)
-          
-          if maximal_distance_for_must_stop >= distance_to_traffic_light: 
-                timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+
+          maximal_distance_for_must_cross = maximal_distance_for_must_cross_function(speed,yellow_time)
+          #print("maximal_distance_for_must_cross")
+          #print(maximal_distance_for_must_cross)
+
+
+        #     # Condition to check if the vehicle is at a specific distance
+          if maximal_distance_for_must_cross >= distance_to_traffic_light: 
+                
+                   
+                timestamp = datetime.now().strftime('%H:%M:%S.%f')
                 # Simulation Time
                 header = data.header
                 secs = header.stamp.secs
@@ -130,8 +135,9 @@ def traffic_light_event(data):
                 Egocar_data["World_Time"] = timestamp
                 Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
                 Egocar_data["Simulation_time"] = simulation_Time
-                Egocar_data["Traffic_Light_Event"] = "Traffic_Light_Stop"
+                Egocar_data["Traffic_Light_Event"] = "Traffic_Light_Pass"
                 write_to_json(Egocar_data) # for json
+
            
                 # Set traffic light to yellow
                 traffic_light.set_state(carla.TrafficLightState.Yellow)
@@ -139,7 +145,7 @@ def traffic_light_event(data):
 
                 # Set traffic light to red after 3 seconds
                 threading.Timer(yellow_time, lambda: set_traffic_light_state(carla.TrafficLightState.Red, duration=10)).start()
-                traffic_light_green_flag = 0  # Disable further changes until reset
+                traffic_light_green_flag = False  # Disable further changes until reset
 
             
 
