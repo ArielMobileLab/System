@@ -25,18 +25,18 @@ traffic_light_id = 83
 traffic_light = None
 traffic_light_green_flag = 0
 yellow_time = 3
-
+acceleraion = 2
 
 
 Map_type = sys.argv[1]
 #Map_type = "Guide_parent"
 #Map_type = "First_Response_train_2"
 #Map_type = "First_Response"
-Agent_type = "_Event"
 
+Agent_type = "_Event"
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-file_name = os.path.join(folder_path, 'Traffic_Light{}_{}.json'.format(Map_type,current_time))
+file_name = os.path.join(folder_path, 'Traffic_Light{}_{}.json'.format(Agent_type, current_time))
 
 
 def write_to_json(data_dict):
@@ -79,13 +79,16 @@ def maximal_distance_for_must_cross_function(v,yellow_time):
     # the Junction_Width is deffrennt based on the junction and map
     Junction_Width = 7.5
     Vehicle_Length = 3.633375
-    distance = v * yellow_time - Junction_Width - Vehicle_Length
+    delay = 0.04
+    #distance = v * (yellow_time + delay)- Junction_Width - Vehicle_Length
+    distance = v * (yellow_time + delay)
     return distance
 
 
 def maximal_distance_for_must_stop_function(speed,yellow_time):
-    acceleraion = 1.5
-    distance = (speed*yellow_time-0.5*acceleraion*yellow_time**2)
+    acceleraion = 2
+    delay = 0.04
+    distance = (speed* (yellow_time + delay)-0.5*acceleraion*yellow_time**2)
     return distance
 
 
@@ -119,7 +122,7 @@ def traffic_light_event(data):
 
 
         #     # Condition to check if the vehicle is at a specific distance
-          if maximal_distance_for_must_cross >= distance_to_traffic_light: 
+          if (maximal_distance_for_must_cross + 27.0) >= distance_to_traffic_light: 
                 
                    
                 timestamp = datetime.now().strftime('%H:%M:%S.%f')
@@ -135,7 +138,7 @@ def traffic_light_event(data):
                 Egocar_data["World_Time"] = timestamp
                 Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
                 Egocar_data["Simulation_time"] = simulation_Time
-                Egocar_data["Traffic_Light_Event"] = "Traffic_Light_Pass"
+                Egocar_data["Traffic_Light_Event"] = "Traffic_Light_Easy"
                 write_to_json(Egocar_data) # for json
 
            
@@ -144,13 +147,13 @@ def traffic_light_event(data):
                 rospy.loginfo("Traffic light set to yellow")
 
                 # Set traffic light to red after 3 seconds
-                threading.Timer(yellow_time, lambda: set_traffic_light_state(carla.TrafficLightState.Red, duration=10)).start()
+                threading.Timer(2, lambda: set_traffic_light_state(carla.TrafficLightState.Red, duration=10)).start()
                 traffic_light_green_flag = False  # Disable further changes until reset
 
             
 
 if __name__ == '__main__':
-    rospy.init_node('traffic_light_controll')
+    rospy.init_node('traffic_light_controlllll')
     
     # Subscribe to the topic that publishes the messages
     rospy.Subscriber('/carla/ego_vehicle/odometry', Odometry, traffic_light_event, queue_size=1)  
