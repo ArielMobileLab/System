@@ -120,21 +120,21 @@ def traffic_light_event(data):
 
           
           if maximal_distance_for_must_stop >= distance_to_traffic_light: 
-                timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+                #timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
                 # Simulation Time
-                header = data.header
-                secs = header.stamp.secs
-                nsecs = header.stamp.nsecs
-                simulation_Time = secs + nsecs * 1e-9
-                simulation_Time_Ros = data.header.seq*0.033333335071821
+                #header = data.header
+                #secs = header.stamp.secs
+                #nsecs = header.stamp.nsecs
+                #simulation_Time = secs + nsecs * 1e-9
+                #simulation_Time_Ros = data.header.seq*0.033333335071821
                 
-                Egocar_data = OrderedDict()
-                Egocar_data["Type"] = "Traffic_Light:"
-                Egocar_data["World_Time"] = timestamp
-                Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
-                Egocar_data["Simulation_time"] = simulation_Time
-                Egocar_data["Traffic_Light_Event"] = "Traffic_Light_Stop_A"
-                write_to_json(Egocar_data) # for json
+                #Egocar_data = OrderedDict()
+                #Egocar_data["Type"] = "Traffic_Light:"
+                #Egocar_data["World_Time"] = timestamp
+                #Egocar_data["Simulation_time_ROS"] = simulation_Time_Ros
+                #Egocar_data["Simulation_time"] = simulation_Time
+                #Egocar_data["Traffic_Light_Event"] = "Traffic_Light_Stop_A"
+                #write_to_json(Egocar_data) # for json
            
                 # Set traffic light to yellow
                 traffic_light.set_state(carla.TrafficLightState.Yellow)
