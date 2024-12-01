@@ -137,9 +137,8 @@ def on_world_tick(world_snapshot):
                         traffic_light_info["FrameID"] = FrameID 
 
                         # Log the color change from previous to current state
-                        traffic_light_info["PreviousState"] = last_traffic_light_colors[actor.id]
-                        traffic_light_info["CurrentState"] = current_traffic_light_color
-
+                        traffic_light_info["PreviousState"] = str(last_traffic_light_colors[actor.id])
+                        traffic_light_info["CurrentState"] = str(current_traffic_light_color)
                         # Get traffic light location (x, y, z)
                         location = actor.get_location()
                         traffic_light_info["Position"] = {
