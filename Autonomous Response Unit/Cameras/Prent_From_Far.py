@@ -35,8 +35,9 @@ def is_front_camera(camera):
     transform = camera.get_transform()
     rotation = transform.rotation
 
-    # Front camera has a pitch of 0 degrees
-    return abs(rotation.pitch) < 5  # Ensure pitch is close to 0 for the front camera
+    # Front camera has a yaw of approximately -179.98 degrees
+    return abs(rotation.yaw - (-179.98)) < 0.1  # Ensure yaw is close to -179.98
+
 
 # Select the front camera
 front_camera = None
