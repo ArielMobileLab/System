@@ -1,30 +1,57 @@
-#Side of an accompanying parent who uses the main camera of the Ego car
-
 import carla
 import numpy as np
 import pygame
 
 # Connect to the CARLA server
-client = carla.Client('10.20.0.164', 2000)
-client.set_timeout(2.0)
+client = carla.Client('10.20.0.180', 2000)
+client.set_timeout(10.0)
 
 # Get the world object
 world = client.get_world()
 
-# Find the existing camera sensor
-camera = None
-for actor in world.get_actors().filter('sensor.camera.rgb'):
-    camera = actor
-    break
+# Find the ego vehicle (assuming it's named 'ego_vehicle')
+ego_vehicle = None
+for actor in world.get_actors().filter('vehicle.*'):
+    if 'role_name' in actor.attributes and actor.attributes['role_name'] == 'ego_vehicle':
+        ego_vehicle = actor
+        break
 
-# Check if camera is found
-if camera is None:
-    print("Camera not found")
+if ego_vehicle is None:
+    print("No ego vehicle found")
     exit()
 
-# Desired resolution of the display
+# Find all camera sensors attached to the ego vehicle
+cameras = []
+for actor in world.get_actors().filter('sensor.camera.rgb'):
+    if actor.parent.id == ego_vehicle.id:
+        cameras.append(actor)
+
+# Check if any cameras are found
+if not cameras:
+    print("No cameras found")
+    exit()
+
+def is_front_camera(camera):
+    transform = camera.get_transform()
+    rotation = transform.rotation
+
+    # Front camera has a pitch of 0 degrees
+    return abs(rotation.pitch) < 5  # Ensure pitch is close to 0 for the front camera
+
+# Select the front camera
+front_camera = None
+for camera in cameras:
+    if is_front_camera(camera):
+        front_camera = camera
+        break
+
+if front_camera is None:
+    print("No front camera found")
+    exit()
+
+# Desired resolution of the display for the selected camera
 desired_display_width = 1920
-desired_display_height = 1080
+desired_display_height = 450
 
 # Render object to keep and pass the Pygame surface
 class RenderObject(object):
@@ -43,33 +70,31 @@ def pygame_callback(data, obj):
     small_img = pygame.transform.scale(pygame.surfarray.make_surface(img.swapaxes(0, 1)), (obj.width, obj.height))
     obj.surface = small_img
 
-# Start camera with Pygame callback
-renderObject = RenderObject(desired_display_width, desired_display_height)
-camera.listen(lambda image: pygame_callback(image, renderObject))
-
-# Initialise the Pygame interface
+# Initialize Pygame and the display
 pygame.init()
-gameDisplay = pygame.display.set_mode((desired_display_width, desired_display_height), pygame.HWSURFACE | pygame.DOUBLEBUF)
+display_width = desired_display_width
+display_height = desired_display_height
+gameDisplay = pygame.display.set_mode((display_width, display_height), pygame.HWSURFACE | pygame.DOUBLEBUF)
 pygame.display.set_caption('CARLA Camera Feed')
+
+# Create a render object for the selected camera and start the camera with Pygame callback
+render_object = RenderObject(desired_display_width, desired_display_height)
+front_camera.listen(lambda image: pygame_callback(image, render_object))
 
 # Game loop
 crashed = False
-
 while not crashed:
     # Collect key press events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
 
-    if renderObject.surface:
-        # Display the scaled-down image directly
-        gameDisplay.blit(renderObject.surface, (0, 0))
-        pygame.display.flip()
+    # Display the selected camera's feed
+    if render_object.surface:
+        gameDisplay.blit(render_object.surface, (0, 0))
+    
+    pygame.display.flip()
 
-
-
-
-# Stop camera and quit Pygame after exiting game loop
-camera.stop()
+# Stop the selected camera and quit Pygame after exiting game loop
+front_camera.stop()
 pygame.quit()
-
