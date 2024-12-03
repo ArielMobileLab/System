@@ -38,6 +38,7 @@ def pygame_callback(data, obj):
     img = np.reshape(np.copy(data.raw_data), (data.height, data.width, 4))
     img = img[:, :, :3]
     img = img[:, :, ::-1]  # Convert from RGB to BGR
+    img = np.fliplr(img)  # Flip the image horizontally
     obj.surface = pygame.surfarray.make_surface(img.swapaxes(0, 1))
 
 # Setup camera
