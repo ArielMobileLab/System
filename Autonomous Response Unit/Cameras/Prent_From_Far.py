@@ -25,30 +25,32 @@ cameras = []
 for actor in world.get_actors().filter('sensor.camera.rgb'):
     if actor.parent.id == ego_vehicle.id:
         cameras.append(actor)
+        para = actor.get_transform()
+        print(para)
 
 # Check if any cameras are found
 if not cameras:
     print("No cameras found")
     exit()
 
-def is_front_camera(camera):
+# Function to check if camera's yaw is less than 100 degrees
+def is_yaw_less_than_100(camera):
     transform = camera.get_transform()
     rotation = transform.rotation
+    return rotation.yaw > 100
 
-    # Front camera has a yaw of approximately -179.98 degrees
-    return abs(rotation.yaw - (-179.98)) < 0.1  # Ensure yaw is close to -179.98
-
-
-# Select the front camera
-front_camera = None
+# Select the first camera with yaw less than 100 degrees
+selected_camera = None
 for camera in cameras:
-    if is_front_camera(camera):
-        front_camera = camera
+    if is_yaw_less_than_100(camera):
+        selected_camera = camera
         break
 
-if front_camera is None:
-    print("No front camera found")
+if selected_camera is None:
+    print("No camera with yaw less than 100 degrees found")
     exit()
+
+print("Selected camera found: {selected_camera.type_id} with yaw: {selected_camera.get_transform().rotation.yaw}")
 
 # Desired resolution of the display for the selected camera
 desired_display_width = 1920
@@ -80,7 +82,7 @@ pygame.display.set_caption('CARLA Camera Feed')
 
 # Create a render object for the selected camera and start the camera with Pygame callback
 render_object = RenderObject(desired_display_width, desired_display_height)
-front_camera.listen(lambda image: pygame_callback(image, render_object))
+selected_camera.listen(lambda image: pygame_callback(image, render_object))
 
 # Game loop
 crashed = False
@@ -97,5 +99,5 @@ while not crashed:
     pygame.display.flip()
 
 # Stop the selected camera and quit Pygame after exiting game loop
-front_camera.stop()
+selected_camera.stop()
 pygame.quit()
