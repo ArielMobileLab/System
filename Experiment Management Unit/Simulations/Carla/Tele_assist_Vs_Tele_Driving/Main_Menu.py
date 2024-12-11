@@ -86,12 +86,12 @@ def launch_scenario(scenarioslist,Town,Face,Objects, Arrow_Guilde, Delay, Gap, A
 
 scenarios = [
     {
-        "name": "Training-Joystic (For Tele-Driving)",
+        "name": "Training-Joystic",
         "description": "",
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Joy_Train.MOV", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons.sh","Town02","Train_Latency_50ms_PD_ON","Nah","Guide_Train", "50", "0", "tele_driving", "Predictive_ON"],
-        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons.sh","Town02","Train_Latency_50ms_PD_ON","Nah","Guide_Train", "50", "0", "tele_driving", "Predictive_ON"],
+        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons.sh","Town02","Traning","Nah","Guide_Train", "50", "0", "tele_driving", "Predictive_ON"],
+        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons.sh","Town02","Traning","Nah","Guide_Train", "50", "0", "tele_driving", "Predictive_ON"],
     },
      {
         "name": "Training",
@@ -99,30 +99,30 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Driving_Train_PD.MOV", 
         "video_path1": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Assist_Train.MOV",
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2.sh","Town04","Teledriving_Takeover_Latency_50ms_","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_OFF"],
-        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2_assit.sh","Town04","Teleassiste_Takeover_Latency_50ms_","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2.sh","Town04","Teledriving_Takeover_Latency_50ms","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Train_first_respons_2_assit.sh","Town04","Teleassist_Takeover_Latency_50ms","Nah","First_Response_train_2", "50", "0", "tele_driving", "Predictive_OFF"],
     },
     {
         "name": "Tele_assist",
         "description": "",
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Assist.MOV",
         "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
-	    "NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_Latency_50ms_Gap_44m_","Nah","First_Response","50", "1", "tele_driving", "Predictive_OFF"],
-        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_Latency_150ms_Gap_27m_","Nah","First_Response","150", "0", "tele_driving", "Predictive_OFF"],
-        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_Latency_50ms_Gap_27m_","Nah","First_Response", "50", "0", "tele_driving", "Predictive_OFF"],
-        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassiste_Latency_150ms_Gap_44m_","Nah","First_Response", "150", "1", "tele_driving", "Predictive_OFF"],
+	"NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassist_Latency_50ms_Gap_44m","Nah","First_Response_Tele_assist","50", "1", "tele_driving", "Predictive_OFF"],
+        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassist_Latency_150ms_Gap_27m","Nah","First_Response_Tele_assist","150", "0", "tele_driving", "Predictive_OFF"],
+        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassist_Latency_50ms_Gap_27m","Nah","First_Response_Tele_assist", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders_assist.sh","Town04","Teleassist_Latency_150ms_Gap_44m","Nah","First_Response_Tele_assist", "150", "1", "tele_driving", "Predictive_OFF"],
     },
     {
         "name": "Tele_driving ",
         "description": "",
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Tele_Driving.MOV",
         "NASA1": "https://docs.google.com/forms/d/e/1FAIpQLSfx4wrdAquDLUB-hKgwHPeI9ikIynPzvf-pvr3FSruK1RQASA/viewform",
-	    "NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_50ms_Gap_44m_","Nah","First_Response","50", "1", "tele_driving", "Predictive_OFF"],
-        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_150ms_Gap_27m_","Nah","First_Response","150", "0", "tele_driving", "Predictive_OFF"],
-        "code2": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_50ms_Gap_27m_","Nah","First_Response", "50", "0", "tele_driving", "Predictive_OFF"],
-        "code3": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_150ms_Gap_44m_","Nah","First_Response", "150", "1", "tele_driving", "Predictive_OFF"]
+	"NASA2": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
+        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_50ms_Gap_44m","Nah","First_Response_Tele_driving","50", "1", "tele_driving", "Predictive_OFF"],
+        "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_150ms_Gap_27m","Nah","First_Response_Tele_driving","150", "0", "tele_driving", "Predictive_OFF"],
+        "code2": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_50ms_Gap_27m","Nah","First_Response_Tele_driving", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code3": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/First_Responders.sh","Town04","Teledriving_Latency_150ms_Gap_44m","Nah","First_Response_Tele_driving", "150", "1", "tele_driving", "Predictive_OFF"]
     },
     {
         "name": "Regual_City_A",
@@ -130,10 +130,10 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latency.MOV",
 	"video_path1": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latancy_PD.MOV",
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Latency_50ms_","Obstacle_A","Guide_Parent", "50", "0", "tele_driving", "Predictive_OFF"],
-        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Latency_150ms_","Obstacle_A","Guide_Parent", "150", "0", "tele_driving", "Predictive_OFF"],   
-        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Latency_50ms_PD_ON_","Obstacle_A","Guide_Parent", "50", "0", "tele_driving", "Predictive_ON"],
-        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Latency_150ms_PD_ON_","Obstacle_A","Guide_Parent", "150", "0", "tele_driving", "Predictive_ON"]
+        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Latency_50ms_PD_OFF","Obstacle_A","Guide_Parent_no_PD", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A.sh","Town01","Latency_150ms_PD_OFF","Obstacle_A","Guide_Parent_no_PD", "150", "0", "tele_driving", "Predictive_OFF"],   
+        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Latency_50ms_PD_ON","Obstacle_A","Guide_Parent_PD", "50", "0", "tele_driving", "Predictive_ON"],
+        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_A_PD.sh","Town01","Latency_150ms_PD_ON","Obstacle_A","Guide_Parent_PD", "150", "0", "tele_driving", "Predictive_ON"]
     },
     {
         "name": "Regual_City_B",
@@ -141,10 +141,10 @@ scenarios = [
         "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latency.MOV",
 	"video_path1": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Tele_assist_Tele_Driving/Reg_Latancy_PD.MOV",
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B.sh","Town01","Latency_50ms_","Obstacle_B","Guide_Parent", "50", "0", "tele_driving", "Predictive_OFF"],
-        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B.sh","Town01","Latency_150ms_","Obstacle_B","Guide_Parent", "150", "0", "tele_driving", "Predictive_OFF"],   
-        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B_PD.sh","Town01","Latency_50ms_PD_ON_","Obstacle_B","Guide_Parent", "50", "0", "tele_driving", "Predictive_ON"],
-        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B_PD.sh","Town01","Latency_150ms_PD_ON_","Obstacle_B","Guide_Parent", "150", "0", "tele_driving", "Predictive_ON"]
+        "code": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B.sh","Town01","Latency_50ms_PD_OFF","Obstacle_B","Guide_Parent_no_PD", "50", "0", "tele_driving", "Predictive_OFF"],
+        "code1": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B.sh","Town01","Latency_150ms_PD_OFF","Obstacle_B","Guide_Parent_no_PD", "150", "0", "tele_driving", "Predictive_OFF"],   
+        "code2": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B_PD.sh","Town01","Latency_50ms_PD_ON","Obstacle_B","Guide_Parent_PD", "50", "0", "tele_driving", "Predictive_ON"],
+        "code3": ["//home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/First_Responders/Senarios/Regular_B_PD.sh","Town01","Latency_150ms_PD_ON","Obstacle_B","Guide_Parent_PD", "150", "0", "tele_driving", "Predictive_ON"]
     }
 ]
 
@@ -277,7 +277,7 @@ def show_scenario_menu():
         elif scenario["name"] == "Training":
        # Create a scenario button
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text=" tele_driving P.D", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5],s["code"][6],s["code"][7],s["code"][8]))
+            scenario_button = ttk.Button(scenario_frame, text=" tele_driving", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5],s["code"][6],s["code"][7],s["code"][8]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
@@ -300,7 +300,7 @@ def show_scenario_menu():
 
 
 
-        elif scenario["name"] ==  scenario["name"] == "Training-Joystic (For Tele-Driving)":
+        elif scenario["name"] ==  scenario["name"] == "Training-Joystic":
             # Create a scenario button
             scenario_button = ttk.Button(scenario_frame, text="Scenario", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5],s["code"][6],s["code"][7],s["code"][8]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
