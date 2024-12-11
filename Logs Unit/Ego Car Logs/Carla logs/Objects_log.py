@@ -18,6 +18,9 @@ file_name = os.path.join(folder_path, 'Objects_{}_{}.json'.format(Agent_type, cu
 
 simulation_time = 0.0
 termination_data_added = False
+SimulationTime = 0.0
+FrameID = 0.0
+stop_write = False
 
 # Initialize an empty set to keep track of written vehicles
 written_vehicles = set()
@@ -50,40 +53,38 @@ def gnss_callback(data):
     simulation_time_ros = data.header.seq * 0.033333335071821
 
 def my_shutdown_callback():
+    global stop_write
+    global SimulationTime
+    global FrameID
 
-    print("ROS node is shutting down. Performing cleanup...")
-                        # Add the termination data only once
-    global simulation_time_ros
-    timestamp = datetime.now().strftime('%H:%M:%S.%f')
-    world_snapshot = world.wait_for_tick()
+    if stop_write == False:
 
-# Retrieve simulation time
-    simulationTime = world_snapshot.timestamp.elapsed_seconds
-    frame_id = world_snapshot.timestamp.frame
+            stop_write = True
+            timestamp = datetime.now().strftime('%H:%M:%S.%f')
+            
+            stop_data = OrderedDict()
+            stop_data["Type"] = "Termination"
+            stop_data["WorldTime"] = timestamp
+            stop_data["SimulationTime"] = SimulationTime
+            stop_data["FrameID"] = FrameID
+            stop_data["Reason"] = "operetor_stop"
 
-    stop_data = OrderedDict()
-    stop_data["Type"] = "Termination"
-    stop_data["WorldTime"] = timestamp
-    stop_data["SimulationTime"] = simulationTime
-    stop_data["FrameID"] = frame_id
-    stop_data["Reason"] = ""
-    write_to_json(stop_data)
-    close_json_file()  
+            print("Writing stop data to JSON...")
+            write_to_json(stop_data)
+            close_json_file()
+            
+
 
 def close_json_file():
-    global flag
-    flag  = False
-    # Read the content of the JSON file
+    global stop_write
     with open(file_name, 'r') as json_file:
         content = json_file.read()
-
-    # Remove trailing comma before closing brackets
-    content = content.rstrip(', \t\n')  # Remove commas, spaces, tabs, and newlines at the end
-
-    # Open the JSON file in write mode and write the modified content
+    content = content.rstrip(', \t\n')  # Remove SimulationTimetrailing commas
     with open(file_name, 'w') as json_file:
         json_file.write(content)
-        json_file.write('\n]}\n')  # Close the JSON array and file
+        json_file.write('\n]}')  # Close the JSON array
+        stop_write = True
+
 
 # Connect to the CARLA server
 client = carla.Client('localhost', 2000)
@@ -104,9 +105,14 @@ def on_world_tick(world_snapshot):
     #simulation_time += 0.033333335071821  # Assuming a fixed frame rate of approximately 30 FPS
     global termination_data_added
     global last_traffic_light_colors
+    global SimulationTime
+    global FrameID
+    global stop_write
     
 
     if flag:
+
+      if stop_write == False:
         for actor_snapshot in world_snapshot:
             actor_id = actor_snapshot.id
             actor = world.get_actor(actor_id)
@@ -139,6 +145,7 @@ def on_world_tick(world_snapshot):
                         # Log the color change from previous to current state
                         traffic_light_info["PreviousState"] = str(last_traffic_light_colors[actor.id])
                         traffic_light_info["CurrentState"] = str(current_traffic_light_color)
+
                         # Get traffic light location (x, y, z)
                         location = actor.get_location()
                         traffic_light_info["Position"] = {
