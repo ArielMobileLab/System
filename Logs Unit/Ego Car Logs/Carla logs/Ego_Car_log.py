@@ -17,10 +17,10 @@ import os
 
 
 # Set the file name for JSON output
-Agent_type = sys.argv[1]
-Map_type = sys.argv[2]
-#Agent_type = "Test"
-#Map_type = "Test"
+#Agent_type = sys.argv[1]
+#Map_type = sys.argv[2]
+Agent_type = "Test"
+Map_type = "Test"
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 file_name = os.path.join(folder_path, 'EgoCar_{}_{}.json'.format(Agent_type, current_time))
@@ -195,6 +195,20 @@ def on_world_tick(world_snapshot):
                         "y": actor.get_location().y,
                         "z": actor.get_location().z
                     }
+
+                    world_map = world.get_map()
+		    current_location = actor.get_location()
+
+		    # Get the current waypoint at the ego vehicle's location
+		    current_lane_info = world_map.get_waypoint(current_location)
+
+		    # Get the lane ID from the current waypoint
+		    lane_id = current_lane_info.lane_id  # This is the lane ID
+
+		    # Add lane ID to the actor information
+		    actor_info["LaneID"] = lane_id
+                    print(lane_id)
+
 
                     # Handle First_Response end of the simulation
                     if (Map_type == "First_Response_Tele_assist" or Map_type == "First_Response_Tele_driving") and not termination_condition_met:
