@@ -52,7 +52,7 @@ def save_recorded_data():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     directory = "/home/omer/Desktop/Carla_Logs/Logs"
     os.makedirs(directory, exist_ok=True)
-    output_json_file = os.path.join(directory, f"recorded_audio_data_{timestamp}.json")
+    output_json_file = os.path.join(directory, f"recorded_audio_data_{timestamp}_Parent.json")
     with open(output_json_file, "w") as file:
         json.dump(audio_data_list, file, indent=4)
     print("Recorded audio data saved to JSON file:", output_json_file)
