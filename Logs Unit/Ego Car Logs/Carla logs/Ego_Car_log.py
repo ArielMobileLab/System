@@ -207,7 +207,6 @@ def on_world_tick(world_snapshot):
 
 		    # Add lane ID to the actor information
 		    actor_info["LaneID"] = lane_id
-                    print(lane_id)
 
 
                     # Handle First_Response end of the simulation
