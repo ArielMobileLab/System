@@ -104,48 +104,48 @@ def write_to_json(data_dict, add_comma=True):
 def collision_callback(data):
     global colition_flag 
     timestamp = datetime.now().strftime('%H:%M:%S.%f')
-
-    if colition_flag == False:
-
-        colition_flag = True
-
-        actor_id = data.other_actor_id
-
-        client = carla.Client('127.0.0.1', 2000)
-        world = client.get_world()  # Make sure to obtain the actual world instance
-        actor = world.get_actor(actor_id)
-        world_snapshot = world.wait_for_tick()
-        simulation_time_colition = world_snapshot.timestamp.elapsed_seconds
-        frame_id_coliton = world_snapshot.timestamp.frame
+    if No_need_for_my_shutdown_callback == True:
+	    if colition_flag == False:
+	
+	        colition_flag = True
+	
+	        actor_id = data.other_actor_id
+	
+	        client = carla.Client('127.0.0.1', 2000)
+	        world = client.get_world()  # Make sure to obtain the actual world instance
+	        actor = world.get_actor(actor_id)
+	        world_snapshot = world.wait_for_tick()
+	        simulation_time_colition = world_snapshot.timestamp.elapsed_seconds
+	        frame_id_coliton = world_snapshot.timestamp.frame
 
 # Get the current world snapshot
+	
+	# Retrieve simulation time
+	
+	        # Check if the actor is valid
+	        if actor:
+	            actor_info =  actor
+	            actor_info = str(actor)
+	            start_index = actor_info.find("type=") + len("type=")
+	            end_index = actor_info.find(")", start_index)
+	            actor_name = actor_info[start_index:end_index].strip()
+	            
+	
+	        else:
+	                    actor_name = "Unknown"
 
-# Retrieve simulation time
-
-        # Check if the actor is valid
-        if actor:
-            actor_info =  actor
-            actor_info = str(actor)
-            start_index = actor_info.find("type=") + len("type=")
-            end_index = actor_info.find(")", start_index)
-            actor_name = actor_info[start_index:end_index].strip()
-            
-
-        else:
-                    actor_name = "Unknown"
-
-        SimulationTime = world_snapshot.timestamp.elapsed_seconds
-        FrameID = world_snapshot.timestamp.frame
-        stop_data = OrderedDict()
-        stop_data["Type"] = "Termination"
-        stop_data["WorldTime"] = timestamp
-        stop_data["SimulationTime"] = simulation_time_colition
-        stop_data["FrameID"] = frame_id_coliton
-        stop_data["Reason"] = "Crash" + "-" + actor_name
-        write_to_json(stop_data, add_comma=False)
-
-
-        close_json_file()
+	        SimulationTime = world_snapshot.timestamp.elapsed_seconds
+	        FrameID = world_snapshot.timestamp.frame
+	        stop_data = OrderedDict()
+	        stop_data["Type"] = "Termination"
+	        stop_data["WorldTime"] = timestamp
+	        stop_data["SimulationTime"] = simulation_time_colition
+	        stop_data["FrameID"] = frame_id_coliton
+	        stop_data["Reason"] = "Crash" + "-" + actor_name
+	        write_to_json(stop_data, add_comma=False)
+	
+	
+	        close_json_file()
 
 
 def close_json_file():
