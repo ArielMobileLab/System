@@ -7,6 +7,9 @@ import json
 from datetime import datetime
 import os
 from collections import OrderedDict
+from carla import TrafficLightState
+import carla
+
 
 # Global flags to track if the videos have been played
 video_flags = {
@@ -21,6 +24,18 @@ Agent_type = "_Avatar"
 folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 file_name = os.path.join(folder_path, 'Video_Status{}_{}.json'.format(Agent_type, current_time))
+
+
+client = carla.Client('localhost', 2000)
+client.set_timeout(2.0)
+world = client.get_world()
+
+
+def get_traffic_light_state_by_id(world, traffic_light_id):
+    traffic_light = world.get_actor(traffic_light_id)
+    if traffic_light is not None:
+        return traffic_light.get_state()
+    return None
 
 
 def write_to_json(data_dict):
@@ -161,28 +176,34 @@ def odometry_callback(data):
         video_flags['video3'] = True
 
     # Video 4 condition
-    elif 86 < x < 95 and -260.0 < y < -250.0 and not video_flags['video4']:
-        timestamp = datetime.now().strftime('%H:%M:%S.%f')
-        simulation_time = data.header.seq * 0.033333335071821
+    elif 82 < x < 98 and -280.0 < y < -210.0 and not video_flags['video4']:
+        traffic_light_id = 60  # Traffic light ID
+         
+        traffic_light_state = get_traffic_light_state_by_id(world, traffic_light_id)
+        if traffic_light_state == TrafficLightState.Yellow:
 
-        header = data.header
-        secs = header.stamp.secs
-        nsecs = header.stamp.nsecs
+	    
+            timestamp = datetime.now().strftime('%H:%M:%S.%f')
+            simulation_time = data.header.seq * 0.033333335071821
 
-        # Combine secs and nsecs into a float
-        simulationTime = secs + nsecs * 1e-9
+            header = data.header
+            secs = header.stamp.secs
+            nsecs = header.stamp.nsecs
 
-        Egocar_data = OrderedDict()
-        Egocar_data["Type"] = "Video_Status:"
-        Egocar_data["Timestamp"] = timestamp
-        Egocar_data["Simulation_time_ROS"] = simulation_time
-        Egocar_data["Simulation_time"] = simulationTime
-        Egocar_data["Video"] = "red_light"
-        write_to_json(Egocar_data)  # for json
+            # Combine secs and nsecs into a float
+            simulationTime = secs + nsecs * 1e-9
 
-        video_path4 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar_video/red_light.mp4'
-        play_video(video_path4, window_x, window_y, window_width, window_height)
-        video_flags['video4'] = True
+            Egocar_data = OrderedDict()
+            Egocar_data["Type"] = "Video_Status:"
+            Egocar_data["Timestamp"] = timestamp
+            Egocar_data["Simulation_time_ROS"] = simulation_time
+            Egocar_data["Simulation_time"] = simulationTime
+            Egocar_data["Video"] = "red_light"
+            write_to_json(Egocar_data)  # for json
+
+            video_path4 = '/home/omer/Desktop/Autonomous Resope Unit/Avatar_Parent/Avatar_video/red_light.mp4'
+            play_video(video_path4, window_x, window_y, window_width, window_height)
+            video_flags['video4'] = True
 
     # Video 5 condition
     elif 260.00 < x < 290.00 and -332.00 < y < -323.00 and not video_flags['video5']:
@@ -221,3 +242,4 @@ rate = rospy.Rate(1)
 # Continue running the code
 while not rospy.is_shutdown():
     rate.sleep()
+
