@@ -1,0 +1,44 @@
+import os
+import json
+import numpy as np
+import soundfile as sf
+
+# Define the current directory containing JSON files and script
+current_directory = os.path.dirname(os.path.abspath(__file__))
+output_directory = os.path.join(current_directory, "output")
+
+# Ensure the output directory exists
+os.makedirs(output_directory, exist_ok=True)
+
+# Sample rate in Hz
+sample_rate = 16000
+
+# Process each JSON file in the current directory
+for filename in os.listdir(current_directory):
+    if filename.endswith(".json"):
+        input_file_path = os.path.join(current_directory, filename)
+        try:
+            # Load the JSON file
+            with open(input_file_path, "r") as f:
+                voice_data = json.load(f)
+
+            # Extract the voice values from the JSON data
+            voice_values = [sample["audio_amplitude"] for sample in voice_data]
+
+            # Convert the voice data back into an audio signal
+            audio_signal = np.array(voice_values)
+
+            # Prepare the output file name (replace .json with .mp3)
+            output_file_name = os.path.splitext(filename)[0] + ".mp3"
+            output_file_path = os.path.join(output_directory, output_file_name)
+
+            # Save the audio signal as an MP3 file
+            sf.write(output_file_path, audio_signal, sample_rate, format='MP3')
+            print(f"MP3 file saved: {output_file_path}")
+
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON in file {filename}: {e}")
+        except Exception as e:
+            print(f"An error occurred while processing file {filename}: {e}")
+
+print("Processing completed.")
