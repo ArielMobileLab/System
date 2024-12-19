@@ -87,41 +87,36 @@ scenarios = [
     {
         "name": "Training",
         "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Parent/Train_Parent.mp4", 
+        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Train_Parent.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Train_parent.sh","Town02","Face_Train","Nah","Guide_Train"]
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Train_parent.sh","Town02","Traning","Nah","Guide_Train"]
     },
     {
         "name": "Far",
         "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Parent/Parent_Driver_From_Far.mp4", 
+        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Driver_From_Far.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Obstacle_C","Guide_Parent"],
-	    "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Obstacle_D","Guide_Parent"],
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Obstacle_C","Guide_Parent"],
+	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Obstacle_D","Guide_Parent"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Obstacle_B","Guide_Parent_C"],
     },
     {
         "name": "Close",
         "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Parent/Driver_Side_Close.mp4", 
+        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Driver_Side_Close.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Obstacle_C","Guide_Parent"],
-	    "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Obstacle_D","Guide_Parent"],
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Obstacle_C","Guide_Parent"],
+	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Obstacle_D","Guide_Parent"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Obstacle_B","Guide_Parent_C"],
     },
     {
         "name": "Avatar",
         "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Parent/Driver_Side_with_Avatar.mp4", 
+        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Driver_Side_with_Avatar.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_videos_A.sh","Town01","Parent_with_videos_A","Obstacle_A","Guide_Parent"],
-	    "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_videos_B.sh","Town01","Parent_with_videos_B","Obstacle_B","Guide_Parent"],
-    },
-    {
-        "name": "Start Video",
-        "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Managment Unit/Simulations/Main_Menu Videos/Parent/Start_Prent_Video.mp4", 
-        "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Obstacle_C","Guide_Parent"],
-	    "code1": ["/home/omer/Desktop/Experiment Managment Unit/Simulations/Carla/Parent/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Obstacle_D","Guide_Parent"],
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_A.sh","Town01","Parent_with_videos_A","Obstacle_A","Guide_Parent"],
+	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_B.sh","Town01","Parent_with_videos_B","Obstacle_B","Guide_Parent"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Obstacle_B","Guide_Parent_C"],
     }
 ]
 
@@ -165,6 +160,14 @@ def show_scenario_menu():
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
 
+            # Create a scenario button
+            scenario_button = ttk.Button(scenario_frame, text="Scenario C", command=lambda s=scenario: launch_scenario(s["code2"] ,s["code2"][1],s["code2"][2],s["code2"][3],s["code2"][4]))
+            #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
+            scenario_button.configure(style="Custom.TButton")
+            scenario_button.pack(side=tk.RIGHT)
+
+    
+
     
 
         # Create a frame for the description label
@@ -204,5 +207,4 @@ show_scenario_menu()
 
 # Run the main loop
 root.mainloop()
-
 
