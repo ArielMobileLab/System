@@ -48,7 +48,7 @@ def Cars(data):
     global second_car_cross
 
     #if first_car_cross == True and 90 < data.pose.pose.position.x < 100 and -35 < data.pose.pose.position.y < -20:
-    if first_car_cross == True: 
+    if first_car_cross == True and 250.5562<data.pose.pose.position.x<282.5260 and -3.0682<data.pose.pose.position.y<2.4960: 
         print("car_1")
         Generate_Car1()
         first_car_cross = False
