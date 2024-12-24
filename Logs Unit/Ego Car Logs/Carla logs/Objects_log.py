@@ -153,6 +153,13 @@ def on_world_tick(world_snapshot):
                             "y": str(location.y),
                             "z": str(location.z)
                         }
+			    
+			carla_location = carla.Location(location.x, location.y, location.z)
+                        world_map = world.get_map()
+                        geolocation = world_map.transform_to_geolocation(carla_location)
+                        traffic_light_info["Longitude"] = str(geolocation.longitude)
+                        traffic_light_info["Latitude"] = str(geolocation.latitude)
+                        traffic_light_info["Altitude"] = str(geolocation.altitude)
 
                         # Write to JSON
                         write_to_json(traffic_light_info)
