@@ -92,14 +92,24 @@ scenarios = [
         "description": "",
         "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Driver_Far.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent.sh","Town04","Face_Train","Nah","Guide_Parent"]
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent.sh","Town04","Far","Nah","Guide_Parent"],
+        "code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent.sh","Town04","Far","Nah","Guide_Parent_C"]
     },
     {
         "name": "Parent_side_Avatar",
         "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Driver_Farxx.mp4", 
+        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Avatar.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent_avatar.sh","Town04","Face_Train","Nah","Guide_Parent"]
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent_avatar.sh","Town04","Avatar","Nah","Guide_Parent"],
+        "code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent_avatar.sh","Town04","Avatar","Nah","Guide_Parent_C"]
+    },
+    {
+        "name": "Parent_side_Close",
+        "description": "",
+        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Avatar.mp4", 
+        "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent_Close.sh","Town04","Close","Nah","Guide_Parent"],
+        "code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent_Close.sh","Town04","Close","Nah","Guide_Parent_C"]
     }
 
 ]
@@ -127,16 +137,24 @@ def show_scenario_menu():
 
         if scenario["name"] == "Training":
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text="Scenario", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
+            scenario_button = ttk.Button(scenario_frame, text="Scenario_A_B", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
         else:   
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text="Scenario", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
+            scenario_button = ttk.Button(scenario_frame, text="Scenario_A_B", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
+
+
+            # Create a scenario button
+            scenario_button = ttk.Button(scenario_frame, text="Scenario_C", command=lambda s=scenario: launch_scenario(s["code1"] ,s["code1"][1],s["code1"][2],s["code1"][3],s["code1"][4]))
+            #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
+            scenario_button.configure(style="Custom.TButton")
+            scenario_button.pack(side=tk.RIGHT)
+    
     
 
         # Create a frame for the description label
