@@ -23,12 +23,13 @@ from nav_msgs.msg import Odometry
 
 
 Map_type = sys.argv[1]
+Folder_Name = sys.argv[2]
 #Map_type = "Guide_Train"
 #Map_type = "Guide_Spatial"
 
 
 
-folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
+folder_path = "/home/omer/Desktop/Carla_Logs/Logs/{}".format(Folder_Name)
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 file_name = os.path.join(folder_path, 'Photo_Interapt_Status{}_{}.json'.format(Map_type,current_time))
 
@@ -125,7 +126,7 @@ def ShowArrow(photo_path, term):
                     pass
                 plt.close(fig) 
             if term == 5 : 
-                time.sleep(8)
+                time.sleep(10)
                 plt.close(fig)  
             if term == 6 : 
                 while not (3.0 < arrow_term < 4.8):
