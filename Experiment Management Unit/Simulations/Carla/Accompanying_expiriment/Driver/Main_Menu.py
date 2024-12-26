@@ -89,34 +89,34 @@ scenarios = [
         "description": "",
         "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Train_Parent.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Train_parent.sh","Town02","Traning","Nah","Guide_Train"]
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Train_parent.sh","Town02","Traning","Training","Guide_Train"]
     },
     {
         "name": "Far",
         "description": "",
         "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Driver_From_Far.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Obstacle_C","Guide_Parent"],
-	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Obstacle_D","Guide_Parent"],
-        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Obstacle_B","Guide_Parent_C"],
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Far","Guide_Parent"],
+	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Far","Guide_Parent"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Far","Guide_Parent_C"],
     },
     {
         "name": "Close",
         "description": "",
         "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Driver_Side_Close.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Obstacle_C","Guide_Parent"],
-	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Obstacle_D","Guide_Parent"],
-        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Obstacle_B","Guide_Parent_C"],
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Close","Guide_Parent"],
+	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Close","Guide_Parent"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Close","Guide_Parent_C"],
     },
     {
         "name": "Avatar",
         "description": "",
         "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Driver_Side_with_Avatar.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_A.sh","Town01","Parent_with_videos_A","Obstacle_A","Guide_Parent"],
-	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_B.sh","Town01","Parent_with_videos_B","Obstacle_B","Guide_Parent"],
-        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Obstacle_B","Guide_Parent_C"],
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_A.sh","Town01","Parent_with_videos_A","Avatar","Guide_Parent"],
+	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_B.sh","Town01","Parent_with_videos_B","Avatar","Guide_Parent"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Avatar","Guide_Parent_C"],
     }
 ]
 
