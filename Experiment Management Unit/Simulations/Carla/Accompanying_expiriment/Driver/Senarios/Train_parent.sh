@@ -44,20 +44,31 @@ function free_port() {
     fi
 }
 
+timestamp=$(date +\%Y-\%m-\%d_\%H-\%M-\%S)
+
+output_directory="/home/omer/Desktop/Carla_Logs/Logs/$3"
+
+# Create the directory if it doesn't exist
+mkdir -p "$output_directory"
+
+
+
+
+export ROS_MASTER_URI=http://10.20.0.180:11311 &&
+export ROS_HOSTNAME=10.20.0.180 &&
+export ROS_IP=10.20.0.180 &&
+
 free_port 2000
 
 trap cleanup INT
 
-
-
-"$HOME/Desktop/CARLA_0.9.13/CarlaUE4.sh" -windowed -ResX=640 -ResY=480 -benchmark -fps=20 &
+"$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/CarlaUE4.sh" &
 
 sleep 11s
-
 source /home/omer/carla-ros-bridge/catkin_ws/devel/setup.bash &&
 
 
-roslaunch carla_ros_bridge Train_Parent.launch town:=$1&
+roslaunch carla_ros_bridge Train_Parent.launch town:=$1 &
 
 sleep 3s
 
@@ -65,37 +76,45 @@ sleep 3s
 run_python=python3
 
 "$run_python" "$HOME/Desktop/API Addapter/Addapter.py" &
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/speed/speed.py" &
+
+
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/speed/speed_secound_pc.py" &
+
 run_python=python
+
 "$run_python" "$HOME/Desktop/API Addapter/RosToUDP.py" &
 
-sleep 6s &&
+# sleep 6s &&
 
-run_python=python
-
-
+run_python=python3
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide.py" $4 &
-
 
 sleep 1s &&
 
+run_python=python
+
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API.py" $4 &
+
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/For_Train.py" $4 &
 
 
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API_Parent_V2.py.py" $4 &
+sleep 1s &&
+"$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $4 $2 $3 &
+
+"$run_python" "$HOME/Desktop/Carla_Logs/Objects_log.py" $4 $2 $3 &
+
+sleep 5s &&
 
 
-sleep 3s &&
-
-"$run_python" "$HOME/Desktop/API Addapter/phy.py" 
-
-#"$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $2 &
-#"$run_python" "$HOME/Desktop/Carla_Logs/Objects_log.py" $2 &
-
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Train_Objects.py" &
-
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Train/Traffic.py" &
 
 sleep 6s &&
 
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
+
+sleep 1s &&
+
+"$run_python" "$HOME/Desktop/API Addapter/phy.py" &
 wait
 
 free_port 2000
