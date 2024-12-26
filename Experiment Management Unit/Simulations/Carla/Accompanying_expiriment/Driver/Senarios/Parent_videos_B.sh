@@ -43,6 +43,12 @@ function free_port() {
         echo "Port $port_to_free is not in use."
     fi
 }
+timestamp=$(date +\%Y-\%m-\%d_\%H-\%M-\%S)
+
+output_directory="/home/omer/Desktop/Carla_Logs/Logs/$3"
+
+# Create the directory if it doesn't exist
+mkdir -p "$output_directory"
 
 
 export ROS_MASTER_URI=http://10.20.0.180:11311 &&
@@ -78,7 +84,7 @@ sleep 6s &&
 
 run_python=python3
 
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Voice/Voice_To_Json_PyAudio.py" &
+#"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Voice/Voice_To_Json_PyAudio.py" $3 &
 
 run_python=python
 "$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Green_Traffice_Light.py" &
@@ -86,13 +92,13 @@ run_python=python
 
 "$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Car_Stop_andGo.py" &
 run_python=python3
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Avatar_Parent/Video_Avatar_scenerio2.py" $2 &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Avatar_Parent/Video_Avatar_scenerio2.py" $2 $3 &
 run_python=python
 export ROS_MASTER_URI=http://10.20.0.180:11311 &&
 export ROS_HOSTNAME=10.20.0.180 &&
 export ROS_IP=10.20.0.180 &&
 run_python=python3
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide_Parent.py" $4 &
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide_Parent.py" $4 $3 &
 run_python=python
 
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Front_Camera_API.py" $4 &
@@ -112,6 +118,10 @@ sleep 1s &&
 "$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Cars_Other_Side_Event.py" &
 
 "$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Static_Objects.py" &
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Static_B.py" &
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Static_walkers.py" &
+"$run_python" "$HOME/Desktop/Carla 0.9.13/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Car_NPC_B.py" &
+
 
 run_python=python3
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/Avatar_Parent/Static_Photo.py" &
@@ -119,9 +129,9 @@ run_python=python3
 run_python=python
 
 sleep 1s &&
-"$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $2 &
+"$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $4 $2 $3&
 
-"$run_python" "$HOME/Desktop/Carla_Logs/Objects_log.py" $2 &
+"$run_python" "$HOME/Desktop/Carla_Logs/Objects_log.py" $4 $2 $3&
 
 sleep 6s &&
 "$run_python" "$HOME/Desktop/API Addapter/phy.py" &
