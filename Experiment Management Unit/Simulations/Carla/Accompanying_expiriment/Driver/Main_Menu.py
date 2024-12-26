@@ -98,7 +98,7 @@ scenarios = [
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
         "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Far","Guide_Parent"],
 	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Far","Guide_Parent"],
-        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Far","Guide_Parent_C"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_C.sh","Town01","Parent_with_out_videos_C","Far","Guide_Parent_C"],
     },
     {
         "name": "Close",
@@ -107,7 +107,7 @@ scenarios = [
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
         "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_A.sh","Town01","Parent_with_out_videos_A","Close","Guide_Parent"],
 	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_B.sh","Town01","Parent_with_out_videos_B","Close","Guide_Parent"],
-        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Close","Guide_Parent_C"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_C.sh","Town01","Parent_with_out_videos_C","Close","Guide_Parent_C"],
     },
     {
         "name": "Avatar",
@@ -116,7 +116,7 @@ scenarios = [
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
         "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_A.sh","Town01","Parent_with_videos_A","Avatar","Guide_Parent"],
 	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_B.sh","Town01","Parent_with_videos_B","Avatar","Guide_Parent"],
-        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/C.sh","Town01","Parent_with_out_videos_C","Avatar","Guide_Parent_C"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_C.sh","Town01","Parent_with_out_videos_C","Avatar","Guide_Parent_C"],
     }
 ]
 
