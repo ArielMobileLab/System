@@ -53,7 +53,7 @@ def Generate_Car1():
     time.sleep(4)
 
     # Resume driving slowly
-    vehicle.apply_control(carla.VehicleControl(throttle=0.2, steer=0.0))
+    vehicle.apply_control(carla.VehicleControl(throttle=0.3, steer=0.0))
 
 
 def cleanup():
