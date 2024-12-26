@@ -24,7 +24,7 @@ def Generate_Car1():
 
     # Define the spawn location for the vehicle
     spawn_location = carla.Transform(
-        carla.Location(x=338.0, y=245, z=1.0),  # Initial location
+        carla.Location(x=340.0, y=235, z=1.0),  # Initial location
         carla.Rotation(pitch=0, yaw=-90, roll=0)  # 180-degree rotation
     )
     # Spawn the vehicle
