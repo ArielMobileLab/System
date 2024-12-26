@@ -10,6 +10,10 @@ import sys
 from datetime import datetime
 import os
 
+
+Folder_Name = sys.argv[1]
+#Folder_Name = "Far"
+
 # Global variable to store simulation time
 simulation_time = 0.0
 
@@ -50,9 +54,9 @@ def signal_handler(sig, frame):
 # Function to save recorded data to a JSON file
 def save_recorded_data():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    directory = "/home/omer/Desktop/Carla_Logs/Logs"
+    directory = "/home/omer/Desktop/Carla_Logs/Logs/{}".format(Folder_Name)
     os.makedirs(directory, exist_ok=True)
-    output_json_file = os.path.join(directory, f"recorded_audio_data_{timestamp}_Parent.json")
+    output_json_file = os.path.join(directory, f"recorded_audio_data_{timestamp}.json")
     with open(output_json_file, "w") as file:
         json.dump(audio_data_list, file, indent=4)
     print("Recorded audio data saved to JSON file:", output_json_file)
