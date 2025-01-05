@@ -8,11 +8,11 @@ from datetime import datetime
 import signal
 import sys
 from datetime import datetime
+import sys
 import os
 
 
-Folder_Name = sys.argv[1]
-#Folder_Name = "Far"
+Senario_type = sys.argv[1]
 
 # Global variable to store simulation time
 simulation_time = 0.0
@@ -23,13 +23,7 @@ audio_data_list = []
 # Callback function to update simulation time
 def gnss_callback(data):
     global simulation_time
-    #simulation_time = data.header.seq * 0.033333335071821  # Assuming header.stamp provides simulation time
-    header = data.header
-    secs = header.stamp.secs
-    nsecs = header.stamp.nsecs
-
-# Combine secs and nsecs into a float
-    simulation_time = secs + nsecs * 1e-9
+    simulation_time = data.header.seq * 0.033333335071821  # Assuming header.stamp provides simulation time
 
 # Define callback function to process incoming audio data
 def callback(in_data, frame_count, time_info, status):
@@ -54,27 +48,25 @@ def signal_handler(sig, frame):
 # Function to save recorded data to a JSON file
 def save_recorded_data():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    directory = "/home/omer/Desktop/Carla_Logs/Logs/{}".format(Folder_Name)
-    os.makedirs(directory, exist_ok=True)
-    output_json_file = os.path.join(directory, f"recorded_audio_data_{timestamp}.json")
+    output_json_file = f"/home/omer/Desktop/Parent_experement/Logs_Parent/{Senario_type}/Parent_{Senario_type}_recorded_audio_data_Physiological_{timestamp}.json"
     with open(output_json_file, "w") as file:
         json.dump(audio_data_list, file, indent=4)
     print("Recorded audio data saved to JSON file:", output_json_file)
+
 
 # Register the signal handler for SIGINT (Ctrl+C)
 signal.signal(signal.SIGINT, signal_handler)
 
 # Define parameters for recording
-duration = 10  # Record for n seconds (not used in this script)
+duration = 5000  # Record for n seconds (not used in this script)
 sample_rate = 16000  # Sample rate (samples per second)
 channels = 1  # Mono audio
 
 # Initialize ROS node
-rospy.init_node('voice_recorder')
+rospy.init_node('voice_recorder_parent_side')
 
 # Subscribe to the ROS topic that publishes simulation time
 rospy.Subscriber("/carla/ego_vehicle/gnss", NavSatFix, gnss_callback)
-
 
 # Initialize PyAudio
 audio = pyaudio.PyAudio()
