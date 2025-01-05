@@ -45,13 +45,13 @@ sleep 1s &&
 
 timestamp=$(date +\%Y-\%m-\%d_\%H-\%M-\%S)
 # Create a new directory with the timestamp
-output_directory="/home/omer/Desktop/Parent_experement/Logs/Far"
+output_directory="/home/omer/Desktop/Parent_experement/Logs_Parent/Far"
 
 # Create the directory if it doesn't exist
 mkdir -p "$output_directory"
 timestamp=$(date +\%Y-\%m-\%d_\%H-\%M-\%S)
 # Define the full path for the video file
-output_file="$output_directory/Parent_Far_$timestamp.mp4"
+output_file="$output_directory/Parent_Far_Physiological_$timestamp.mp4"
 
 # Run FFmpeg and save the video in the new directory
 sleep 1s &&
