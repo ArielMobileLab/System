@@ -90,7 +90,7 @@ scenarios = [
     {
         "name": "Parent_side_Far",
         "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Driver_Far.mp4", 
+        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Driver_Far_Real.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
         "code": ["/home/omer/Desktop/Experiment Management Unit/Real/Parent/Senarios/Parent_Real.sh","Town04","Face_Train","Nah","Guide_Parent"]
     }
