@@ -44,13 +44,13 @@ sleep 1s &&
 "$run_python" "/home/omer/Desktop/Parent_experement/Voice_To_Json_PyAudio.py" $2 &
 
 # Create a new directory with the timestamp
-output_directory="/home/omer/Desktop/Parent_experement/Logs/Avatar"
+output_directory="/home/omer/Desktop/Parent_experement/Logs_Parent/Avatar"
 
 # Create the directory if it doesn't exist
 mkdir -p "$output_directory"
 timestamp=$(date +\%Y-\%m-\%d_\%H-\%M-\%S)
 # Define the full path for the video file
-output_file="$output_directory/Parent_Avatar_$timestamp.mp4"
+output_file="$output_directory/Parent_Avatar_Physiological_$timestamp.mp4"
 
 # Run FFmpeg and save the video in the new directory
 sleep 1s &&
