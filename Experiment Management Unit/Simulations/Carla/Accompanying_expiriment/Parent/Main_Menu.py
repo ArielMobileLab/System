@@ -30,10 +30,9 @@ import os
 
 def play_video(video_path):
     
-    # video_x = 1920 * 2  # Adjust this value to match the screen width of your setup
-    # video_y = 0        # Adjust this value to match the screen height and positioning of your setup
-    subprocess.Popen(['vlc',video_path,'--fullscreen','--play-and-exit']) 
+      subprocess.Popen(['vlc',video_path,'--fullscreen','--play-and-exit']) 
 
+      
 def open_url(url):
     webbrowser.open(url)
 
@@ -60,7 +59,7 @@ for file in files:
 
 
 # Create a function to launch the selected scenario
-def launch_scenario(scenarioslist,Town,Face,Objects, Arrow_Guilde):
+def launch_scenario(scenarioslist,Town,Face,Objects, Arrow_Guilde,Senario_type):
     if wheelName != 'null':
         os.system('ffset /dev/input/by-id/' + wheelName + ' -a 50')
     for scenario in scenarioslist:
@@ -70,7 +69,7 @@ def launch_scenario(scenarioslist,Town,Face,Objects, Arrow_Guilde):
             try:
 
                 # Use subprocess to execute the command
-                subprocess.run(["bash", scenario, Town, Face, Objects, Arrow_Guilde], check=True)
+                subprocess.run(["bash", scenario, Town, Face, Objects, Arrow_Guilde,Senario_type], check=True)
                 repeat = 0
             except subprocess.CalledProcessError:
                 repeat = 1
@@ -81,39 +80,45 @@ def launch_scenario(scenarioslist,Town,Face,Objects, Arrow_Guilde):
 
 
 
-
-
 # Create a list of scenarios
 
 scenarios = [
 
     {
-        "name": "Parent_side_Far",
+        "name": "Training",
         "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Driver_Far.mp4", 
+        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Train_Parent.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent.sh","Town04","Far","Nah","Guide_Parent"],
-        "code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent.sh","Town04","Far","Nah","Guide_Parent_C"]
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Train_parent.sh","Town02","Traning","Training","Guide_Train","1"]
     },
     {
-        "name": "Parent_side_Avatar",
+        "name": "Far",
         "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Avatar.mp4", 
+        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Driver_From_Far.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent_avatar.sh","Town04","Avatar","Nah","Guide_Parent"],
-        "code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent_avatar.sh","Town04","Avatar","Nah","Guide_Parent_C"]
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_A.sh","Town01","Simulation_Far_MapA","Simulation_Far_MapA","Guide_Parent","2"],
+	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_B.sh","Town01","Simulation_Far_MapB","Simulation_Far_MapB","Guide_Parent","3"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_C.sh","Town01","Simulation_Far_MapC","Simulation_Far_MapC","Guide_Parent_C","4"],
     },
     {
-        "name": "Parent_side_Close",
+        "name": "Close",
         "description": "",
-        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Parent_Avatar.mp4", 
+        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Driver_Side_Close.mp4", 
         "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
-        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent_Close.sh","Town04","Close","Nah","Guide_Parent"],
-        "code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Parent/Senarios/Parent_Close.sh","Town04","Close","Nah","Guide_Parent_C"]
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_A.sh","Town01","Simulation_Close_MapA","Simulation_Close_MapA","Guide_Parent","5"],
+	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_B.sh","Town01","Simulation_Close_MapB","Simulation_Close_MapB","Guide_Parent","6"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_with_out_videos_C.sh","Town01","Simulation_Close_MapC","Simulation_Close_MapC","Guide_Parent_C","7"],
+    },
+    {
+        "name": "Avatar",
+        "description": "",
+        "video_path": "/home/omer/Desktop/Experiment Management Unit/Simulations/Main_Menu Videos/Parent/Driver_Side_with_Avatar.mp4", 
+        "NASA": "https://docs.google.com/forms/d/e/1FAIpQLSfGy6BIwAGpHZDJ-Uk6T1q9awHvASKNafpMJdrHi8HLvBCeOg/viewform",
+        "code": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_A.sh","Town01","Simulation_Avatar_MapA","Simulation_Avatar_MapA","Guide_Parent","8"],
+	"code1": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_B.sh","Town01","Simulation_Avatar_MapB","Simulation_Avatar_MapB","Guide_Parent","9"],
+        "code2": ["/home/omer/Desktop/Experiment Management Unit/Simulations/Carla/Accompanying_expiriment/Senarios/Parent_videos_C.sh","Town01","Simulation_Avatar_MapC","Simulation_Avatar_MapC","Guide_Parent_C","10"],
     }
-
 ]
-
 
 
 # Create a function to display the scenario menu
@@ -137,24 +142,32 @@ def show_scenario_menu():
 
         if scenario["name"] == "Training":
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text="Scenario_A_B", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
+            scenario_button = ttk.Button(scenario_frame, text="Scenario", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
+
         else:   
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text="Scenario_A_B", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4]))
+            scenario_button = ttk.Button(scenario_frame, text="Scenario A", command=lambda s=scenario: launch_scenario(s["code"] ,s["code"][1],s["code"][2],s["code"][3],s["code"][4],s["code"][5]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
-
 
             # Create a scenario button
-            scenario_button = ttk.Button(scenario_frame, text="Scenario_C", command=lambda s=scenario: launch_scenario(s["code1"] ,s["code1"][1],s["code1"][2],s["code1"][3],s["code1"][4]))
+            scenario_button = ttk.Button(scenario_frame, text="Scenario B", command=lambda s=scenario: launch_scenario(s["code1"] ,s["code1"][1],s["code1"][2],s["code1"][3],s["code1"][4],s["code1"][5]))
             #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
             scenario_button.configure(style="Custom.TButton")
             scenario_button.pack(side=tk.RIGHT)
+
+            # Create a scenario button
+            scenario_button = ttk.Button(scenario_frame, text="Scenario C", command=lambda s=scenario: launch_scenario(s["code2"] ,s["code2"][1],s["code2"][2],s["code2"][3],s["code2"][4],s["code2"][5]))
+            #scenario_button = ttk.Button(scenario_frame, text="Go to Scenario", command=lambda s=scenario: launch_scenario(s["code"],s["Town"]))
+            scenario_button.configure(style="Custom.TButton")
+            scenario_button.pack(side=tk.RIGHT)
+
     
+
     
 
         # Create a frame for the description label
@@ -196,4 +209,3 @@ show_scenario_menu()
 root.mainloop()
 
 
-# OnLy GoD cAn judGe mE
