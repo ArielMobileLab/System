@@ -3,6 +3,7 @@ import random
 import time
 from nav_msgs.msg import Odometry
 import rospy
+import numpy as np
 
 
 # List to store the created actors
@@ -43,15 +44,18 @@ def gap_acceptance(world, actors, num_cars=15):
             break
 
     blueprint_library = world.get_blueprint_library()
-    vehicle_bp = random.choice(blueprint_library.filter('vehicle.tesla.model3'))
+    #vehicle_bp = random.choice(blueprint_library.filter('vehicle.tesla.model3'))
 
     spawn_location = carla.Transform(
         carla.Location(x=270, y=326.0, z=0.2),
         carla.Rotation(pitch=0, yaw=180, roll=0) 
     )
-    num_cars_with_interval_15_sec = 10
+  
 
     created_actors = []
+
+    min_gap = 6  # Minimum gap time
+    max_gap = 12  # Maximum gap time
 
     # Spawn the vehicles
     for i in range(num_cars):
@@ -60,19 +64,25 @@ def gap_acceptance(world, actors, num_cars=15):
             nissan_micra_location = ego_vehicle.get_location()
             
             if nissan_micra_location.x < 110:
-                if i < num_cars_with_interval_15_sec:
 
-                    current_interval = 10.0
-                    
-                else:
-                    current_interval = 15.0
+		    # Use a uniform distribution to generate random intervals between min_gap and max_gap
+		    random_interval = np.random.uniform(min_gap, max_gap)
+		    
+		    print(random_interval)
+                    vehicle_bp = random.choice(blueprint_library.filter('vehicle.tesla.model3'))
 
-                vehicle = world.spawn_actor(vehicle_bp, spawn_location)
-                vehicle.apply_control(carla.VehicleControl(throttle=0.42, steer=0.0))
+                    color_name = random.choice(['255,255,255', '128,128,128', '0,0,0','0,0,139'])
+		    #black: '0,0,0'
+		    #Grey: '128,128,128'
+		    #White: '255,255,255'
+		    #Dark Blue: '0,0,139'
+                    vehicle_bp.set_attribute('color', color_name)
 
-                created_actors.append(vehicle)
+		    vehicle = world.spawn_actor(vehicle_bp, spawn_location)
+		    vehicle.apply_control(carla.VehicleControl(throttle=0.42, steer=0.0))  # throttle=0.42 original
 
-                time.sleep(current_interval)
+		    created_actors.append(vehicle)
+		    time.sleep(random_interval)  # Wait for the generated interval before spawning the next car
             else:
 
                 for vehicle in created_actors:
