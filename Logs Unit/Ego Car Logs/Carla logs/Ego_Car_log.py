@@ -17,11 +17,14 @@ import os
 
 
 # Set the file name for JSON output
-#Agent_type = sys.argv[1]
-#Map_type = sys.argv[2]
-Agent_type = "Test"
-Map_type = "Test"
-folder_path = "/home/omer/Desktop/Carla_Logs/Logs"
+Agent_type = sys.argv[1]
+Map_type = sys.argv[2]
+Folder_Name = sys.argv[3]
+#Agent_type = "Test"
+#Agent_type = "Latency_50ms_PD_OFF_MapC"
+#Folder_Name="Latency_50ms_PD_OFF_MapC"
+#Map_type = "Guide_Parent_no_PD"
+folder_path = "/home/omer/Desktop/Carla_Logs/Logs/{}".format(Folder_Name)
 current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 file_name = os.path.join(folder_path, 'EgoCar_{}_{}.json'.format(Agent_type, current_time))
 SimulationTime_Ros = 0.0
@@ -30,6 +33,10 @@ stop_write = False
 colition_flag = False
 frame_id = 0.0
 No_need_for_my_shutdown_callback = False
+A1 = True
+A2 = True
+A3 = False
+A_flip = True
 
 
 termination_data_added = False
@@ -104,48 +111,47 @@ def write_to_json(data_dict, add_comma=True):
 def collision_callback(data):
     global colition_flag 
     timestamp = datetime.now().strftime('%H:%M:%S.%f')
-    if No_need_for_my_shutdown_callback == True:
+    if No_need_for_my_shutdown_callback == False:
 	    if colition_flag == False:
-	
-	        colition_flag = True
-	
-	        actor_id = data.other_actor_id
-	
-	        client = carla.Client('127.0.0.1', 2000)
-	        world = client.get_world()  # Make sure to obtain the actual world instance
-	        actor = world.get_actor(actor_id)
-	        world_snapshot = world.wait_for_tick()
-	        simulation_time_colition = world_snapshot.timestamp.elapsed_seconds
-	        frame_id_coliton = world_snapshot.timestamp.frame
 
-# Get the current world snapshot
-	
+		colition_flag = True
+
+		actor_id = data.other_actor_id
+
+		client = carla.Client('127.0.0.1', 2000)
+		world = client.get_world()  # Make sure to obtain the actual world instance
+		actor = world.get_actor(actor_id)
+		world_snapshot = world.wait_for_tick()
+		simulation_time_colition = world_snapshot.timestamp.elapsed_seconds
+		frame_id_coliton = world_snapshot.timestamp.frame
+
+	# Get the current world snapshot
+
 	# Retrieve simulation time
-	
-	        # Check if the actor is valid
-	        if actor:
-	            actor_info =  actor
-	            actor_info = str(actor)
-	            start_index = actor_info.find("type=") + len("type=")
-	            end_index = actor_info.find(")", start_index)
-	            actor_name = actor_info[start_index:end_index].strip()
-	            
-	
-	        else:
-	                    actor_name = "Unknown"
 
-	        SimulationTime = world_snapshot.timestamp.elapsed_seconds
-	        FrameID = world_snapshot.timestamp.frame
-	        stop_data = OrderedDict()
-	        stop_data["Type"] = "Termination"
-	        stop_data["WorldTime"] = timestamp
-	        stop_data["SimulationTime"] = simulation_time_colition
-	        stop_data["FrameID"] = frame_id_coliton
-	        stop_data["Reason"] = "Crash" + "-" + actor_name
-	        write_to_json(stop_data, add_comma=False)
-	
-	
-	        close_json_file()
+		# Check if the actor is valid
+		if actor:
+		    actor_info =  actor
+		    actor_info = str(actor)
+		    start_index = actor_info.find("type=") + len("type=")
+		    end_index = actor_info.find(")", start_index)
+		    actor_name = actor_info[start_index:end_index].strip()
+		    
+
+		else:
+		            actor_name = "Unknown"
+
+
+		stop_data = OrderedDict()
+		stop_data["Type"] = "Termination"
+		stop_data["WorldTime"] = timestamp
+		stop_data["SimulationTime"] = simulation_time_colition
+		stop_data["FrameID"] = frame_id_coliton
+		stop_data["Reason"] = "Crash" + "-" + actor_name
+		write_to_json(stop_data, add_comma=False)
+
+
+		close_json_file()
 
 
 def close_json_file():
@@ -167,12 +173,29 @@ def on_world_tick(world_snapshot):
     global SimulationTime
     global FrameID
     global No_need_for_my_shutdown_callback
+    global A1
+    global A2
+    global A3
+    global A_flip
+
+
+
+
 
     termination_condition_met = False  # Flag to track if termination condition has been met
 
     for actor_snapshot in world_snapshot:  # This should loop through actors
         actor_id = actor_snapshot.id
         actor = world.get_actor(actor_id)
+
+
+	if A_flip == True and 200<actor.get_location().x<240  and 124<actor.get_location().y<140:
+
+		A1 = False
+		A2 = False 
+		A3 = True
+		A_Flip = False
+
 
         if stop_write == False:
             if colition_flag == False:
@@ -209,8 +232,10 @@ def on_world_tick(world_snapshot):
 		    actor_info["LaneID"] = lane_id
 
 
+
                     # Handle First_Response end of the simulation
                     if (Map_type == "First_Response_Tele_assist" or Map_type == "First_Response_Tele_driving") and not termination_condition_met:
+
                         if actor.get_location().x > -180.0:
                             print("closing JSON file.")
                             actor_info = OrderedDict()
@@ -227,7 +252,10 @@ def on_world_tick(world_snapshot):
 
                     # Handle Guide_Parent map type
                     elif (Map_type == "Guide_Parent_no_PD" or Map_type == "Guide_Parent_PD") and not termination_condition_met:
-                        if 90.128  < actor.get_location().y < 116.1248 and 88.2840 < actor.get_location().x < 92.3620:
+
+
+                        if 90.128  < actor.get_location().y < 116.1248 and 88.2840 < actor.get_location().x < 94.3620:
+
                             print("closing JSON file.")
                             actor_info = OrderedDict()
                             actor_info["Type"] = "Termination"
@@ -240,6 +268,103 @@ def on_world_tick(world_snapshot):
                             No_need_for_my_shutdown_callback = True
                             termination_condition_met = True  # Set flag to True, indicating termination condition met
                             return  # Exit function
+
+			elif -5.25 < actor.get_location().y < 5.25 and 348 < actor.get_location().x < 359:
+
+                            print("closing JSON file.")
+                            actor_info = OrderedDict()
+                            actor_info["Type"] = "Termination"
+                            actor_info["WorldTime"] = timestamp
+                            actor_info["SimulationTime"] = SimulationTime
+                            actor_info["FrameID"] = FrameID
+                            actor_info["Reason"] = "Navigation error"
+                            write_to_json(actor_info)
+                            close_json_file()  # Close the JSON file when the condition is met
+                            No_need_for_my_shutdown_callback = True
+                            termination_condition_met = True  # Set flag to True, indicating termination condition met
+                            return  # Exit function
+
+			elif 320 < actor.get_location().y < 333 and 60 < actor.get_location().x < 80.0:
+
+                            print("closing JSON file.")
+                            actor_info = OrderedDict()
+                            actor_info["Type"] = "Termination"
+                            actor_info["WorldTime"] = timestamp
+                            actor_info["SimulationTime"] = SimulationTime
+                            actor_info["FrameID"] = FrameID
+                            actor_info["Reason"] = "Navigation error"
+                            write_to_json(actor_info)
+                            close_json_file()  # Close the JSON file when the condition is met
+                            No_need_for_my_shutdown_callback = True
+                            termination_condition_met = True  # Set flag to True, indicating termination condition met
+                            return  # Exit function
+
+                    elif (Map_type == "Guide_Parent_PD_C" or Map_type == "Guide_Parent_no_PD_C") and not termination_condition_met:
+
+
+			if 90.128  < actor.get_location().y < 116.1248 and 88.2840 < actor.get_location().x < 94:
+
+                            print("closing JSON file.")
+                            actor_info = OrderedDict()
+                            actor_info["Type"] = "Termination"
+                            actor_info["WorldTime"] = timestamp
+                            actor_info["SimulationTime"] = SimulationTime
+                            actor_info["FrameID"] = FrameID
+                            actor_info["Reason"] = "End of the simulation"
+                            write_to_json(actor_info)
+                            close_json_file()  # Close the JSON file when the condition is met
+                            No_need_for_my_shutdown_callback = True
+                            termination_condition_met = True  # Set flag to True, indicating termination condition met
+                            return  # Exit function
+                        
+			if A1 == True and 323 < actor.get_location().y < 333 and 98 < actor.get_location().x < 115:
+
+                            print("closing JSON file.")
+                            actor_info = OrderedDict()
+                            actor_info["Type"] = "Termination"
+                            actor_info["WorldTime"] = timestamp
+                            actor_info["SimulationTime"] = SimulationTime
+                            actor_info["FrameID"] = FrameID
+                            actor_info["Reason"] = "Navigation error"
+                            write_to_json(actor_info)
+                            close_json_file()  # Close the JSON file when the condition is met
+                            No_need_for_my_shutdown_callback = True
+                            termination_condition_met = True  # Set flag to True, indicating termination condition met
+                            return  # Exit function
+
+			elif A2 == True and 90 < actor.get_location().y < 120 and 91 < actor.get_location().x < 100:
+
+                            print("closing JSON file.")
+                            actor_info = OrderedDict()
+                            actor_info["Type"] = "Termination"
+                            actor_info["WorldTime"] = timestamp
+                            actor_info["SimulationTime"] = SimulationTime
+                            actor_info["FrameID"] = FrameID
+                            actor_info["Reason"] = "Navigation error"
+                            write_to_json(actor_info)
+                            close_json_file()  # Close the JSON file when the condition is met
+                            No_need_for_my_shutdown_callback = True
+                            termination_condition_met = True  # Set flag to True, indicating termination condition met
+                            return  # Exit function
+
+
+			elif  A3 == True and A1 == False and 324 <actor.get_location().y < 332 and 80 < actor.get_location().x < 83:
+                            
+                            print("closing JSON file.")
+                            actor_info = OrderedDict()
+                            actor_info["Type"] = "Termination"
+                            actor_info["WorldTime"] = timestamp
+                            actor_info["SimulationTime"] = SimulationTime
+                            actor_info["FrameID"] = FrameID
+                            actor_info["Reason"] = "Navigation error"
+                            write_to_json(actor_info)
+                            close_json_file()  # Close the JSON file when the condition is met
+                            No_need_for_my_shutdown_callback = True
+                            termination_condition_met = True  # Set flag to True, indicating termination condition met
+                            return  # Exit function
+
+
+
 
                     # If termination conditions are not met, continue with regular processing
                     if not termination_condition_met:
