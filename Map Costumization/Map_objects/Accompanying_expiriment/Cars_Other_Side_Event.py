@@ -99,8 +99,8 @@ def Cars(data):
         Generate_Car1()
         first_car_cross = False
     
-    #if second_car_cross == True  and  330.00 < data.pose.pose.position.x < 340.00 and -115.00 < data.pose.pose.position.y < -90.00:
-    if second_car_cross == True:
+    if second_car_cross == True  and  330.00 < data.pose.pose.position.x < 340.00 and -115.00 < data.pose.pose.position.y < -90.00:
+    #if second_car_cross == True:
         #print("car_2")
         Generate_Cars2(world, actors, num_cars=15)
         second_car_cross = False
