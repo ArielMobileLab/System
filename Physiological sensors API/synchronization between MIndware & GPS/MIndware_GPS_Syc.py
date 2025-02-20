@@ -4,17 +4,16 @@ from fastdtw import fastdtw
 from collections import defaultdict
 from scipy.interpolate import interp1d
 
-
 sample_rate = 20
 midware_multiplayer =500
 gps_multiplayer = 512
-
 
 
 def moving_average(x, n=1500):
     return np.convolve(x, np.ones(n)/n, mode='same')
 
 def tidy_mindware():
+
     file_name = r"C:\Users\ALEX\Desktop\Synchronic/Mind.xlsx"
     Mindware = pd.read_excel(file_name)
     print(Mindware.shape)
@@ -38,7 +37,7 @@ def tidy_mindware():
 
     return Mindware
 
-
+#Mindware_matrix
 M = tidy_mindware()
 
 def tidy_GPS():
@@ -61,12 +60,13 @@ def tidy_GPS():
     GPS.to_excel(r"C:\Users\ALEX\Desktop\Synchronic\processed_gps.xlsx", index=False)
     return GPS
 
+#GPS_matrix
 G = tidy_GPS()
 
-# DTW
+# DTW between ACC from both Matrix
 distance, path = fastdtw(G['Acceleration'].values, M['Acceleration'].values)
 
-
+#Adding Index
 M['Mindex'] = np.arange(len(M))
 G['Gindex'] = np.arange(len(G))
 
@@ -81,11 +81,12 @@ result.columns = ["Mindex", "Gindex"]
 # merge M with index colum
 M_with_index = pd.merge(M, result, how="left", on="Mindex")
 
-# merge M with 
+# merge M with the G matrix
 M_with_index_and_G = pd.merge(M_with_index, G, how="left", on="Gindex")
 
+# interpolate for missing data due to the mean index in lane 77
 M_with_index_and_G = M_with_index_and_G.interpolate(method='linear', axis=0)
 
-# שמירת הקובץ
-output_file_csv = r"C:\Users\ALEX\Desktop\Synchronic\M3.csv"
+# saving the matrix
+output_file_csv = r"C:\Users\ALEX\Desktop\Synchronic\Scy_GPS_Mindware.csv"
 M_with_index_and_G.to_csv(output_file_csv, index=False)
