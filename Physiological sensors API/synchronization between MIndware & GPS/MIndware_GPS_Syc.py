@@ -1,3 +1,36 @@
+import pandas as pd
+
+# File paths (Update these with your actual file names)
+main_file = r"C:\Users\ALEX\Desktop\Synchronic\test\4/M_with_Aligned_GPS_Time.xlsx"     # Your main file
+lookup_file = r"C:\Users\ALEX\Desktop\Synchronic\test\4/processed_gps.xlsx"  # Your lookup file
+
+# Load the Excel files
+df_main = pd.read_excel(main_file)
+df_lookup = pd.read_excel(lookup_file)
+
+# Ensure column names match
+print("Main file columns:", df_main.columns)
+print("Lookup file columns:", df_lookup.columns)
+# Merge using the correct column names
+df_main = df_main.merge(df_lookup[['GPS.Time', 'Acceleration']], 
+                        left_on='Aligned_GPS_Time', 
+                        right_on='GPS.Time', 
+                        how='left')
+
+# Drop the extra 'GPS.Time' column after merging
+df_main.drop(columns=['GPS.Time'], inplace=True)
+
+# Rename 'Acceleration' to 'Acceleration gps'
+df_main.rename(columns={'Acceleration': 'Acceleration gps'}, inplace=True)
+
+# Save the updated main file
+updated_file = r"C:\Users\ALEX\Desktop\Synchronic\test\4/updated_file.xlsx"     # Your main file
+df_main.to_excel(updated_file, index=False)
+
+print(f"Updated file saved as '{updated_file}'")
+
+
+
 import numpy as np
 import pandas as pd
 from fastdtw import fastdtw
@@ -63,7 +96,7 @@ def tidy_GPS():
 #GPS_matrix
 G = tidy_GPS()
 
-# DTW between ACC from both Matrix
+# DTW between ACC from both Matrixs
 distance, path = fastdtw(G['Acceleration'].values, M['Acceleration'].values)
 
 #Adding Index
@@ -84,7 +117,7 @@ M_with_index = pd.merge(M, result, how="left", on="Mindex")
 # merge M with the G matrix
 M_with_index_and_G = pd.merge(M_with_index, G, how="left", on="Gindex")
 
-# interpolate for missing data due to the mean index in lane 77
+# interpolate for missing data due to lane 77 mean prosses
 M_with_index_and_G = M_with_index_and_G.interpolate(method='linear', axis=0)
 
 # saving the matrix
