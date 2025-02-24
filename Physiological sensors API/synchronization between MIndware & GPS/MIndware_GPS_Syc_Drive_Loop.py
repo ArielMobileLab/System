@@ -49,29 +49,45 @@ def tidy_GPS(file_path):
     return GPS
 
 def sync_data(gps_folder_path, mindware_path, output_path):
-
+        
+        #Mindware_matrix
         M = tidy_mindware(mindware_path)
+        #GPS_matrix
         G = tidy_GPS(gps_folder_path)
 
+        # DTW between ACC from both Matrixs
         distance, path = fastdtw(G['Acceleration'].values, M['Acceleration'].values)
 
+        #Adding Index
         M['Mindex'] = np.arange(len(M))
         G['Gindex'] = np.arange(len(G))
         
         path = pd.DataFrame(path, columns=["G", "M"])
+
+        # Calculating the Average of G Indexes for Each Index in M
         result = path.groupby('M')['G'].mean().reset_index()
+
+        #re-name coulums
         result.columns = ["Mindex", "Gindex"]
 
+        # merge M with index colum
         M_with_index = pd.merge(M, result, how="left", on="Mindex")
+
+        # merge M with the G matrix
         M_with_index_and_G = pd.merge(M_with_index, G, how="left", on="Gindex")
+
+        # interpolate for missing data due to lane 77 mean prosses
         M_with_index_and_G = M_with_index_and_G.interpolate(method='linear', axis=0)
 
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)  # Ensure the folder exists
+        # Ensure the folder exists
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)  
+
+        # saving the matrix
         M_with_index_and_G.to_csv(output_path, index=False)
         print(f"✔ Sync completed for {output_path}")
 
 
-# ---- Main Loop ---- #
+# ---- Main Loop ---- # for finding the Maindware & gps & output path
 for participant in os.listdir(BASE_PATH):
     if participant.startswith("C"):  # Check if the folder starts with 'C'
         participant_path = os.path.join(BASE_PATH, participant, "Teleoperation")
@@ -98,5 +114,4 @@ for participant in os.listdir(BASE_PATH):
                     elif "_Accompanied_Far" in folder and run_type == "Far":
                         print(f"Found Far folder: {gps_folder_path}")
                         sync_data(gps_folder_path,mindware_path,output_file)    
-
 
