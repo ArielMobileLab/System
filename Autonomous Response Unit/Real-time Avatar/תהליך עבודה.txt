@@ -1,4 +1,5 @@
 SadTalker - VIDEO GENERATION - לוקח זמן להכין סרטון לכן בזמן אמת זה לא טוב אולי בדיעבד זה יכול לעבוד
+https://github.com/OpenTalker/SadTalker/tree/main?tab=readme-ov-file
 
 
 avatar.py - בעצם בעזרת מספר תמונות ועבודה עם 100 הרץ זה נראה כאילו אנחנו מדברים 
