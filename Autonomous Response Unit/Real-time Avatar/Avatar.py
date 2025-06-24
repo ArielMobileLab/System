@@ -21,12 +21,12 @@ spoken_text = ""
 is_speaking = False
 
 # טען תמונות
-avatar_img_open = pygame.image.load(r"C:\Users\ALEX\Desktop\Synchronic\Error\smile.PNG")
-avatar_img_blink = pygame.image.load(r"C:\Users\ALEX\Desktop\Synchronic\Error\blink.PNG")
+avatar_img_open = pygame.image.load(r"C:\Users\ALEX\Desktop\Synchronic\Error\Real-time Avatar\smile.PNG")
+avatar_img_blink = pygame.image.load(r"C:\Users\ALEX\Desktop\Synchronic\Error\Real-time Avatar\blink.PNG")
 mouth_frames = [
-    pygame.image.load(r"C:\Users\ALEX\Desktop\Synchronic\Error\mouth1.PNG"),
-    pygame.image.load(r"C:\Users\ALEX\Desktop\Synchronic\Error\mouth2.PNG"),
-    pygame.image.load(r"C:\Users\ALEX\Desktop\Synchronic\Error\mouth3.PNG"),
+    pygame.image.load(r"C:\Users\ALEX\Desktop\Synchronic\Error\Real-time Avatar\mouth1.PNG"),
+    pygame.image.load(r"C:\Users\ALEX\Desktop\Synchronic\Error\Real-time Avatar\mouth2.PNG"),
+    pygame.image.load(r"C:\Users\ALEX\Desktop\Synchronic\Error\Real-time Avatar\mouth3.PNG"),
 ]
 
 # מיקום
@@ -41,7 +41,7 @@ last_blink = pygame.time.get_ticks()
 blink_interval = random.randint(4000, 7000)
 blinking = False
 blink_start = 0
-blink_duration = 150
+blink_duration = 80
 
 # אנימציית פה
 mouth_frame_index = 0
@@ -72,7 +72,7 @@ def draw_screen():
     elif blinking and now - blink_start >= blink_duration:
         blinking = False
         last_blink = now
-        blink_interval = random.randint(4000, 7000)
+        blink_interval = random.randint(2000, 4000)
         avatar_img = avatar_img_open
     else:
         avatar_img = avatar_img_blink if blinking else avatar_img_open
@@ -81,11 +81,11 @@ def draw_screen():
 
     # פה משתנה
     if is_speaking:
-        if now - mouth_frame_timer > 100:
+        if now - mouth_frame_timer > 200:
             mouth_frame_index = (mouth_frame_index + 1) % len(mouth_frames)
             mouth_frame_timer = now
         mouth_img = mouth_frames[mouth_frame_index]
-        screen.blit(mouth_img, (avatar_pos[0] + 70, avatar_pos[1] + 100))
+        screen.blit(mouth_img, (avatar_pos[0], avatar_pos[1]))
 
     # טקסט
     text_surface = font.render(spoken_text, True, BLACK)
