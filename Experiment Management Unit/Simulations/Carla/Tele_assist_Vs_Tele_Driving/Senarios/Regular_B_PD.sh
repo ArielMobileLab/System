@@ -44,6 +44,15 @@ function free_port() {
     fi
 }
 
+timestamp=$(date +\%Y-\%m-\%d_\%H-\%M-\%S)
+
+output_directory="/home/omer/Desktop/Carla_Logs/Logs/$3"
+
+# Create the directory if it doesn't exist
+mkdir -p "$output_directory"
+
+
+
 export ROS_MASTER_URI=http://10.20.0.164:11311 
 export ROS_IP=10.20.0.164
 
@@ -72,7 +81,7 @@ run_python=python3
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/speed/speed.py" &
 run_python=python
 
-"$run_python" "$HOME/Desktop/API Addapter/RosToUDP.py" &
+"$run_python" "$HOME/Desktop/API Addapter/RosToUDP.py" $9 &
 
 sleep 6s &&
 
@@ -81,7 +90,9 @@ run_python=python
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Walkers1.py" &
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Car_Stop_andGo.py" &
 
-"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide_Parent.py" $4 $2 &
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Car_NPC_B.py" &
+
+"$run_python" "$HOME/Desktop/Autonomous Resope Unit/Arrow_Guide/Arrows_guide_Parent_New.py" $4 $2 $3&
 
 "$run_python" "/home/omer/Desktop/Autonomous Resope Unit/Predivtive display/predictive_display.py" $5 $8 &
 
@@ -90,23 +101,26 @@ run_python=python
 "$run_python" "$HOME/Desktop/Autonomous Resope Unit/RearVIew/Rear_camera_API.py" $4 &
 
 
-
 sleep 1s &&
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Traffic_Light_Event_B.py" &
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Traffic_Light_Event_Clean.py" $2 &
 sleep 1s &&
-
-
-"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Traffic_Light_Event_B_Pass.py" $2 &
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Traffic_Light_Event_Easy.py" $2 &
+sleep 1s &&
 
 "$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Static_Objects.py" &
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Static_B.py" &
+"$run_python" "$HOME/Desktop/CARLA_0.9.13/PythonAPI/examples/Map_objects/Parent/Mordechai/Static_walkers.py" &
 
 sleep 1s &&
-"$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $2 &
-"$run_python" "$HOME/Desktop/Carla_Logs/Objects_log.py" $2 &
+"$run_python" "$HOME/Desktop/Carla_Logs/Ego_Car_log.py" $2 $4 $3&
+"$run_python" "$HOME/Desktop/Carla_Logs/Objects_log.py" $2 $3 &
 
 sleep 1s &&
 
 "$run_python" "$HOME/Desktop/API Addapter/Joy_addapter.py" &
+
+
+"$run_python" "$HOME/Desktop/Comunication Unit/Latency.py" $5 &
 
 sleep 6s &&
 
