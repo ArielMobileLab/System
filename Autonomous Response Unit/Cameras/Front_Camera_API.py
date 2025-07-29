@@ -47,7 +47,7 @@ def pygame_callback(data, obj):
 camera_bp = world.get_blueprint_library().find('sensor.camera.rgb')
 camera_bp.set_attribute('image_size_x', '3500')  # Adjust resolution based on aspect ratio
 camera_bp.set_attribute('image_size_y', '1080')
-camera_bp.set_attribute('fov', '120.0')
+camera_bp.set_attribute('fov', '130.0')
 camera_bp.set_attribute('gamma', '1.7')                  # Set gamma to 1.8
 camera_bp.set_attribute('iso', '600.0')                  # Set ISO to 600.0
 camera_bp.set_attribute('shutter_speed', '500.0')
