@@ -12,3 +12,10 @@ The system displays an animated avatar on screen and plays speech audio generate
     Hebrew speech synthesis using gTTS
 
     Trigger rules based on simulation time (speaking  every 10 seconds).
+
+⚠️ Limitations (Current Version):
+
+    Low-level TTS: The speech is generated using basic gTTS, which lacks expressive emotion or dynamic intonation.
+    ▶️ For better voice quality and emotional control, integration with ElevenLabs or Azure Neural TTS is prepared in the main folder of the project but not yet active.
+
+    No lip-sync yet: The mouth animation is not synchronized with the actual phonemes or speech timing. It is currently a simple, time-based approximation.
