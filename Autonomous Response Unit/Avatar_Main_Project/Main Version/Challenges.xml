@@ -1,0 +1,44 @@
+<Conditions>
+
+    <Condition1>
+        <Event>ObjectMonitoring</Event>
+        <IntervalSeconds>2</IntervalSeconds>
+        <StartLocation x="325.0" y="-55.83941268"/>
+        <EndLocation x="0.0438771" y="-90.43102"/>
+        <ObjectID>229</ObjectID>
+        <ObjectMeasures>
+            <Measure>Acceleration.x</Measure>
+            <Measure>Acceleration.y</Measure>
+            <Measure>Acceleration.z</Measure>
+        </ObjectMeasures>
+    </Condition1>
+
+
+    <Condition2>
+        <Event>ObjectMonitoring</Event>
+        <IntervalSeconds>2</IntervalSeconds>
+        <StartLocation x="325.0" y="-55.83941268"/>
+        <EndLocation x="0.0438771" y="-90.43102"/>
+        <ObjectID>229</ObjectID>
+        <ObjectMeasures>
+            <Measure>Velocity.x</Measure>
+            <Measure>Velocity.y</Measure>
+            <Measure>Velocity.z</Measure>
+        </ObjectMeasures>
+    </Condition2>
+
+
+    <Condition3>
+        <Event>ObjectMonitoring</Event>
+        <IntervalSeconds>2</IntervalSeconds>
+        <StartLocation x="325.0" y="-55.83941268"/>
+        <EndLocation x="0.0438771" y="-90.43102"/>
+        <ObjectID>83</ObjectID>
+        <ObjectMeasures>
+            <Measure>TrafficLightState</Measure>
+            <Measure>DistanceFromEgoCar</Measure>
+        </ObjectMeasures>
+    </Condition3>
+
+
+</Conditions>
