@@ -5,14 +5,11 @@ import math
 import numpy as np
 import pandas as pd
 
-
-
-
+#=======Paremeters=====
 Final_value_Array = []
 Face_State = 1
 
-
-
+#========UDP INFO======
 UDP_IP = "127.0.0.1"
 UDP_PORT = 5005
 UDO_IP_OUT = "10.20.0.184"
@@ -22,11 +19,7 @@ send_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
 
-
-
 def send_udp_message_to_avatar_generatore(Stress_Model):
-
-
         global Face_State
 
         if Face_State == 1:
@@ -136,3 +129,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
