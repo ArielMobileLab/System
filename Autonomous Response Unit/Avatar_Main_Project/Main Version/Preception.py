@@ -11,9 +11,9 @@ UDP_PORT = 5005
 UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
 
-def send_udp_message_to_brain(condition_name, object_id, data_dict):
+def send_udp_message_to_brain(challenge_name, object_id, data_dict):
     # Compose message as: "ConditionName | ObjectID: id | key1: val1 | key2: val2 ..."
-    parts = ["{} | ObjectID: {}".format(condition_name, object_id)]
+    parts = ["{} | Object: {}".format(challenge_name, object_id)]
     for k, v in data_dict.items():
         if isinstance(v, (int, float)):
             parts.append("{}: {:.2f}".format(k, v))
@@ -25,21 +25,21 @@ def send_udp_message_to_brain(condition_name, object_id, data_dict):
     UDPServerSocket.sendto(message.encode('utf-8'), (UDP_IP, UDP_PORT))
 
 
-def monitor_thread(object_id, measures, interval, condition_name, world):
+def monitor_challenge(object_id, measures, interval, challenge_name, world):
     ego_actor = world.get_actor(229)  # Ego vehicle with ID 229
     actor = world.get_actor(object_id)
+    print(challenge_name)
     if not actor:
-        print("[ERROR][{}] Object with ID {} not found.".format(condition_name, object_id))
+        print("[ERROR][{}] Object with ID {} not found.".format(challenge_name, object_id))
         return
 
     actor_type = actor.type_id
     print("[START][{}] Monitoring object {} ({}) | Measures: {} | Interval: {}s".format(
-        condition_name, object_id, actor_type, measures, interval))
+        challenge_name, object_id, actor_type, measures, interval))
     
 
     while True:
         output = {}
-
         try:
             location = actor.get_location()
         except:
@@ -106,30 +106,33 @@ def monitor_thread(object_id, measures, interval, condition_name, world):
             else:
                 output[measure] = "[UNSUPPORTED or NOT AVAILABLE]"
 
-        send_udp_message_to_brain(condition_name, actor_type, output)
+        send_udp_message_to_brain(challenge_name, actor_type, output)
 
         time.sleep(interval)
 
 
 def monitor_from_xml(xml_path, client, world):
     tree = ET.parse(xml_path)
-    root = tree.getroot()
+    root = tree.getroot()   # Now this will be <Challenges>
     threads = []
 
-    # Iterate over all direct children of <Conditions> (e.g., <Condition1>, <Condition2>)
-    for condition_elem in root.findall("./*"):
-        object_id = int(condition_elem.findtext("ObjectID", 0))
-        interval = float(condition_elem.findtext("IntervalSeconds", 1))
+    # Iterate over all children of <Challenges>: <Challenge1>, <Challenge2>, ...
+    for challenge_elem in root.findall("./*"):
+        object_id = int(challenge_elem.findtext("ObjectID", 0))
+        interval = float(challenge_elem.findtext("IntervalSeconds", 1))
 
         measures = []
-        for m in condition_elem.findall(".//Measure"):
+        for m in challenge_elem.findall(".//Measure"):
             if m.text:
                 measures.append(m.text.strip().lower())
 
-        condition_name = condition_elem.tag
+        challenge_name = challenge_elem.tag   # Example: "Challenge1"
 
-        # Pass parameters explicitly to avoid closure issues in threads
-        t = threading.Thread(target=monitor_thread, args=(object_id, measures, interval, condition_name, world))
+        # Start thread
+        t = threading.Thread(
+            target=monitor_challenge,
+            args=(object_id, measures, interval, challenge_name, world)
+        )
         t.daemon = True
         t.start()
         threads.append(t)
