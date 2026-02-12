@@ -140,7 +140,7 @@ def compute_ttc_dynamic(s, min_dist=2.0, eps=1e-8):
     vrel_x = s["obj_vx"] - ego_vx
     vrel_y = s["obj_vy"] - ego_vy
 
-    # | r + v_rel * t |^2 = min_dist^2 - Calculating TTC assuming constant speeds # îùååàä øéáåòéú
+    # | r + v_rel * t |^2 = min_dist^2 - Calculating TTC assuming constant speeds (quadratic solution)
 
     a = vrel_x*vrel_x + vrel_y*vrel_y # relative speed squared
     b = 2 * (rx * vrel_x + ry * vrel_y) # if disntace closing or get bigger
@@ -180,7 +180,7 @@ def compute_ttc_static(ego, obj_x, obj_y):
     #distance between ego and static object
     distance = math.hypot(rx, ry)
 
-    # If already extremely close ? treat as immediate contact
+    # If already extremely close - treat as immediate contact
     if distance < 1e-6:
         return 0.0
 
@@ -200,7 +200,7 @@ def compute_ttc_static(ego, obj_x, obj_y):
     return distance / closing_speed
 
 # =========================
-# éöéøú ìåâ îìà
+# Generate log
 # =========================
 all_frames = []
 
@@ -282,10 +282,11 @@ for name, samples in all_objects.items():
             all_frames.append(frame_log)
 
 # =========================
-# ùîéøä
+# Save file
 # =========================
 with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump({"Logs": all_frames}, f, indent=2)
 
 print("Full TTC log exported:", OUTPUT_FILE)
+
 
