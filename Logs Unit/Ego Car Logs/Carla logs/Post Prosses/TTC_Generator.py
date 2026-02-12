@@ -123,7 +123,7 @@ for name in all_objects:
     all_objects[name].sort(key=lambda s: s["t"])
 
 # =========================
-# TTC Vectors version
+# TTC Vectors Version
 # =========================
 def compute_ttc_dynamic(s, min_dist=2.0, eps=1e-8):
     
@@ -169,7 +169,7 @@ def compute_ttc_dynamic(s, min_dist=2.0, eps=1e-8):
     return min(t_candidates) if t_candidates else float("inf")
 
 # =========================
-# TTC  (traffic lights)
+# TTC Closing model (for traffic lights)
 # =========================
 def compute_ttc_static(ego, obj_x, obj_y):
 
@@ -288,6 +288,7 @@ with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump({"Logs": all_frames}, f, indent=2)
 
 print("Full TTC log exported:", OUTPUT_FILE)
+
 
 
 
