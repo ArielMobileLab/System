@@ -85,7 +85,7 @@ for e in ego_log["Logs"]:
 ego_samples.sort(key=lambda s: s["t"])
 
 # =========================
-# Insert all Objects
+# Insert Objects log
 # =========================
 all_objects = defaultdict(list)
 
@@ -123,7 +123,7 @@ for name in all_objects:
     all_objects[name].sort(key=lambda s: s["t"])
 
 # =========================
-# TTC Vectors
+# TTC Vectors version
 # =========================
 def compute_ttc_dynamic(s, min_dist=2.0, eps=1e-8):
     
@@ -169,7 +169,7 @@ def compute_ttc_dynamic(s, min_dist=2.0, eps=1e-8):
     return min(t_candidates) if t_candidates else float("inf")
 
 # =========================
-# TTC Static obj (traffic lights)
+# TTC  (traffic lights)
 # =========================
 def compute_ttc_static(ego, obj_x, obj_y):
 
@@ -192,7 +192,7 @@ def compute_ttc_static(ego, obj_x, obj_y):
     #Project ego velocity onto line-of-sight direction
     closing_speed = (rx * ego_vx + ry * ego_vy) / distance
 
-    #if closing_speed <= 0 ? ego is moving away or perpendicular
+    #if closing_speed <= 0 - ego is moving away or perpendicular
     if closing_speed <= 0:
         return float("inf")
 
@@ -288,5 +288,6 @@ with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump({"Logs": all_frames}, f, indent=2)
 
 print("Full TTC log exported:", OUTPUT_FILE)
+
 
 
