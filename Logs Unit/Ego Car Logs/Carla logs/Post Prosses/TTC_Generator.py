@@ -1,4 +1,28 @@
 # -*- coding: utf-8 -*-
+"""
+CARLA TTC Log Generator
+
+This script builds a unified frame-level log for Time-To-Collision (TTC)
+analysis between the ego vehicle and all detected objects in a CARLA simulation.
+
+Main steps:
+1. Load Ego vehicle and Objects logs.
+2. Synchronize ego and object samples based on simulation time.
+3. Compute TTC:
+   - Dynamic objects (Cars, Walkers, etc.): Vector version (quadratic solution).
+   - Traffic lights: radial closing speed model.
+5. Ignore static walker objects (low-speed threshold) - for static walkers
+6. Export a structured JSON file containing:
+   - Ego state
+   - Object state
+   - Distance
+   - TTC value
+
+Output:
+A frame-based JSON file suitable for further safety analysis,
+visualization, and minimum-TTC evaluation.
+"""
+
 import json
 import math
 import os
@@ -6,11 +30,15 @@ import re
 from collections import defaultdict
 
 # =========================
-# Files input output
+# Files input output local version
 # =========================
-OBJECTS_FILE = r"C:\Users\ALEX\Desktop\Work\TTC\last version\Objects_Simulation_Avatar_MapB_2025-03-17_19-18-22.json"
-EGO_FILE     = r"C:\Users\ALEX\Desktop\Work\TTC\last version\EgoCar_Simulation_Avatar_MapB_2025-03-17_19-18-22.json"
-OUTPUT_FILE  = r"C:\Users\ALEX\Desktop\Work\TTC\frame_log_full.json"
+OBJECTS_FILE = ...
+EGO_FILE = ...
+OUTPUT_FILE = ..
+Example usage:
+OBJECTS_FILE = r"....\Objects_Simulation_Avatar_MapB_2025-03-17_19-18-22.json"
+EGO_FILE     = r"....\EgoCar_Simulation_Avatar_MapB_2025-03-17_19-18-22.json"
+OUTPUT_FILE  = r"....\TTC_log.json"
 
 MAX_DISTANCE_TO_CALC_TTC = 200.0
 
@@ -112,7 +140,7 @@ def compute_ttc_dynamic(s, min_dist=2.0, eps=1e-8):
     vrel_x = s["obj_vx"] - ego_vx
     vrel_y = s["obj_vy"] - ego_vy
 
-    # | r + v_rel * t |^2 = min_dist^2 - Calculating TTC assuming constant speeds # Ó˘ÂÂ‡‰ ¯È·ÂÚÈ˙
+    # | r + v_rel * t |^2 = min_dist^2 - Calculating TTC assuming constant speeds # √Æ√π√•√•√†√§ √∏√©√°√•√≤√©√∫
 
     a = vrel_x*vrel_x + vrel_y*vrel_y # relative speed squared
     b = 2 * (rx * vrel_x + ry * vrel_y) # if disntace closing or get bigger
@@ -172,7 +200,7 @@ def compute_ttc_static(ego, obj_x, obj_y):
     return distance / closing_speed
 
 # =========================
-# ÈˆÈ¯˙ ÏÂ‚ ÓÏ‡
+# √©√∂√©√∏√∫ √¨√•√¢ √Æ√¨√†
 # =========================
 all_frames = []
 
@@ -208,9 +236,10 @@ for name, samples in all_objects.items():
                 obj_vy = (curr["y"] - prev["y"]) / dt
                 obj_speed = math.hypot(obj_vx, obj_vy)
 
-                # skip static walkers
-                if obj_speed < 0.2:
+                # Skip static walkers
+                if obj_speed < 0.2 and "walker" in name.lower():
                   continue
+
 
                 s = {
                     "ego_x": ego["x"],
@@ -253,9 +282,10 @@ for name, samples in all_objects.items():
             all_frames.append(frame_log)
 
 # =========================
-# ˘ÓÈ¯‰
+# √π√Æ√©√∏√§
 # =========================
 with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump({"Logs": all_frames}, f, indent=2)
 
 print("Full TTC log exported:", OUTPUT_FILE)
+
