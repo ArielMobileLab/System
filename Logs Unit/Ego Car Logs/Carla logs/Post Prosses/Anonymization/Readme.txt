@@ -16,7 +16,8 @@ cd ~/VBx
 
 1. Make folder mydata in VBx folder
 
-2. Copy the WAV file (**16 kHz**) and make_lab.py into mydata folder:
+2. Copy the Audio WAV file (**16 kHz**) and make_lab.py (from the Anonymization
+ git) into mydata folder:
 
 ```bash
 path/mydata
