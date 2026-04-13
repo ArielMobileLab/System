@@ -14,9 +14,9 @@ cd ~/VBx
 
 ### Prepare the `.lab` file
 
-1. Make folder mydata in VBx file
+1. Make folder mydata in VBx folder
 
-2. Copy the WAV file (**16 kHz**) and make_lab.py into:
+2. Copy the WAV file (**16 kHz**) and make_lab.py into mydata folder:
 
 ```bash
 path/mydata
@@ -27,10 +27,9 @@ path/mydata
 ```bash
 python make_lab.py example.wav example.lab
 ```
-
 Now we will have .lab to the wav in mydata folder
 
-### Run diarization
+### Run diarization (RTTM file)
 
 ```bash
 cd ~/VBx
