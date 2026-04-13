@@ -20,13 +20,15 @@ cd ~/VBx
 
 ```bash
 path/mydata
-```
+``
 
 3. In the terminal, run:
 
 ```bash
 python make_lab.py example.wav example.lab
 ```
+
+Now we will have .lab to the wav in mydata folder
 
 ### Run diarization
 
