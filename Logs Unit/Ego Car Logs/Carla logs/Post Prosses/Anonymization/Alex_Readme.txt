@@ -1,5 +1,4 @@
-
-## Part 1: Create a Separate Channel for Each Speaker
+Part 1: Create a Separate Channel for Each Speaker
 
 ### Install
 
@@ -53,7 +52,7 @@ For each run of the script, set the required **speaker ID** in the code.
 
 ---
 
-## Part 2: Voice Conversion
+Part 2: Voice Conversion
 
 ### Install
 
