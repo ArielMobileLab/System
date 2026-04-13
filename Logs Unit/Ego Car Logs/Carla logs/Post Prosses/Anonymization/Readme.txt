@@ -58,6 +58,7 @@ Part 2: Voice Conversion
 
 Install so-vits-svc-fork from:
 `https://github.com/voicepaw/so-vits-svc-fork`
+Recommended: **Win**
 
 ### Additional files
 
