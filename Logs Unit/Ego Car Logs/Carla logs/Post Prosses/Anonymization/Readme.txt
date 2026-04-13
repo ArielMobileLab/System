@@ -14,13 +14,15 @@ cd ~/VBx
 
 ### Prepare the `.lab` file
 
-1. Copy the WAV file (**16 kHz**) into:
+1. Make folder mydata in VBx file
+
+2. Copy the WAV file (**16 kHz**) and make_lab.py into:
 
 ```bash
 path/mydata
 ```
 
-2. In the terminal, run:
+3. In the terminal, run:
 
 ```bash
 python make_lab.py example.wav example.lab
@@ -42,10 +44,10 @@ Inside the `myexp` folder, a new output will be created (`AHC+VB`), including th
 
 ### Split audio by speaker
 
-Copy the **WAV** file and the **RTTM** file into the script folder for speaker separation, then run:
+Copy the **WAV** file and the **RTTM** file with Cut_file_afrer_rttm.py for speaker separation, then run:
 
 ```bash
-Cut_file_afrer_rttm.py
+python Cut_file_afrer_rttm.py
 ```
 
 For each run of the script, set the required **speaker ID** in the code.
