@@ -1,24 +1,68 @@
-go to file home/VBX:
 
-After put the Wav file to mydata - example.wav (need to be 16k) need to make example.lab file from make_lab.py (terminal python make_lab.py example.wav example.lab)
+## Part 1: Create a Separate Channel for Each Speaker
 
-after that:
+### Install
 
-cd ~/VBx 
+Install VBx from:
+`https://github.com/BUTSpeechFIT/VBx`
+Recommended: **Linux**
+
+### Go to the VBx folder
+
+```bash
+cd ~/VBx
+```
+
+### Prepare the `.lab` file
+
+1. Copy the WAV file (**16 kHz**) into:
+
+```bash
+path/mydata
+```
+
+2. In the terminal, run:
+
+```bash
+python make_lab.py example.wav example.lab
+```
+
+### Run diarization
+
+```bash
+cd ~/VBx
 source vbx-env/bin/activate
 rm -rf myexp myxvec
 mkdir -p myexp myxvec
 ./run_my_one_file.sh
+```
 
-output: myexp file there will be new output (AHC+VB) with the rttm file
+### Output
 
+Inside the `myexp` folder, a new output will be created (`AHC+VB`), including the **RTTM** file.
 
-after that 
-Cut wav file after getting rttm file to seperate speakers audio:
+### Split audio by speaker
 
-/home/auto-tech/VBx/mydata/cut file after rttm:
-run Cut_file_afrer_rttm.py with the wav file  and the rttm file (each time go into the code and put the speaker id.
+Copy the **WAV** file and the **RTTM** file into the script folder for speaker separation, then run:
 
+```bash
+Cut_file_afrer_rttm.py
+```
 
+For each run of the script, set the required **speaker ID** in the code.
 
+---
 
+## Part 2: Voice Conversion
+
+### Install
+
+Install so-vits-svc-fork from:
+`https://github.com/voicepaw/so-vits-svc-fork`
+
+### Additional files
+
+GUI config and model:
+`https://drive.google.com/drive/folders/1Ggyz14lo4gTIwUdj5M3G9REj62rHcSOe`
+
+---
