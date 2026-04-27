@@ -1,0 +1,16 @@
+{
+  "output_file": "",
+  "pitch_shifter": {
+    "pitch_percentage": 135.0,
+    "preserve_formants": true
+  },
+  "equalizer": {
+    "low_freq_hz": 120,
+    "low_gain_db": -4.0,
+    "mid_freq_hz": 900,
+    "mid_gain_db": 0.0,
+    "mid_q": 1.41,
+    "high_freq_hz": 300,
+    "high_gain_db": 4.0
+  }
+}
