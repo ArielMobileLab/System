@@ -58,6 +58,7 @@ For each run of the script, set the required **speaker ID** in the code.
 
 Part 2: Voice Conversion
 
+Version 1:
 ### Install
 
 Install so-vits-svc-fork from:
@@ -69,4 +70,10 @@ Recommended: **Win**
 GUI config and model:
 `https://drive.google.com/drive/folders/1Ggyz14lo4gTIwUdj5M3G9REj62rHcSOe`
 
----
+
+Version 2 (recommneded):
+Go to folder version2
+Open terminal at the folder and run:
+python process_voice.py Orignal_10.wav female_voice_config.json
+python process_voice.py Orignal_10.wav deeper_voice_config_V2.json
+
