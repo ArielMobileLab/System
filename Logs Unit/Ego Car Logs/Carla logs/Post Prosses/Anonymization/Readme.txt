@@ -72,7 +72,6 @@ GUI config and model:
 
 
 Version 2 (recommneded):
-Go to folder version2
 Open terminal at the folder and run:
 python process_voice.py Orignal_10.wav female_voice_config.json
 python process_voice.py Orignal_10.wav deeper_voice_config_V2.json
