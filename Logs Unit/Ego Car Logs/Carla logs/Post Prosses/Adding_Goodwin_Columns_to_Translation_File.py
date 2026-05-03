@@ -17,9 +17,8 @@ OUTPUT_SUFFIX = "_completed_with_categories.xlsx"
 OLD_PATH = r"H:\My Drive\Ariel Uni"
 NEW_PATH = r"G:\My Drive\Ariel Uni"
 
-
+"""Normalize text for"""
 def clean_text(value):
-    """Normalize text for comparison."""
     if value is None:
         return ""
 
@@ -31,9 +30,8 @@ def clean_text(value):
 
     return value.strip()
 
-
+"""Replace H drive with G drive."""
 def fix_path(path):
-    """Replace H drive with G drive."""
     path = clean_text(path).strip('"')
 
     if path.lower().startswith(OLD_PATH.lower()):
@@ -41,12 +39,10 @@ def fix_path(path):
 
     return path
 
-
+"""Convert time to HH:MM:SS format."""
 def clean_time(value):
-    """Convert time to HH:MM:SS format."""
     if value is None:
         return ""
-
     if isinstance(value, datetime):
         value = value.time()
 
@@ -81,28 +77,25 @@ def clean_time(value):
         pass
 
     return value
-
-
+"""Convert seconds to HH:MM:SS."""
 def seconds_to_time(seconds):
-    """Convert seconds to HH:MM:SS."""
+
     h = seconds // 3600
     m = (seconds % 3600) // 60
     s = seconds % 60
 
     return f"{h:02}:{m:02}:{s:02}"
 
-
+"""read CSV File"""
 def read_csv_file(path):
-    """Read CSV file. In this project, cp1255 reads the Hebrew correctly."""
     with open(path, "r", encoding="cp1255", newline="") as f:
         reader = csv.DictReader(f)
         rows = list(reader)
-
     return reader.fieldnames, rows
 
-
+"""Find time and text colums"""
 def find_time_and_text_columns(ws):
-    """Find the Excel columns named זמן and טקסט."""
+
     for row in range(1, min(ws.max_row, 30) + 1):
         headers = {}
 
@@ -117,7 +110,7 @@ def find_time_and_text_columns(ws):
 
     raise ValueError("Could not find 'זמן' and 'טקסט' columns")
 
-
+"""Checking strick of columns is empty"""
 def column_is_empty(ws, col):
     """Check if an entire Excel column is empty."""
     for row in range(1, ws.max_row + 1):
@@ -126,7 +119,7 @@ def column_is_empty(ws, col):
 
     return True
 
-
+"""Check if colum is empty"""
 def find_empty_columns(ws, number_of_columns):
     """Find the first block of empty columns."""
     for start_col in range(1, ws.max_column + number_of_columns + 50):
@@ -143,16 +136,9 @@ def find_empty_columns(ws, number_of_columns):
     raise ValueError("Could not find empty columns")
 
 
+"""Build table from combined_cat_class.csv.""" # (זמן, טקסט)  ->  ערכי הקטגוריות
 def make_category_lookup(cat_rows, cat_headers, filename):
-    """
-    Build lookup table from combined_cat_class.csv.
 
-    Key:
-    time_shira + text_shira
-
-    Value:
-    category columns D:N
-    """
     category_headers = cat_headers[3:14]  # CSV columns D:N
     lookup = {}
 
@@ -180,72 +166,89 @@ def make_category_lookup(cat_rows, cat_headers, filename):
 
     return category_headers, lookup
 
+"""Add category columns to each participant transcript file."""
+def process_transcript(part_xlsx_path, cat_rows, cat_headers):
+    # Convert the input path string to a Path object
+    part_xlsx_path = Path(part_xlsx_path)
 
-def process_transcript(xlsx_path, cat_rows, cat_headers):
-    """Add category columns to one transcript Excel file."""
-    xlsx_path = Path(xlsx_path)
-
-    if not xlsx_path.exists():
-        print(f"[SKIP] File not found: {xlsx_path}")
+    # Check if the Excel file exists
+    if not part_xlsx_path.exists():
+        print(f"[SKIP] File not found: {part_xlsx_path}")
         return False
 
-    output_path = xlsx_path.with_name(xlsx_path.stem + OUTPUT_SUFFIX)
+    # Create a new output file path in the same folder as the original file
+    output_path = part_xlsx_path.with_name(part_xlsx_path.stem + OUTPUT_SUFFIX)
 
-    # Safety: never overwrite the original or an existing output file
-    if output_path.resolve() == xlsx_path.resolve():
+    # Safety check: make sure the output file is not the same as the original file
+    if output_path.resolve() == part_xlsx_path.resolve():
         raise RuntimeError("Output path is identical to source path")
 
+    # Safety check: do not overwrite an existing output file
     if output_path.exists():
         raise FileExistsError(f"Output already exists, not overwriting: {output_path}")
 
-    wb = load_workbook(xlsx_path)
-    ws = wb.active
+    # Open the participent file workbook
+    wb = load_workbook(part_xlsx_path)
 
+    # Select the active worksheet
+    ws = wb.active
+    
+    # Find the header row and the columns of "זמן" and "טקסט"
     header_row, time_col, text_col = find_time_and_text_columns(ws)
 
+    # Build a lookup table from the category cat CSV for this specific Excel file
     category_headers, lookup = make_category_lookup(
-        cat_rows,
-        cat_headers,
-        xlsx_path.name,
+        cat_rows,        # All rows from combined_cat_class.csv
+        cat_headers,     # Column names from combined_cat_class.csv
+        part_xlsx_path.name,  # Current Excel filename
     )
 
+    # Find the first empty block of columns where the categories can be paste
     start_col = find_empty_columns(ws, len(category_headers))
 
-    # Write category headers
+    # Write the category column names into the Excel header row
     for i, header in enumerate(category_headers):
         ws.cell(row=header_row, column=start_col + i).value = header
 
+    # Counter for the number of matched rows
     matched = 0
 
-    # Fill matching rows
+    # Go over all data rows in the Excel file, starting after the header row
     for row in range(header_row + 1, ws.max_row + 1):
+
+        # Clear the cell data "time" "text" before using
         key = (
             clean_time(ws.cell(row=row, column=time_col).value),
             clean_text(ws.cell(row=row, column=text_col).value),
         )
 
+        # If this time + text does not exist in the category lookup, skip this row
         if key not in lookup:
             continue
 
+        # If a match exists, write the category values into the new columns
         for i, value in enumerate(lookup[key]):
             ws.cell(row=row, column=start_col + i).value = value
 
+        # Count this row as matched
         matched += 1
 
+    # Save the modified workbook as a new file, not over the original file
     wb.save(output_path)
 
     print(f"Saved: {output_path}")
+
     print(f"Matched rows: {matched}")
 
     return True
 
-
+"""Add category columns to each path participent file file."""
 def main():
     # Read input files
     _, mapping_rows = read_csv_file(MAPPING_CSV)
     cat_headers, cat_rows = read_csv_file(CAT_CSV)
 
-    # Collect unique transcript paths from mapping table
+    # Collect all transcript paths from mapping table
     transcript_paths = []
 
     for row in mapping_rows:
@@ -256,7 +259,7 @@ def main():
 
     print(f"Transcript files found: {len(transcript_paths)}")
 
-    # Process each transcript file
+    # Process each participant file
     processed = 0
 
     for path in transcript_paths:
